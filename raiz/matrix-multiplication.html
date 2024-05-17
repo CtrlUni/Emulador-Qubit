@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+
+  <html lang="en">
+
+<head>
+  <meta charset="utf-8">
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+
+
+
+
+
+
+
+
+<meta name="description" content="My digital copybook">
+<meta name="keywords" content="">
+<meta name="author" content="Gianluca Casati">
+
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<meta name="theme-color" content="#343434">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+<title>matrix-multiplication</title>
+
+  <link rel="icon" href="//g14n.info/favicon.ico" type="image/x-icon" />
+
+  <link rel="stylesheet" href="/style.css">
+
+</head>
+<body>
+  <nav>
+  <ul>
+    <li><a href="/matrix-multiplication" onclick="toggleNav()">matrix-multiplication</a></li>
+    <li><a href="https://github.com/fibo/matrix-multiplication">Code</a></li>
+    
+      <li><a href="https://www.npmjs.com/package/matrix-multiplication">npm</a></li>
+    
+    <li id="hamburgericon" onclick="toggleNav()">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </li>
+  </ul>
+</nav>
+
+
+  <main><h1 id="matrix-multiplication">matrix-multiplication</h1>
+
+<blockquote>
+  <p>implements row by column multiplication</p>
+</blockquote>
+
+<p><a href="#installation">Installation</a> |
+<a href="#api">API</a> |
+<a href="#examples">Examples</a> |
+<a href="#license">License</a></p>
+
+<p><a href="http://badge.fury.io/js/matrix-multiplication"><img src="https://badge.fury.io/js/matrix-multiplication.svg" alt="NPM version" /></a>
+<a href="https://travis-ci.org/fibo/matrix-multiplication?branch=master"><img src="https://travis-ci.org/fibo/matrix-multiplication.svg?branch=master" alt="Build Status" /></a>
+<a href="https://gemnasium.com/fibo/matrix-multiplication"><img src="https://gemnasium.com/fibo/matrix-multiplication.svg" alt="Dependency Status" /></a>
+<a href="https://standardjs.com"><img src="https://img.shields.io/badge/code_style-standard-brightgreen.svg" alt="JavaScript Style Guide" /></a></p>
+
+<h2 id="installation">Installation</h2>
+
+<p>With <a href="https://npmjs.org/">npm</a> do</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm <span class="nb">install </span>matrix-multiplication
+</code></pre></div></div>
+
+<h2 id="api">API</h2>
+
+<p>Optional custom operators are supported.</p>
+
+<h3 id="var-operator--matrixmultiplicationcustomoperator"><code class="language-plaintext highlighter-rouge">var operator = matrixMultiplication([customOperator])</code></h3>
+
+<ul>
+  <li><strong>@param</strong> <code class="language-plaintext highlighter-rouge">{Object}</code> <strong>[customOperator]</strong></li>
+  <li><strong>@param</strong> <code class="language-plaintext highlighter-rouge">{Function}</code> <strong>[customOperator.addition]</strong> defaults to common <code class="language-plaintext highlighter-rouge">+</code></li>
+  <li><strong>@param</strong> <code class="language-plaintext highlighter-rouge">{Function}</code> <strong>[customOperator.multiplication]</strong> defaults to common <code class="language-plaintext highlighter-rouge">*</code></li>
+  <li><strong>@returns</strong> <code class="language-plaintext highlighter-rouge">{Function}</code> <strong>operator</strong></li>
+</ul>
+
+<h3 id="var-mul--operatormiddle-leftmatrix-rightmatrix"><code class="language-plaintext highlighter-rouge">var mul = operator(middle, leftMatrix, rightMatrix)</code></h3>
+
+<p>The only requirement needed to multiply row by column an <strong>a x b</strong> matrix by
+an <strong>c x d</strong> matrix is that <code class="language-plaintext highlighter-rouge">b = c</code>, i.e. the middle indexes are equal.
+Actually two compatible matrices are <strong>n x m</strong> and <strong>m x l</strong>, let’s call <strong>m</strong> the <strong>middle</strong>.</p>
+
+<ul>
+  <li><strong>@param</strong> <code class="language-plaintext highlighter-rouge">{Number}</code> <strong>middle</strong></li>
+  <li><strong>@returns</strong> <code class="language-plaintext highlighter-rouge">{Function}</code> <strong>mul</strong></li>
+</ul>
+
+<h3 id="var-matrix--mulleftmatrix-rightmatrix"><code class="language-plaintext highlighter-rouge">var matrix = mul(leftMatrix, rightMatrix)</code></h3>
+
+<p>Finally we have the matrix multiplication function. Remember that is <strong>not</strong> a
+commutative operator.</p>
+
+<ul>
+  <li><strong>@param</strong> <code class="language-plaintext highlighter-rouge">{Array}</code> <strong>leftMatrix</strong></li>
+  <li><strong>@param</strong> <code class="language-plaintext highlighter-rouge">{Array}</code> <strong>rightMatrix</strong></li>
+  <li><strong>@returns</strong> <code class="language-plaintext highlighter-rouge">{Array}</code> <strong>matrix</strong></li>
+</ul>
+
+<h3 id="matrixmultiplicationerror"><code class="language-plaintext highlighter-rouge">matrixMultiplication.error</code></h3>
+
+<p>An object exposing the following error messages:</p>
+
+<ul>
+  <li><a href="#leftmatrixnotcompatible">leftMatrixNotCompatible</a></li>
+  <li><a href="#rightmatrixnotcompatible">rightMatrixNotCompatible</a></li>
+</ul>
+
+<h2 id="examples">Examples</h2>
+
+<p>All code in the examples below is intended to be contained into a <a href="https://github.com/fibo/matrix-multiplication/blob/master/test.js">single file</a>.</p>
+
+<p>Square matrices <strong>2x2</strong></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">matrixMultiplication</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">matrix-multiplication</span><span class="dl">'</span><span class="p">)</span>
+
+<span class="kd">var</span> <span class="nx">mul</span> <span class="o">=</span> <span class="nx">matrixMultiplication</span><span class="p">()(</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="kd">var</span> <span class="nx">leftMatrix</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span>
+                  <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+
+<span class="kd">var</span> <span class="nx">rightMatrix</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span>
+                  <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+
+<span class="nx">mul</span><span class="p">(</span><span class="nx">leftMatrix</span><span class="p">,</span> <span class="nx">rightMatrix</span><span class="p">)</span> <span class="c1">// [-3, 2,</span>
+                             <span class="c1">//  -1, 1]</span>
+</code></pre></div></div>
+
+<p>Actually, any pair of matrices with <em>middle</em> = 2 can be multiplied with the same <code class="language-plaintext highlighter-rouge">mul</code>
+function, try with a <strong>3x2</strong> by <strong>2x4</strong></p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">matrix3x2</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span>
+                 <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span>
+                 <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+
+<span class="kd">var</span> <span class="nx">matrix2x4</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span>
+                <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+
+<span class="nx">mul</span><span class="p">(</span><span class="nx">matrix3x2</span><span class="p">,</span> <span class="nx">matrix2x4</span><span class="p">)</span> <span class="c1">// [-3, 2, 8, 11,</span>
+                          <span class="c1">//  -1, 1, 3, 4,</span>
+                          <span class="c1">//  -1, 1, 3, 4])</span>
+</code></pre></div></div>
+
+<p>Matrices are checked for compatibility, for instances the following snippets will throw.</p>
+
+<h3 id="leftmatrixnotcompatible">leftMatrixNotCompatible</h3>
+
+<p>Since <em>mul</em> was defined as a multiplication with <em>middle</em> index 2, left matrix is
+not compatible cause it has 3 columns.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">mul</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span>
+     <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span>
+     <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span>
+                <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+</code></pre></div></div>
+
+<h3 id="rightmatrixnotcompatible">rightMatrixNotCompatible</h3>
+
+<p>Since <em>mul</em> was defined as a multiplication with <em>middle</em> index 2, right matrix is
+not compatible cause it has 3 rows.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">mul</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span>
+     <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span>
+             <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span>
+             <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">])</span>
+</code></pre></div></div>
+
+<p>You can also multiply over a custom field, just provide a <em>customOperator</em> object with
+an <em>addition</em> and a <em>multiplication</em> function.
+The following example shows multiplication of two square matrices of booleans.</p>
+
+<blockquote>
+  <p>Matrices of strings are left as an excercise to the reader.</p>
+</blockquote>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">booleanAdd</span> <span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">a</span> <span class="o">||</span> <span class="nx">b</span> <span class="p">}</span>
+<span class="kd">function</span> <span class="nx">booleanMul</span> <span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">a</span> <span class="o">&amp;&amp;</span> <span class="nx">b</span> <span class="p">}</span>
+
+<span class="kd">var</span> <span class="nx">customOperators</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">addition</span><span class="p">:</span> <span class="nx">booleanAdd</span><span class="p">,</span>
+  <span class="na">multiplication</span><span class="p">:</span> <span class="nx">booleanMul</span>
+<span class="p">}</span>
+
+<span class="kd">var</span> <span class="nx">mulB</span> <span class="o">=</span> <span class="nx">matrixMultiplication</span><span class="p">(</span><span class="nx">customOperators</span><span class="p">)(</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="kd">var</span> <span class="nx">y</span> <span class="o">=</span> <span class="kc">true</span>
+<span class="kd">var</span> <span class="nx">n</span> <span class="o">=</span> <span class="kc">false</span>
+
+<span class="kd">var</span> <span class="nx">matrix</span> <span class="o">=</span> <span class="p">[</span><span class="nx">n</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">n</span><span class="p">,</span>
+              <span class="nx">y</span><span class="p">,</span> <span class="nx">n</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span>
+              <span class="nx">n</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">n</span><span class="p">]</span>
+
+<span class="kd">var</span> <span class="nx">identity</span> <span class="o">=</span> <span class="p">[</span><span class="nx">y</span><span class="p">,</span> <span class="nx">n</span><span class="p">,</span> <span class="nx">n</span>
+                <span class="nx">n</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">n</span><span class="p">,</span>
+                <span class="nx">n</span><span class="p">,</span> <span class="nx">n</span><span class="p">,</span> <span class="nx">y</span><span class="p">]</span>
+
+<span class="nx">mulB</span><span class="p">(</span><span class="nx">matrix</span><span class="p">,</span> <span class="nx">identity</span><span class="p">)</span> <span class="c1">// [n, y, n,</span>
+                       <span class="c1">//  y, n, y,</span>
+                       <span class="c1">//  n, y, n]</span>
+</code></pre></div></div>
+
+<h2 id="license">License</h2>
+
+<p><a href="http://g14n.info/mit-license/">MIT</a></p>
+
+</main>
+
+  <load-html src="/common/footer.html"></load-html>
+  <script src="//g14n.info/js/bundle.js"></script>
+
+</body>
+</html>

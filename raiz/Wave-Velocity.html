@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Phase vs group speed</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/reset.min.css">
+	<style>
+	  body,
+table {
+  font-family: Arial;
+  font-size: 14px;
+}
+
+h1 {
+  font-size: 120%;
+  font-weight: bold;
+}
+
+input[type="range"] {
+  width: 180px;
+  padding: 0;
+  margin: 0 0.2em 0 0.2em;
+}
+
+td {
+  padding: 0.2em;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+td.label {
+  text-align: right;
+}
+
+button.small {
+  width: 22px;
+  height: 22px;
+  padding: 0px;
+  margin: 0px;
+  font-size: 80%;
+  font-weight: bold;
+}
+.container {
+  position: center;
+  width: 800px;
+  height: 300px;
+  background: rgba(0, 0, 0, 0.05);
+  transition: all 2s;
+  transform-style: preserve-3d;
+  -webkit-animation: container 6s 1s 1;
+          animation: container 6s 1s 1;
+}
+.container canvas {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transition: all 2s;
+  transform: translate(-50%, -50%);
+}
+.container canvas:nth-child(0) {
+  -webkit-animation: canvas-0 6s 1s 1;
+          animation: canvas-0 6s 1s 1;
+}
+.container canvas:nth-child(1) {
+  -webkit-animation: canvas-1 6s 1s 1;
+          animation: canvas-1 6s 1s 1;
+}
+.container canvas:nth-child(2) {
+  -webkit-animation: canvas-2 6s 1s 1;
+          animation: canvas-2 6s 1s 1;
+}
+.container canvas:nth-child(3) {
+  -webkit-animation: canvas-3 6s 1s 1;
+          animation: canvas-3 6s 1s 1;
+}
+.container canvas:nth-child(4) {
+  -webkit-animation: canvas-4 6s 1s 1;
+          animation: canvas-4 6s 1s 1;
+}
+.container canvas:nth-child(5) {
+  -webkit-animation: canvas-5 6s 1s 1;
+          animation: canvas-5 6s 1s 1;
+}
+.container canvas:nth-child(6) {
+  -webkit-animation: canvas-6 6s 1s 1;
+          animation: canvas-6 6s 1s 1;
+}
+.container canvas:nth-child(7) {
+  -webkit-animation: canvas-7 6s 1s 1;
+          animation: canvas-7 6s 1s 1;
+}
+.container canvas:nth-child(8) {
+  -webkit-animation: canvas-8 6s 1s 1;
+          animation: canvas-8 6s 1s 1;
+}
+.container canvas:nth-child(9) {
+  -webkit-animation: canvas-9 6s 1s 1;
+          animation: canvas-9 6s 1s 1;
+}
+.container canvas:nth-child(10) {
+  -webkit-animation: canvas-10 6s 1s 1;
+          animation: canvas-10 6s 1s 1;
+}
+.container:hover {
+  transform: translateX(-50%) rotateX(-27.5deg) rotateY(-45deg);
+}
+.container:hover canvas:nth-child(0) {
+  transform: translate3d(-50%, -50%, 50px);
+}
+.container:hover canvas:nth-child(1) {
+  transform: translate3d(-50%, -50%, 0px);
+}
+.container:hover canvas:nth-child(2) {
+  transform: translate3d(-50%, -50%, -50px);
+}
+.container:hover canvas:nth-child(3) {
+  transform: translate3d(-50%, -50%, -100px);
+}
+.container:hover canvas:nth-child(4) {
+  transform: translate3d(-50%, -50%, -150px);
+}
+.container:hover canvas:nth-child(5) {
+  transform: translate3d(-50%, -50%, -200px);
+}
+.container:hover canvas:nth-child(6) {
+  transform: translate3d(-50%, -50%, -250px);
+}
+.container:hover canvas:nth-child(7) {
+  transform: translate3d(-50%, -50%, -300px);
+}
+.container:hover canvas:nth-child(8) {
+  transform: translate3d(-50%, -50%, -350px);
+}
+.container:hover canvas:nth-child(9) {
+  transform: translate3d(-50%, -50%, -400px);
+}
+.container:hover canvas:nth-child(10) {
+  transform: translate3d(-50%, -50%, -450px);
+}
+
+@-webkit-keyframes container {
+  33.3%, 66.6% {
+    transform: translateX(-50%) rotateX(-27.5deg) rotateY(-45deg);
+  }
+}
+
+@keyframes container {
+  33.3%, 66.6% {
+    transform: translateX(-50%) rotateX(-27.5deg) rotateY(-45deg);
+  }
+}
+@-webkit-keyframes canvas-0 {
+  33.3%, 66.6% {
+    transform: translate3d(-50%, -50%, 50px);
+  }
+}
+@keyframes canvas-0 {
+  33.3%, 66.6% {
+    transform: translate3d(-50%, -50%, 50px);
+  }
+}
+@-webkit-keyframes canvas-1 {
+  33.3%, 66.6% {
+    transform: translate3d(-50%, -50%, 0px);
+  }
+}
+@keyframes canvas-1 {
+  33.3%, 66.6% {
+    transform: translate3d(-50%, -50%, 0px);
+  }
+}
+@-webkit-keyframes canvas-2 {
+  33.3%, 66.6% {
+    transform: translate3d(-50%, -50%, -50px);
+  }
+}
+@keyframes canvas-2 {
+  33.3%, 66.6% {
+    transform: translate3d(-50%, -50%, -50px);
+  }
+}
+@-webkit-keyframes canvas-3 {
+  33.3%, 66.6% {
+    transform: translate3d(-50%, -50%, -100px);
+  }
+}
+@keyframes canvas-3 {
+  33.3%, 66.6% {
+    transform: translate3d(-50%, -50%, -100px);
+  }
+}
+@-webkit-keyframes canvas-4 {
+  33.3%, 66.6% {
+    transform: translate3d(-50%, -50%, -150px);
+  }
+}
+@keyframes canvas-4 {
+  33.3%, 66.6% {
+    transform: translate3d(-50%, -50%, -150px);
+  }
+}
+@-webkit-keyframes canvas-5 {
+  33.3%, 66.6% {
+    transform: translate3d(-50%, -50%, -200px);
+  }
+}
+@keyframes canvas-5 {
+  33.3%, 66.6% {
+    transform: translate3d(-50%, -50%, -200px);
+  }
+}
+@-webkit-keyframes canvas-6 {
+  33.3%, 66.6% {
+    transform: translate3d(-50%, -50%, -250px);
+  }
+}
+@keyframes canvas-6 {
+  33.3%, 66.6% {
+    transform: translate3d(-50%, -50%, -250px);
+  }
+}
+@-webkit-keyframes canvas-7 {
+  33.3%, 66.6% {
+    transform: translate3d(-50%, -50%, -300px);
+  }
+}
+@keyframes canvas-7 {
+  33.3%, 66.6% {
+    transform: translate3d(-50%, -50%, -300px);
+  }
+}
+@-webkit-keyframes canvas-8 {
+  33.3%, 66.6% {
+    transform: translate3d(-50%, -50%, -350px);
+  }
+}
+@keyframes canvas-8 {
+  33.3%, 66.6% {
+    transform: translate3d(-50%, -50%, -350px);
+  }
+}
+@-webkit-keyframes canvas-9 {
+  33.3%, 66.6% {
+    transform: translate3d(-50%, -50%, -400px);
+  }
+}
+@keyframes canvas-9 {
+  33.3%, 66.6% {
+    transform: translate3d(-50%, -50%, -400px);
+  }
+}
+@-webkit-keyframes canvas-10 {
+  33.3%, 66.6% {
+    transform: translate3d(-50%, -50%, -450px);
+  }
+}
+@keyframes canvas-10 {
+  33.3%, 66.6% {
+    transform: translate3d(-50%, -50%, -450px);
+  }
+}
+
+	  </style> 
+	  <!--
+	  <style>
+	  html, body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 5000px;
+}
+
+.container {
+  position: relative;
+  width: 800px;
+  height: 800px;
+  background: rgba(0, 0, 0, 0.05);
+  transition: all 2s;
+  transform-style: preserve-3d;
+  -webkit-animation: container 6s 1s 1;
+          animation: container 6s 1s 1;
+}
+.container canvas {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transition: all 2s;
+  transform: translate(-50%, -50%);
+}
+.container canvas:nth-child(0) {
+  -webkit-animation: canvas-0 6s 1s 1;
+          animation: canvas-0 6s 1s 1;
+}
+.container canvas:nth-child(1) {
+  -webkit-animation: canvas-1 6s 1s 1;
+          animation: canvas-1 6s 1s 1;
+}
+.container canvas:nth-child(2) {
+  -webkit-animation: canvas-2 6s 1s 1;
+          animation: canvas-2 6s 1s 1;
+}
+.container canvas:nth-child(3) {
+  -webkit-animation: canvas-3 6s 1s 1;
+          animation: canvas-3 6s 1s 1;
+}
+.container canvas:nth-child(4) {
+  -webkit-animation: canvas-4 6s 1s 1;
+          animation: canvas-4 6s 1s 1;
+}
+.container canvas:nth-child(5) {
+  -webkit-animation: canvas-5 6s 1s 1;
+          animation: canvas-5 6s 1s 1;
+}
+.container canvas:nth-child(6) {
+  -webkit-animation: canvas-6 6s 1s 1;
+          animation: canvas-6 6s 1s 1;
+}
+.container canvas:nth-child(7) {
+  -webkit-animation: canvas-7 6s 1s 1;
+          animation: canvas-7 6s 1s 1;
+}
+.container canvas:nth-child(8) {
+  -webkit-animation: canvas-8 6s 1s 1;
+          animation: canvas-8 6s 1s 1;
+}
+.container canvas:nth-child(9) {
+  -webkit-animation: canvas-9 6s 1s 1;
+          animation: canvas-9 6s 1s 1;
+}
+.container canvas:nth-child(10) {
+  -webkit-animation: canvas-10 6s 1s 1;
+          animation: canvas-10 6s 1s 1;
+}
+.container:hover {
+  transform: translateX(-50%) rotateX(-27.5deg) rotateY(-45deg);
+}
+.container:hover canvas:nth-child(0) {
+  transform: translate3d(-50%, -50%, 50px);
+}
+.container:hover canvas:nth-child(1) {
+  transform: translate3d(-50%, -50%, 0px);
+}
+.container:hover canvas:nth-child(2) {
+  transform: translate3d(-50%, -50%, -50px);
+}
+.container:hover canvas:nth-child(3) {
+  transform: translate3d(-50%, -50%, -100px);
+}
+.container:hover canvas:nth-child(4) {
+  transform: translate3d(-50%, -50%, -150px);
+}
+.container:hover canvas:nth-child(5) {
+  transform: translate3d(-50%, -50%, -200px);
+}
+.container:hover canvas:nth-child(6) {
+  transform: translate3d(-50%, -50%, -250px);
+}
+.container:hover canvas:nth-child(7) {
+  transform: translate3d(-50%, -50%, -300px);
+}
+.container:hover canvas:nth-child(8) {
+  transform: translate3d(-50%, -50%, -350px);
+}
+.container:hover canvas:nth-child(9) {
+  transform: translate3d(-50%, -50%, -400px);
+}
+.container:hover canvas:nth-child(10) {
+  transform: translate3d(-50%, -50%, -450px);
+}
+
+@-webkit-keyframes container {
+  33.3%, 66.6% {
+    transform: translateX(-50%) rotateX(-27.5deg) rotateY(-45deg);
+  }
+}
+
+@keyframes container {
+  33.3%, 66.6% {
+    transform: translateX(-50%) rotateX(-27.5deg) rotateY(-45deg);
+  }
+}
+@-webkit-keyframes canvas-0 {
+  33.3%, 66.6% {
+    transform: translate3d(-50%, -50%, 50px);
+  }
+}
+@keyframes canvas-0 {
+  33.3%, 66.6% {
+    transform: translate3d(-50%, -50%, 50px);
+  }
+}
+@-webkit-keyframes canvas-1 {
+  33.3%, 66.6% {
+    transform: translate3d(-50%, -50%, 0px);
+  }
+}
+@keyframes canvas-1 {
+  33.3%, 66.6% {
+    transform: translate3d(-50%, -50%, 0px);
+  }
+}
+@-webkit-keyframes canvas-2 {
+  33.3%, 66.6% {
+    transform: translate3d(-50%, -50%, -50px);
+  }
+}
+@keyframes canvas-2 {
+  33.3%, 66.6% {
+    transform: translate3d(-50%, -50%, -50px);
+  }
+}
+@-webkit-keyframes canvas-3 {
+  33.3%, 66.6% {
+    transform: translate3d(-50%, -50%, -100px);
+  }
+}
+@keyframes canvas-3 {
+  33.3%, 66.6% {
+    transform: translate3d(-50%, -50%, -100px);
+  }
+}
+@-webkit-keyframes canvas-4 {
+  33.3%, 66.6% {
+    transform: translate3d(-50%, -50%, -150px);
+  }
+}
+@keyframes canvas-4 {
+  33.3%, 66.6% {
+    transform: translate3d(-50%, -50%, -150px);
+  }
+}
+@-webkit-keyframes canvas-5 {
+  33.3%, 66.6% {
+    transform: translate3d(-50%, -50%, -200px);
+  }
+}
+@keyframes canvas-5 {
+  33.3%, 66.6% {
+    transform: translate3d(-50%, -50%, -200px);
+  }
+}
+@-webkit-keyframes canvas-6 {
+  33.3%, 66.6% {
+    transform: translate3d(-50%, -50%, -250px);
+  }
+}
+@keyframes canvas-6 {
+  33.3%, 66.6% {
+    transform: translate3d(-50%, -50%, -250px);
+  }
+}
+@-webkit-keyframes canvas-7 {
+  33.3%, 66.6% {
+    transform: translate3d(-50%, -50%, -300px);
+  }
+}
+@keyframes canvas-7 {
+  33.3%, 66.6% {
+    transform: translate3d(-50%, -50%, -300px);
+  }
+}
+@-webkit-keyframes canvas-8 {
+  33.3%, 66.6% {
+    transform: translate3d(-50%, -50%, -350px);
+  }
+}
+@keyframes canvas-8 {
+  33.3%, 66.6% {
+    transform: translate3d(-50%, -50%, -350px);
+  }
+}
+@-webkit-keyframes canvas-9 {
+  33.3%, 66.6% {
+    transform: translate3d(-50%, -50%, -400px);
+  }
+}
+@keyframes canvas-9 {
+  33.3%, 66.6% {
+    transform: translate3d(-50%, -50%, -400px);
+  }
+}
+@-webkit-keyframes canvas-10 {
+  33.3%, 66.6% {
+    transform: translate3d(-50%, -50%, -450px);
+  }
+}
+@keyframes canvas-10 {
+  33.3%, 66.6% {
+    transform: translate3d(-50%, -50%, -450px);
+  }
+}
+
+html,
+body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}table{border-collapse:collapse;border-spacing:0}
+
+
+</style>-->
+	<link rel="stylesheet" href="./css/styleA.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+  <h1>Modelo do processamento analógico</h1>
+
+<div style="width: 800px;">
+  $$E(z, t)=A(z - ut)\cos\left[k(z-vt)\right]$$
+</div>
+
+<table>
+  <tr>
+    <td class="label">Velocidade de fase \(v\)</td>
+    <td><input type="range" id="phaseSlider" min="-100" max="1000" value="0" oninput="update()" /></td>
+    <td id="phaseValue" style="width: 3em;"></td><br>
+    <td><button class="small" onclick="phaseSlider.value = 0; update();">0</button></td>
+    <td style="width: 0.5em;"></td>
+	<br>
+    <td class="label">Velocidade do grupo \(u\)</td>
+    <td><input type="range" id="groupSlider" min="-100" max="100" value="0" oninput="update()" /></td>
+    <td id="groupValue" style="width: 3em;"></td>
+    <td><button class="small" onclick="groupSlider.value = 0; update();">0</button></td>
+  </tr>
+  <br>
+  <tr>
+    <td class="label">Comprimento de onda \(2\pi/k\)</td>
+    <td><input type="range" id="waveSlider" min="001" max="1500" value="750" oninput="update()" /></td>
+    <td id="waveValue"></td>
+    <td></td>
+    <td></td>
+    <td class="label">Largura do pulso</td>
+    <td><input type="range" id="widthSlider" min="0" max="1000" value="500" oninput="update()" /></td>
+    <td id="widthValue"></td>
+    <td></td>
+  </tr>
+</table>
+<table>
+<div id="graph" style="width: 800px; height: 300px;"></div>
+<!-- partial -->
+</table>
+
+<table>
+  <div id="container" class="container">
+  </table>
+	<script src='js/tex-chtml.js'></script>
+<script src='js/plotly-2.30.0.min.js'></script>
+<script>
+  Array.linspace = function (a, b, n) {
+  let result = [];
+  const step = (b - a) / (n - 1);
+  for (let i = 0; i < n; i++) result.push(a + i * step);
+
+  return result;
+};
+
+const VIEW = 10;
+
+let start = 0;
+let peak = 0.05 * VIEW;
+let phase = 0.0;
+let phaseSpeed, groupSpeed, wavelen, width;
+let previous;
+
+function update() {
+  phaseSpeed = 0.01 * parseInt(phaseSlider.value);
+  phaseValue.innerText = phaseSpeed.toFixed(2);
+
+  groupSpeed = 0.01 * parseInt(groupSlider.value);
+  groupValue.innerText = groupSpeed.toFixed(2);
+
+  width = 0.005 * parseInt(widthSlider.value);
+  widthValue.innerText = (2 * width).toFixed(2);
+
+  let oldwave = wavelen;
+  wavelen = 0.001 * parseInt(waveSlider.value);
+  waveValue.innerText = wavelen.toFixed(2);
+
+  if (oldwave) phase = peak + ((phase - peak) * wavelen) / oldwave;
+}
+
+function envelope(x) {
+  x = (x - peak) / width;
+  return Math.exp(-Math.LN2 * x * x);
+}
+
+function wave(x) {
+  return envelope(x) * Math.cos((2 * Math.PI * (x - phase)) / wavelen);
+}
+
+function compute() {
+  const x = Array.linspace(start, start + VIEW, 1000);
+  return { x: x, w: x.map(wave), e: x.map(envelope) };
+}
+
+function timeStep(time) {
+  if (previous === undefined) {
+    previous = time;
+    requestAnimationFrame(timeStep);
+    return;
+  }
+
+  const elapsed = 0.001 * (time - previous);
+  previous = time;
+
+  peak += elapsed * groupSpeed;
+  phase += elapsed * phaseSpeed;
+
+  if (groupSpeed > 0 && peak > start + 0.9 * VIEW) {
+    start += 0.8 * VIEW;
+    Plotly.relayout(graph, { "xaxis.range": [start, start + VIEW] });
+  } else if (groupSpeed < 0 && peak < start + 0.1 * VIEW) {
+    start -= 0.8 * VIEW;
+    Plotly.relayout(graph, { "xaxis.range": [start, start + VIEW] });
+  }
+
+  const comp = compute();
+  Plotly.animate(
+    graph,
+    {
+      data: [
+        { x: comp.x, y: comp.w },
+        { x: comp.x, y: comp.e }
+      ]
+    },
+    { transition: { duration: 0 }, frame: { duration: 0, redraw: false } }
+  );
+
+  requestAnimationFrame(timeStep);
+}
+
+function initSimul() {
+  update();
+
+  const comp = compute();
+  const data = [
+    {
+      x: comp.x,
+      y: comp.w,
+      mode: "lines",
+      type: "scatter",
+      line: { color: "red" },
+      name: "wave"
+    },
+    {
+      x: comp.x,
+      y: comp.e,
+      mode: "lines",
+      type: "scatter",
+      line: { color: "blue", dash: "dash" },
+      name: "envelope"
+    }
+  ];
+
+  const font = { family: "Arial", size: 14 };
+  const layout = {
+    xaxis: {
+      title: "Coordenada espacial <i>z</i>",
+      showline: true,
+      zeroline: false,
+      titlefont: font,
+      tickfont: font,
+      range: [start, start + VIEW]
+    },
+    yaxis: {
+      title: "<i>E</i>(<i>z</i>, <i>t</i>)",
+      showline: true,
+      zeroline: false,
+      titlefont: font,
+      tickfont: font,
+      range: [-1.05, 1.05]
+    },
+    margin: { l: 56, t: 5, r: 5, b: 44 },
+    dragmode: false,
+    showlegend: false
+  };
+
+  Plotly.newPlot(graph, data, layout);
+
+  requestAnimationFrame(timeStep);
+}
+
+window.addEventListener("load", initSimul);
+</script>
+<script>
+	var canvasCount = 16;
+var canvasWidth = 800;
+
+function drawSin(ctx, waveLength, x = 1, y) {
+  var i = 0;
+  while (i++ < x) {
+    ctx.fillRect(
+    i,
+    y + Math.sin(i / waveLength) * waveLength,
+    1, 1);
+
+  }
+}
+
+var canvases = new Array(canvasCount).
+join(' ').
+split(' ').
+map((c, i) => {
+  var canvas = document.createElement('canvas');
+  canvas.width = canvasWidth;
+  canvas.height = canvasWidth;
+  container.appendChild(canvas);
+  return canvas;
+});
+
+var contexts = canvases.map(c => c.getContext('2d'));
+contexts.forEach(ctx => ctx.fillStyle = 'red');
+
+function draw() {
+  contexts.forEach((ctx, index) => {
+    ctx.clearRect(0, 0, canvasWidth, canvasWidth);
+    i += 0.0100;
+
+    drawSin(
+    ctx,
+    60 / Math.pow(index + 1, 1 + Math.sin(i)),
+    canvasWidth,
+    canvasWidth / 2);
+
+  });
+  requestAnimationFrame(draw);
+}
+
+var i = 0;
+draw();
+  </script>
+</body>
+</html>
