@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en" > 
+  <!--
+<head>
+  <meta charset="UTF-8">
+  <title>Spin Quântico</title>
+  
+<style>
+  canvas {
+  border: 1px solid #666666;
+} 
+body {
+  background: #333;
+}
+
+h1#headerNames {
+  margin-top: 10%;
+  color: #fff;
+  font-family: Georgia, serif;
+  font-size: 40px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.button {
+  width: 100px;
+  margin: auto;
+  padding: 5px;
+  background: #1fa91f;
+  border: 3px solid #fff;
+  border-radius: 10px;
+  color: #fff;
+  font-family: Arial, sans-serif;
+  font-size: 10px;
+  font-weight: bold;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  display: block;
+  cursor: pointer;
+}
+
+#stopButton {
+  background: #ff0000;
+  display: none;
+}
+
+#timerWrapper {
+  margin: 10px 0;
+  color: #fff;
+  font-family: Arial, sans-serif;
+  font-size: 10px;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 1s;
+}
+
+#timerWrapper.visible {
+  opacity: 1;
+}
+
+#timesUp {
+  padding-top: 20%;
+  background-color: red;
+  color: #fff;
+  font-family: Arial, sans-serif;
+  font-size: 40px;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-align: center;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  display: none;
+}
+#timesUp a {
+  margin: 10px auto;
+  font-size: 15px;
+  position: absolute;
+  bottom: 50px;
+  left: 0;
+  right: 0;
+  display: none;
+}
+
+#timesUp.backgroundRed {
+  background-color: #333;
+}
+
+@media only screen and (max-width: 60px) {
+  h1 {
+    font-size: 50px;
+  }
+}
+</style>
+</head> 
+-->
+  <head>
+	<!-- Global site tag (gtag.js) - Google Analytics --
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-105814606-2"></script>-->
+<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+
+	gtag('config', 'UA-105814606-2');
+</script>
+
+	<title>Aplicação da transformadas de Fourier na simulação quântico</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link href="css/styles.css" rel="stylesheet" type="text/css">
+	<link href="css/css?family=Montserrat|Open+Sans" rel="stylesheet">
+	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+	<meta name="viewport" content="width=device-width" />
+
+	<!-- Favicon magic -->
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+	<link rel="manifest" href="/site.webmanifest">
+	<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+	<meta name="msapplication-TileColor" content="#ffc40d">
+	<meta name="theme-color" content="#ffffff">
+
+	<!-- Stuff for Facebook/Twitter -->
+	       
+  </head>
+  <body>
+  
+<body>
+  
+<!-- partial:index.partial.html -->
+<html> 
+  
+  <body bgcolor="black" text="lightgray">
+<script src="three.min.js"></script>  
+	<h1 id="headerNames">Processar</h1>
+	<div class="button" id="startButton">Iniciar</div>
+	<div class="button" id="stopButton">Processando</div>
+
+	<div id="timesUp">
+	  Tempo esgotado!
+	  <a href="">Reiniciar</a>
+	</div>
+	<p><input id="peace-build-up-slider" type="range" min="0" max="1" value="1" step="any"></p>
+<canvas id="Spin-a" width="400" height="400"></canvas> 
+	<div id="timerWrapper">tempo restante: <span id="timer"></span></div>
+<br>
+Superposição X<input type="range" id="normalVectorTheta1" value="0" min="0" max="90" step="2" oninput="normalVectorChanged()">
+<br>
+Superposição Y<input type="range" id="normalVectorTheta2" value="0" min="0" max="90" step="2" oninput="normalVectorChanged()">
+    <br>
+Binário(Amp:0/100)<input type="range" id="uAngle" value="0" min="0" max="90" step="2" oninput="updateUVector()">
+    <br>
+
+	<!-- partial:index.partial.html -->
+	
+	<!-- partial --
+	<script  src="./random.js"></script>-->
+	<script  src="./spin.js"></script>
+	<script src="main.bundle.js"></script>
+  </body>
+</html>
+<!-- partial -->
+  
+
+</body>
+</html>
