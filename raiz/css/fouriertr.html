@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html >
+<head>
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-105814606-2"></script>
+	<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+
+	gtag('config', 'UA-105814606-2');
+	</script>
+
+	<title>Fourier Dönüşümlerine İnteraktif bir Giriş</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link href="css/styles.css" rel="stylesheet" type="text/css">
+	<link href="https://fonts.googleapis.com/css?family=Montserrat|Open+Sans" rel="stylesheet">
+	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+	<meta name="viewport" content="width=device-width" />
+
+	<!-- Favicon magic -->
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+	<link rel="manifest" href="/site.webmanifest">
+	<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+	<meta name="msapplication-TileColor" content="#ffc40d">
+	<meta name="theme-color" content="#ffffff">
+
+	<!-- Stuff for Facebook/Twitter -->
+	<meta property="og:url"                content="http://www.jezzamon.com/fourier&#x2F;tr.html" />
+	<meta property="og:type"               content="website" />
+	<meta property="og:title"              content="Fourier Dönüşümlerine İnteraktif bir Giriş" />
+	<meta property="og:description"        content="Fourier dönüşümleri birçok farklı şeyin yapılmasında kullanılabilecek bir araçtır. Bu sayfa Fourier dönüşümlerinin işleyişini açıklamakta ve yararlı olabilecek bazı kullanım yollarını göstermektedir." />
+	<meta property="og:image"              content="http://www.jezzamon.com/fourier/preview.png" />
+	<meta property="og:image:type"         content="image/png" />
+	<meta property="og:image:width"        content="1200" />
+	<meta property="og:image:height"       content="630" />
+	<meta name="twitter:card"              content="summary_large_image" />
+	<meta name="twitter:site"              content="@jezzamonn" />
+	<meta property="fb:app_id"             content="264785490940720" />
+</head>
+<body>
+<header>
+	<canvas id="header-background" class="header-background"></canvas>
+	<h1>Fourier Dönüşümlerine İnteraktif bir Giriş</h1>
+	<p>Jez Swanson</p>
+	<p>Çeviren: Harun Hindioğlu</p>
+</header>
+<nav id="languages">
+	<ul>
+		<li><a href="&#x2F;fourier">English</a></li>
+		<li><a href="&#x2F;fourier&#x2F;az.html">Azərbaycanca</a></li>
+		<li><a href="&#x2F;fourier&#x2F;de.html">Deutsch</a></li>
+		<li><a href="&#x2F;fourier&#x2F;es.html">Español</a></li>
+		<li><a href="&#x2F;fourier&#x2F;fr.html">Français</a></li>
+		<li><a href="&#x2F;fourier&#x2F;it.html">Italiano</a></li>
+		<li><a href="&#x2F;fourier&#x2F;pl.html">Polski</a></li>
+		<li><a href="&#x2F;fourier&#x2F;pt-br.html">Português</a></li>
+		<li><a href="&#x2F;fourier&#x2F;sk.html">Slovenčina</a></li>
+		<li><a href="&#x2F;fourier&#x2F;tr.html">Türkçe</a></li>
+		<li><a href="&#x2F;fourier&#x2F;ru.html">Русский</a></li>
+		<li><a href="&#x2F;fourier&#x2F;he.html">עברית</a></li>
+		<li><a href="&#x2F;fourier&#x2F;fa.html">فارسی</a></li>
+		<li><a href="&#x2F;fourier&#x2F;ko.html">한국어</a></li>
+		<li><a href="&#x2F;fourier&#x2F;zh-cn.html">简体中文</a></li>
+		<li><a href="&#x2F;fourier&#x2F;zh-tw.html">繁體中文</a></li>
+		<li><a href="https://github.com/Jezzamonn/fourier/tree/master/content">Add a translation</a></li>
+	</ul>
+</nav>
+<main id="content">
+	<p>Fourier dönüşümleri birçok farklı şeyin yapılmasında kullanılabilecek bir araçtır. Bu sayfa Fourier dönüşümlerinin işleyişini açıklamakta ve yararlı olabilecek bazı kullanım yollarını göstermektedir. Bir de bu dönüşümlerle bunun gibi eğlenceli şeyleri nasıl yapacağınızı gösterir:</p>
+<canvas id="self-draw" class="sketch" width=500 height=500></canvas>
+<p>Fourier dönüşümlerinin işleyişini anlatırken bu animasyonu da açıklayacağım!</p>
+<p>Okumayı bitirdiğinizde:</p>
+<ul>
+<li>Fourier dönüşümünün ne yaptığı</li>
+<li>Fourier dönüşümlerinin bazı pratik kullanımları</li>
+<li>Ve bazı amaçsız ama şık kullanımları hakkında epeyce fikir edinmiş olacaksınız.</li>
+</ul>
+<p>Matematik ve denklemleri şimdilik bu işin dışında tutacağız. Fourier dönüşümlerinin arkasında bir sürü ilginç matematiksel işlem var ama onun aslında ne yaptığı ve onu neden kullanmak isteyeceğinizle başlamayı yeğlerim. Konu hakkında daha detaylı bilgiye ulaşmak isterseniz, bazı ileri okuma önerilerini aşağıda bulabilirsiniz!</p>
+<h2 id="evetimdibunedir">Evet, şimdi bu nedir?</h2>
+<p>Fourier dönüşümü basitçe, bir şeyi sinüs dalgaları halinde ayırmanın bir yoludur. İsmi, genelde olduğu gibi, uzun zaman önce yaşamış olan Fourier adında birinden gelir.</p>
+<p>Hadi birkaç basit örnekle başlayarak ilerleyelim. Öncelikle zaman içinde tekrarlayan modeller olan dalgalara bakacağız.</p>
+<p>İşte bir dalga örneği:</p>
+<canvas id="combo-sine-wave" class="sketch" width=500 height=300></canvas>
+<p>Buradaki dalga modeli sinüs dalgalarına ayrılabilir. Bu iki sinüs dalgasını bir araya getirirsek başlangıçtaki dalgayı tekrar elde ederiz.</p>
+<canvas id="combo-sine-wave" class="sketch" width=500 height=300></canvas>
+<p>Fourier dönüşümü birleşik dalga elde etmenin ve her bir sinüs dalgasını yeniden ortaya çıkarmanın bir yoludur. Bu örnekte, yalnızca başlangıçtaki dalgaya bakarak bunu neredeyse zihinden de yapabilirsiniz.</p>
+<p>Neden? Öyle görünüyor ki gerçek dünyadaki birçok şey bu sinüs dalgaları aracılığıyla etkileşim halinde. Biz onlara genelde dalga frekansları diyoruz.</p>
+<p>Bunun en belirgin örneği sestir. Bir ses duyduğumuzda, onu dalgalı bir hat şeklinde değil sesi meydana getiren sinüs dalgalarının farklı frekansları şeklinde duyarız.</p>
+<p><button id="together-button" class="button">Tam Dalga Oynat</button></p>
+<p><button id="split-button-1" class="button">Yüksek Frekansta Oynat</button></p>
+<p><button id="split-button-2" class="button">Düşük Frekansta Oynat</button></p>
+<p>Dalgaları bilgisayarda ayırabiliyor olmak bize insanların aslında ne duyduğuna dair bir fikir verir. Sesin ne kadar yüksek veya kısık olduğunu anlayabilir veya hangi nota olduğunu tahmin edebiliriz.</p>
+<p>Bu işlemi sinüs dalgalarından oluşuyormuş gibi görünmeyen dalgalar üzerinde de yapabiliriz.</p>
+<p>Hadi şuna bir göz atalım. Buna kare dalga denir.</p>
+<canvas id="square-wave" class="sketch" width=500 height=300></canvas>
+<p>Öyle gibi görünmese de sinüs dalgalarına ayrılabilir.</p>
+<canvas id="square-wave-split" class="sketch" width=500 height=500></canvas>
+<p>Bu kez çok sayıda sinüs dalgasına ihtiyacımız var. Teknik olarak, kare dalgayı tam anlamıyla karşılayabilmesi için sonsuz sayıda lazım. Daha çok sinüs dalgası ekledikçe model de gitgide başlangıçtaki kare dalgaya yaklaşacaktır.</p>
+<canvas id="square-wave-build-up" class="sketch" width=500 height=500></canvas>
+<p><input id="square-wave-build-up-slider" type="range" min="0" max="1" value="0" step="any" ></p>
+<p><button id="square-wave-button" class="button">Dalga Oynat</button></p>
+<p><em>Kaç sinüs dalgası olduğunu görmek için üstteki düğmeyi çubuğun üzerinde kaydırın.</em></p>
+<p>Gerçekten de belirgin ölçüde en büyük farkı yaratanların ilk birkaç sinüs dalgası olduğunu göreceksiniz. Düğmeyi ortaya getirdiğinizde, dalganın şekli genel hatlarıyla ortaya çıkar ama pürüzlüdür. Artık pürüzleri düzleştirmek için tek ihtiyacımız olan diğer küçük dalgalar.</p>
+<p>Dalgayı dinlediğinizde, sesin giderek azaldığını duyarsınız çünkü daha yüksek frekansları siliyoruz.</p>
+<p>Bu işlem, tekrarlayan her dizide bu şekilde gerçekleşir. Hadi siz de kendinizinkini çizmeyi deneyin!</p>
+<div class="multi-container">
+<div class="sketch" >
+    <canvas id="wave-draw" class="sketch-child" width=500 height=300></canvas>
+    <p id="wave-draw-instruction" class="instruction wave-instruction">Buraya çizin!</p>
+</div>
+<canvas id="wave-draw-split" class="sketch" width=500 height=500></canvas>
+</div>
+<p><input id="wave-draw-slider" type="range" min="0" max="1" value="1" step="any">
+<button id="wave-draw-button" class="button">Dalga Oynat</button></p>
+<p><em>Sinüs dalgaları eklendikçe çizimin sizinkine nasıl yaklaştığını görmek için düğmeyi hareket ettirin.</em></p>
+<p>Fazladan pürüzün haricinde, sinüs dalgalarının yalnızca yarısı kullanıldığında bile dalga yine oldukça benzer bir hale gelir.</p>
+<p>Aslında dalganın bu benzerliğini lehimize kullanabiliriz. Fourier dönüşümünü kullanarak sesin önemli kısımlarını alabilir ve onlardan orijinal sese oldukça yakın bir şey elde edebiliriz.</p>
+<p>Bilgisayarlarda dalgalar normalde nokta dizileri halinde saklanır.</p>
+<canvas id="wave-samples" class="sketch" width=500 height=500></canvas>
+<p>Bunun yerine, onları bir grup sinüs dalgasıyla gösterebiliriz. Ardından daha küçük frekansları yok sayarak sesi sıkıştırabiliriz. Sonuç aynı olmaz ama kulağa, orijinaline oldukça yakın gelecektir.</p>
+<canvas id="wave-frequencies" class="sketch" width=500 height=500></canvas>
+<p>MP3'lerin yaptığı da aslında budur. Yalnızca, onlar hangi frekansların korunup hangilerinin atılacağı konusunda daha akıllıdırlar.</p>
+<p>Özetle bu durumda Fourier dönüşümlerini bir dalganın temel özellikleri hakkında fikir sahibi olmak için kullanabilir, böylece edindiğimiz fikirden, veri sıkıştırma gibi şeyler yaparken yararlanabiliriz.</p>
+<p>Evet, şimdi Fourier dönüşümünün biraz daha derinine inelim. Sıradaki bölüm, Fourier dönüşümünün işleviyle ilgili daha fazla fikir verecektir.</p>
+<h2 id="demberler">Dış Çemberler</h2>
+<p>Yazının başında bu dönüşümün, sinüs dalgalarına ayırmada kullanıldığını söyledim. Olay şu ki Fourier dönüşümüyle ortaya çıkan sinüs dalgaları normal sinüs dalgaları değil, 3B'dir. Onlara "karmaşık sinüsoidler" denilebilir. Ya da yalnızca "spiraller"…</p>
+<canvas id="complex-sinusoid" class="sketch" width=500 height=500></canvas>
+<p>Yandan bakınca sinüs dalgaları gibi görünürler. Ama üstten bakınca, çember gibidirler.</p>
+<canvas id="complex-sinusoid-turn" class="sketch" width=500 height=500></canvas>
+<p>Şimdiye kadar yaptığımız her şey için normal 2B sinüs dalgalarına ihtiyaç duyduk. 2B dalgalar üzerinde Fourier dönüşümü yaptığımızda karmaşık kısımlar nötrlenir, böylece sinüs dalgaları elde ederiz.</p>
+<p>Ama 3B sinüs dalgalarını şunun gibi gözüken eğlenceli bir şeyler yapmak için kullanabiliriz:</p>
+<canvas id="peace-epicycles" class="sketch" width=500 height=500></canvas>
+<p>Burada neler oluyor?</p>
+<p>Evet, zamanla izlediği yol dolayısıyla çizimi 3B şekle sahip olarak düşünebiliriz. Bir el çizdiğinizi hayal edin; kaleminizin ucunun olduğu noktada üç boyut da mevcut olacaktır. X ve Y düzlemleri bize konumu verir, zaman düzlemi de o andaki zamandır.</p>
+<canvas id="peace-3d" class="sketch" width=500 height=500></canvas>
+<p>Bu şekildeki bir 3B modeli 2B sinüs dalgaları kullanarak gösteremeyiz. Ne kadar 2B sinüs dalgası eklersek ekleyelim, asla 3B bir şekil elde edemeyiz. Öyleyse başka bir şeye ihtiyacımız var.</p>
+<p>Kullanabileceğimiz şey yukarıda bahsettiğimiz 3B spiral sinüs dalgaları. Onlardan çok sayıda eklediğimizde, 3B modelimize benzeyen bir şey elde edebiliriz.</p>
+<p>Unutmayın, bu dalgalara üstten baktığımızda çember gibi görünürler. Bir çemberin etrafında hareket eden diğer çembere dış çember denir.</p>
+<canvas id="peace-build-up" class="sketch" width=500 height=500></canvas>
+<p><input id="peace-build-up-slider" type="range" min="0" max="1" value="1" step="any"></p>
+<p><em>Kutucukta bulunan çember sayısını belirlemek için üstteki düğmeyi kullanın.</em></p>
+<p>Öncekinde olduğu gibi yalnızca birkaç çemberle modelimize epey yakın bir sonuç elde ederiz. Çünkü bu oldukça basit bir şekil ve son çembelerin tek yaptıkları sınırları birazcık daha keskinleştirmek.</p>
+<p>Bütün bunlar her çizime uygulanabilir, gerçekten! Şimdi onu test etme sırası sizde.</p>
+<div class="multi-container">
+<div class="sketch" >
+    <canvas id="draw-zone" class="sketch-child" width=500 height=500></canvas>
+    <p id="draw-zone-instruction" class="instruction">Buraya çizin!</p>
+    <button id="draw-zone-undo-button" class="button embedded-button">Geri al</button>
+</div>
+<canvas id="circle-zone" class="sketch" width=500 height=500></canvas>
+</div>
+<p><input id="circle-zone-slider" type="range" min="0" max="1" value="1" step="any"></p>
+<p><em>Çizimde kullanılacak çember sayısını belirlemek için düğmeyi hareket ettirin.</em></p>
+<p>Birçok şekil için bütün noktaları saklamak yerine yalnızca az sayıda çemberle gayet güzel bir çizim yakınlığının elde edilebildiğini kez daha görüyorsunuz.</p>
+<p>Bunu gerçek veri için de kullanabilir miyiz? Şey… Evet! Aslında, oluşturmaya çalıştığımız şekiller gibi işlerde muhtemelen daha iyi sonuçlar verecek olan SVG (Vektör İmaj Formatı) adında bir başka veri formatı daha var. Yani, bu şimdilik sadece küçük güzel gifler yapmaya yarar.</p>
+<canvas id="fourier-title" class="sketch" width=500 height=300></canvas>
+<p>Ancak Fourier dönüşümlerini kullanan bir başka görsel veri çeşidi daha var.</p>
+<h2 id="jpeg">JPEG</h2>
+<p>Fourier dönüşümlerinin görseller üzerine de uygulanabileceğini biliyor muydunuz? Aslında onu sürekli kullanıyoruz çünkü JPEG'ler onunla çalışır! Aynı ilkeleri görsellere uyguluyarak onları sinüs dalgası gruplarına ayırıyor ve sadece önemli olanları saklıyoruz.</p>
+<p>Şimdi görsellerle çalıştığımıza göre bize farklı bir sinüs dalgası türü lazım. Öyle bir şeye ihtiyacımız var ki elimizde nasıl bir görsel olursa olsun, bir grup sinüs dalgasını bir araya getirerek &nbsp;başlangıçtaki görsele dönebilelim.</p>
+<p>Bunu yapabilmek için her bir sinüs dalgası da görsel olmalı. Çizgi şeklindeki dalga yerine, elimizde artık siyah ve beyaz bölgeleri olan görseller var. Her görseldeki daha fazla veya az kontrast bir dalganın boyutunu temsil eder.</p>
+<p>Aynı şekilde bunu renkleri temsil etmekte de kullanabiliriz ama şimdilik siyah-beyaz görsellerle başlayalım. Renksiz görseller için bize birkaç yatay dalga görseli lazım.</p>
+<p><img id="img-y-component" src="img/components-4-0.png" class="sketch sketch-small"></p>
+<p>Ve birkaç tane de dikey dalga görseli.</p>
+<p><img id="img-x-component" src="img/components-0-4.png" class="sketch sketch-small"></p>
+<p>Yatay ve dikey görseller bizimki gibi görsel türlerini kendi başlarına temsil etmekte yetersiz kalırlar. Bu yüzden hem yatay hem dikey görsellerin sayılarını birlikte katlayarak fazladan dalgalar oluşturmak gerekir.</p>
+<div class="multi-container">
+<img id="img-mult-x-component" src="img/components-0-4.png" class="sketch sketch-mult">
+<div class="maths">×</div>
+<img id="img-mult-y-component" src="img/components-4-0.png" class="sketch sketch-mult">
+<div class="maths">=</div>
+<img id="img-x-y-component" src="img/components-4-4.png" class="sketch sketch-mult">
+</div>
+<p>İşte 8x8'lik bir görsel için gereken bütün görseller.</p>
+<div class="img-component-container">
+    <img src="img/components-0-0.png" class="img-component">
+    <img src="img/components-0-1.png" class="img-component">
+    <img src="img/components-0-2.png" class="img-component">
+    <img src="img/components-0-3.png" class="img-component">
+    <img src="img/components-0-4.png" class="img-component">
+    <img src="img/components-0-5.png" class="img-component">
+    <img src="img/components-0-6.png" class="img-component">
+    <img src="img/components-0-7.png" class="img-component">
+    <img src="img/components-1-0.png" class="img-component">
+    <img src="img/components-1-1.png" class="img-component">
+    <img src="img/components-1-2.png" class="img-component">
+    <img src="img/components-1-3.png" class="img-component">
+    <img src="img/components-1-4.png" class="img-component">
+    <img src="img/components-1-5.png" class="img-component">
+    <img src="img/components-1-6.png" class="img-component">
+    <img src="img/components-1-7.png" class="img-component">
+    <img src="img/components-2-0.png" class="img-component">
+    <img src="img/components-2-1.png" class="img-component">
+    <img src="img/components-2-2.png" class="img-component">
+    <img src="img/components-2-3.png" class="img-component">
+    <img src="img/components-2-4.png" class="img-component">
+    <img src="img/components-2-5.png" class="img-component">
+    <img src="img/components-2-6.png" class="img-component">
+    <img src="img/components-2-7.png" class="img-component">
+    <img src="img/components-3-0.png" class="img-component">
+    <img src="img/components-3-1.png" class="img-component">
+    <img src="img/components-3-2.png" class="img-component">
+    <img src="img/components-3-3.png" class="img-component">
+    <img src="img/components-3-4.png" class="img-component">
+    <img src="img/components-3-5.png" class="img-component">
+    <img src="img/components-3-6.png" class="img-component">
+    <img src="img/components-3-7.png" class="img-component">
+    <img src="img/components-4-0.png" class="img-component">
+    <img src="img/components-4-1.png" class="img-component">
+    <img src="img/components-4-2.png" class="img-component">
+    <img src="img/components-4-3.png" class="img-component">
+    <img src="img/components-4-4.png" class="img-component">
+    <img src="img/components-4-5.png" class="img-component">
+    <img src="img/components-4-6.png" class="img-component">
+    <img src="img/components-4-7.png" class="img-component">
+    <img src="img/components-5-0.png" class="img-component">
+    <img src="img/components-5-1.png" class="img-component">
+    <img src="img/components-5-2.png" class="img-component">
+    <img src="img/components-5-3.png" class="img-component">
+    <img src="img/components-5-4.png" class="img-component">
+    <img src="img/components-5-5.png" class="img-component">
+    <img src="img/components-5-6.png" class="img-component">
+    <img src="img/components-5-7.png" class="img-component">
+    <img src="img/components-6-0.png" class="img-component">
+    <img src="img/components-6-1.png" class="img-component">
+    <img src="img/components-6-2.png" class="img-component">
+    <img src="img/components-6-3.png" class="img-component">
+    <img src="img/components-6-4.png" class="img-component">
+    <img src="img/components-6-5.png" class="img-component">
+    <img src="img/components-6-6.png" class="img-component">
+    <img src="img/components-6-7.png" class="img-component">
+    <img src="img/components-7-0.png" class="img-component">
+    <img src="img/components-7-1.png" class="img-component">
+    <img src="img/components-7-2.png" class="img-component">
+    <img src="img/components-7-3.png" class="img-component">
+    <img src="img/components-7-4.png" class="img-component">
+    <img src="img/components-7-5.png" class="img-component">
+    <img src="img/components-7-6.png" class="img-component">
+    <img src="img/components-7-7.png" class="img-component">
+</div>
+<p>Bu görselleri alıp kontrastlarını boyutlarına göre ayarladıktan sonra bir araya getirirsek her görseli oluşturabiliriz.</p>
+<p>Hadi bu "A" harfiyle başlayalım. Oldukça küçük ama bize de küçük lazım yoksa çok sayıda başka görsel elde ederiz.</p>
+<p><img src="img/a.png" class="sketch sketch-letter"></p>
+<p>Bu görsellerden daha çok ekledikçe, gerçek görsele gitgide daha yaklaşan bir sonuç elde edeceğiz. Ama sadece birkaç tane eklediğimiz halde, aslına yakınlık makul ölçüde sağlandığı için herhalde buradaki modeli anlamışsınızdır.</p>
+<div class="hidden-preload">
+    <img src="img/img-buildup-0-0.png">
+    <img src="img/img-buildup-0-1.png">
+    <img src="img/img-buildup-0-2.png">
+    <img src="img/img-buildup-0-3.png">
+    <img src="img/img-buildup-0-4.png">
+    <img src="img/img-buildup-0-5.png">
+    <img src="img/img-buildup-0-6.png">
+    <img src="img/img-buildup-0-7.png">
+    <img src="img/img-buildup-1-0.png">
+    <img src="img/img-buildup-1-1.png">
+    <img src="img/img-buildup-1-2.png">
+    <img src="img/img-buildup-1-3.png">
+    <img src="img/img-buildup-1-4.png">
+    <img src="img/img-buildup-1-5.png">
+    <img src="img/img-buildup-1-6.png">
+    <img src="img/img-buildup-1-7.png">
+    <img src="img/img-buildup-2-0.png">
+    <img src="img/img-buildup-2-1.png">
+    <img src="img/img-buildup-2-2.png">
+    <img src="img/img-buildup-2-3.png">
+    <img src="img/img-buildup-2-4.png">
+    <img src="img/img-buildup-2-5.png">
+    <img src="img/img-buildup-2-6.png">
+    <img src="img/img-buildup-2-7.png">
+    <img src="img/img-buildup-3-0.png">
+    <img src="img/img-buildup-3-1.png">
+    <img src="img/img-buildup-3-2.png">
+    <img src="img/img-buildup-3-3.png">
+    <img src="img/img-buildup-3-4.png">
+    <img src="img/img-buildup-3-5.png">
+    <img src="img/img-buildup-3-6.png">
+    <img src="img/img-buildup-3-7.png">
+    <img src="img/img-buildup-4-0.png">
+    <img src="img/img-buildup-4-1.png">
+    <img src="img/img-buildup-4-2.png">
+    <img src="img/img-buildup-4-3.png">
+    <img src="img/img-buildup-4-4.png">
+    <img src="img/img-buildup-4-5.png">
+    <img src="img/img-buildup-4-6.png">
+    <img src="img/img-buildup-4-7.png">
+    <img src="img/img-buildup-5-0.png">
+    <img src="img/img-buildup-5-1.png">
+    <img src="img/img-buildup-5-2.png">
+    <img src="img/img-buildup-5-3.png">
+    <img src="img/img-buildup-5-4.png">
+    <img src="img/img-buildup-5-5.png">
+    <img src="img/img-buildup-5-6.png">
+    <img src="img/img-buildup-5-7.png">
+    <img src="img/img-buildup-6-0.png">
+    <img src="img/img-buildup-6-1.png">
+    <img src="img/img-buildup-6-2.png">
+    <img src="img/img-buildup-6-3.png">
+    <img src="img/img-buildup-6-4.png">
+    <img src="img/img-buildup-6-5.png">
+    <img src="img/img-buildup-6-6.png">
+    <img src="img/img-buildup-6-7.png">
+    <img src="img/img-buildup-7-0.png">
+    <img src="img/img-buildup-7-1.png">
+    <img src="img/img-buildup-7-2.png">
+    <img src="img/img-buildup-7-3.png">
+    <img src="img/img-buildup-7-4.png">
+    <img src="img/img-buildup-7-5.png">
+    <img src="img/img-buildup-7-6.png">
+    <img src="img/img-buildup-7-7.png">
+</div>
+<div id="letter-buildup" class="multi-container">
+<img id="letter-buildup-letter" src="img/img-buildup-0-0.png" class="sketch sketch-letter">
+<div id="letter-buildup-components" class="img-component-container">
+    <img src="img/img-components-0-0.png" class="img-component">
+    <img src="img/img-components-0-1.png" class="img-component">
+    <img src="img/img-components-0-2.png" class="img-component">
+    <img src="img/img-components-0-3.png" class="img-component">
+    <img src="img/img-components-0-4.png" class="img-component">
+    <img src="img/img-components-0-5.png" class="img-component">
+    <img src="img/img-components-0-6.png" class="img-component">
+    <img src="img/img-components-0-7.png" class="img-component">
+    <img src="img/img-components-1-0.png" class="img-component">
+    <img src="img/img-components-1-1.png" class="img-component">
+    <img src="img/img-components-1-2.png" class="img-component">
+    <img src="img/img-components-1-3.png" class="img-component">
+    <img src="img/img-components-1-4.png" class="img-component">
+    <img src="img/img-components-1-5.png" class="img-component">
+    <img src="img/img-components-1-6.png" class="img-component">
+    <img src="img/img-components-1-7.png" class="img-component">
+    <img src="img/img-components-2-0.png" class="img-component">
+    <img src="img/img-components-2-1.png" class="img-component">
+    <img src="img/img-components-2-2.png" class="img-component">
+    <img src="img/img-components-2-3.png" class="img-component">
+    <img src="img/img-components-2-4.png" class="img-component">
+    <img src="img/img-components-2-5.png" class="img-component">
+    <img src="img/img-components-2-6.png" class="img-component">
+    <img src="img/img-components-2-7.png" class="img-component">
+    <img src="img/img-components-3-0.png" class="img-component">
+    <img src="img/img-components-3-1.png" class="img-component">
+    <img src="img/img-components-3-2.png" class="img-component">
+    <img src="img/img-components-3-3.png" class="img-component">
+    <img src="img/img-components-3-4.png" class="img-component">
+    <img src="img/img-components-3-5.png" class="img-component">
+    <img src="img/img-components-3-6.png" class="img-component">
+    <img src="img/img-components-3-7.png" class="img-component">
+    <img src="img/img-components-4-0.png" class="img-component">
+    <img src="img/img-components-4-1.png" class="img-component">
+    <img src="img/img-components-4-2.png" class="img-component">
+    <img src="img/img-components-4-3.png" class="img-component">
+    <img src="img/img-components-4-4.png" class="img-component">
+    <img src="img/img-components-4-5.png" class="img-component">
+    <img src="img/img-components-4-6.png" class="img-component">
+    <img src="img/img-components-4-7.png" class="img-component">
+    <img src="img/img-components-5-0.png" class="img-component">
+    <img src="img/img-components-5-1.png" class="img-component">
+    <img src="img/img-components-5-2.png" class="img-component">
+    <img src="img/img-components-5-3.png" class="img-component">
+    <img src="img/img-components-5-4.png" class="img-component">
+    <img src="img/img-components-5-5.png" class="img-component">
+    <img src="img/img-components-5-6.png" class="img-component">
+    <img src="img/img-components-5-7.png" class="img-component">
+    <img src="img/img-components-6-0.png" class="img-component">
+    <img src="img/img-components-6-1.png" class="img-component">
+    <img src="img/img-components-6-2.png" class="img-component">
+    <img src="img/img-components-6-3.png" class="img-component">
+    <img src="img/img-components-6-4.png" class="img-component">
+    <img src="img/img-components-6-5.png" class="img-component">
+    <img src="img/img-components-6-6.png" class="img-component">
+    <img src="img/img-components-6-7.png" class="img-component">
+    <img src="img/img-components-7-0.png" class="img-component">
+    <img src="img/img-components-7-1.png" class="img-component">
+    <img src="img/img-components-7-2.png" class="img-component">
+    <img src="img/img-components-7-3.png" class="img-component">
+    <img src="img/img-components-7-4.png" class="img-component">
+    <img src="img/img-components-7-5.png" class="img-component">
+    <img src="img/img-components-7-6.png" class="img-component">
+    <img src="img/img-components-7-7.png" class="img-component">
+</div>
+</div>
+<p>Mevcut JPEG görsellerin fazladan birkaç detayı daha var.</p>
+<p>JPEG'de görsel 8x8'lik parçalara ayrılır ve her parça kendi içinde sinüs dalgalarına ayrılır. Her pikselin ne ölçüde açık veya koyu renkte olduğunu belirlemek için bir frekans grubu kullanırız. Ardından, biri kırmızı-yeşil, diğeri mavi-sarı renkler için iki grup daha kullanırız. Her bir parça için kullandığımız frekans sayısı JPEG'in kalitesini belirler.</p>
+<p>İşte detayları görebilmemiz için büyütülmüş gerçek bir JPEG görsel. Kalite düzeyiyle oynadığımızda bu sürecin işleyişini görebiliriz.</p>
+<div id="jpeg-example" class="sketch">
+    <img src="img/cat.png" class="sketch-child clear-pixels">
+</div>
+<h2 id="sonu">Sonuç</h2>
+<p>Öyleyse özetleyelim:</p>
+<ul>
+<li>Fourier dönüşümleri, bir şeyleri alıp frekanslarına ayırmamızı sağlayan şeylerdir.</li>
+<li>Bu frekanslar elimizdeki verinin bazı temel özellikleri hakkında fikir verir</li>
+<li>Böylece, sadece önemli frekansları saklayarak veri sıkıştırabiliriz.</li>
+<li>Ayrıca bir grup çemberle, onları başarılı animasyonlar yapmada da kullanabiliriz.</li>
+</ul>
+<p>Buradakiler sadece yüzeysel birkaç uygulama. Fourier dönüşümü son derece güçlü bir araçtır çünkü frekanslara ayırmak işin özüne inmektir. Devre tasarımı, cep telefonu sinyalleri, manyetik rezonans görüntüleme (MRI) ve kuantum fiziği dahil birçok alanda kullanılırlar!</p>
+<h2 id="merakedenleriinsorular">Merak edenler için sorular</h2>
+<p>Burada işin matematik kısmının çoğunu atladım ama fourier dönüşümlerinin temelinde yatan çalışma ilkelerini merak ediyorsanız, işte araştırmanıza rehber olabilecek birkaç soru:</p>
+<ul>
+<li>Bir Fourier dönüşümünü matematiksel olarak nasıl gösterirsiniz?</li>
+<li>Sürekli zamanlı bir Fourier dönüşümü ile kesik zamanlı bir Fourier dönüşümü arasındaki fark nedir?</li>
+<li>Bir Fourier dönüşümünün sayısal hesabı nasıl yapılır?</li>
+<li>Bütün bir şarkının Fourier dönüşümü nasıl yapılır? (Tek bir nota yerine.)</li>
+</ul>
+<h2 id="leriokuma">İleri 'okuma'</h2>
+<p>Daha fazlasını öğrenmek için bakabileceğiniz gerçek anlamda iyi bazı kaynaklar:</p>
+<p><a href="https://betterexplained.com/articles/an-interactive-guide-to-the-fourier-transform/">An Interactive Guide To The Fourier Transform</a>
+Olan biteni daha ziyade matematiksel açıdan irdeleyen mükemmel bir makale.</p>
+<p><a href="https://www.youtube.com/watch?v=spUNpyF58BY">But what is the Fourier Transform? A visual introduction</a>
+Fourier dönüşümlerinin matematiğinin ses perspektifinden de açıklandığı, 3Blue1Brown tarafından yayınlanan mükemmel bir Youtube videosu.</p>
+<p><a href="https://alex.miller.im/posts/fourier-series-spinning-circles-visualization/">A Tale of Math & Art: Creating the Fourier Series Harmonic Circles Visualization</a>
+Şekil çizmek için dış çemberleri nasıl kullanabileceğinizi anlatan bir başka makale, konuyu lineer cebir üzerinden ele alıyor.</p>
+<p><a href="https://en.wikipedia.org/wiki/Fourier_transform">Fourier dönüşümü (Vikipedi)</a>
+Ve tabi ki Vikipedi makalesi de oldukça iyi.</p>
+<h2 id="yazar">Yazar</h2>
+<p>Ben Jez! Bay bölgesinde bir araştırma şirketinde tam-zamanlı çalışıyorum ve boş vakitlerimi oyun üreterek ve bunun gibi interaktif kodlar yazarak geçirmeyi seviyorum!</p>
+<p>Bu web sayfası açık kaynak kodlu bir sayfa, kodlarına <a href="https://github.com/Jezzamonn/fourier">GitHub</a>'dan göz atabilirsiniz! Herhangi bir öneriniz veya sormak istediğiniz bir soru varsa bana <a href="https://twitter.com/jezzamonn">Twitter</a> üzerinden tweet atmaktan çekinmeyin.</p>
+<p>Diğer işlerimi de görmek istiyorsanız, <a href="https://github.com/Jezzamonn/fourier/blob/master">anasayfamı</a> ziyaret edin! Sıradaki işimi merak ediyorsanız Twitter hesabımı takip edebilirsiniz <a href="https://twitter.com/jezzamonn">@jezzamonn</a>!</p>
+</main>
+<script src="main.bundle.js"></script>
+</body>
+</html>

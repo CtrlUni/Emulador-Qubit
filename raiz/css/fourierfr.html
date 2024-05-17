@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html >
+<head>
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-105814606-2"></script>
+	<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+
+	gtag('config', 'UA-105814606-2');
+	</script>
+
+	<title>Une introduction interactive aux transformations de Fourier</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link href="css/styles.css" rel="stylesheet" type="text/css">
+	<link href="https://fonts.googleapis.com/css?family=Montserrat|Open+Sans" rel="stylesheet">
+	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+	<meta name="viewport" content="width=device-width" />
+
+	<!-- Favicon magic -->
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+	<link rel="manifest" href="/site.webmanifest">
+	<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+	<meta name="msapplication-TileColor" content="#ffc40d">
+	<meta name="theme-color" content="#ffffff">
+
+	<!-- Stuff for Facebook/Twitter -->
+	<meta property="og:url"                content="http://www.jezzamon.com/fourier&#x2F;fr.html" />
+	<meta property="og:type"               content="website" />
+	<meta property="og:title"              content="Une introduction interactive aux transformations de Fourier" />
+	<meta property="og:description"        content="Les transformations de Fourier sont un outil utilisé dans un tas de choses différentes. Ceci est une explication de ce que fait une transformation de Fourier, et des différentes manières dont elle peut être utile." />
+	<meta property="og:image"              content="http://www.jezzamon.com/fourier/preview.png" />
+	<meta property="og:image:type"         content="image/png" />
+	<meta property="og:image:width"        content="1200" />
+	<meta property="og:image:height"       content="630" />
+	<meta name="twitter:card"              content="summary_large_image" />
+	<meta name="twitter:site"              content="@jezzamonn" />
+	<meta property="fb:app_id"             content="264785490940720" />
+</head>
+<body>
+<header>
+	<canvas id="header-background" class="header-background"></canvas>
+	<h1>Une introduction interactive aux transformations de Fourier</h1>
+	<p>Jez Swanson</p>
+	<p>Traduit par <a href="http://www.richoux.fr">Florian Richoux</a></p>
+</header>
+<nav id="languages">
+	<ul>
+		<li><a href="&#x2F;fourier">English</a></li>
+		<li><a href="&#x2F;fourier&#x2F;az.html">Azərbaycanca</a></li>
+		<li><a href="&#x2F;fourier&#x2F;de.html">Deutsch</a></li>
+		<li><a href="&#x2F;fourier&#x2F;es.html">Español</a></li>
+		<li><a href="&#x2F;fourier&#x2F;fr.html">Français</a></li>
+		<li><a href="&#x2F;fourier&#x2F;it.html">Italiano</a></li>
+		<li><a href="&#x2F;fourier&#x2F;pl.html">Polski</a></li>
+		<li><a href="&#x2F;fourier&#x2F;pt-br.html">Português</a></li>
+		<li><a href="&#x2F;fourier&#x2F;sk.html">Slovenčina</a></li>
+		<li><a href="&#x2F;fourier&#x2F;tr.html">Türkçe</a></li>
+		<li><a href="&#x2F;fourier&#x2F;ru.html">Русский</a></li>
+		<li><a href="&#x2F;fourier&#x2F;he.html">עברית</a></li>
+		<li><a href="&#x2F;fourier&#x2F;fa.html">فارسی</a></li>
+		<li><a href="&#x2F;fourier&#x2F;ko.html">한국어</a></li>
+		<li><a href="&#x2F;fourier&#x2F;zh-cn.html">简体中文</a></li>
+		<li><a href="&#x2F;fourier&#x2F;zh-tw.html">繁體中文</a></li>
+		<li><a href="https://github.com/Jezzamonn/fourier/tree/master/content">Add a translation</a></li>
+	</ul>
+</nav>
+<main id="content">
+	<p>Les transformations de Fourier sont un outil utilisé dans un tas de choses différentes. Ceci est une explication de ce que fait une transformation de Fourier, et des différentes manières dont elle peut être utile. Et comment faire de jolies choses avec, comme ceci:</p>
+<canvas id="self-draw" class="sketch" width=500 height=500></canvas>
+<p>Je vais expliquer le fonctionnement de cette animation, et du même coup expliquer les transformations de Fourier !</p>
+<p>À la fin, vous devriez avoir une bonne idée de :</p>
+<ul>
+<li>qu'est-ce qu'une transformation de Fourier,</li>
+<li>quelques utilisations pratiques des transformations de Fourier,</li>
+<li>quelques utilisations inutiles mais cool des transformations de Fourier.</li>
+</ul>
+<p>Nous allons laisser les mathématiques et les équations de côté pour le moment. Il y a un tas de calculs intéressants derrière cela, mais il est préférable de commencer par ce qu'une transformation de Fourier fait réellement, et pourquoi vous voudriez l'utiliser. Si vous voulez en savoir plus sur les aspects mathématiques, il y a quelques suggestions de lecture plus bas !</p>
+<h2 id="alorscestquoilatransformationdefourier">Alors, c'est quoi la transformation de Fourier ?</h2>
+<p>En gros, la transformation de Fourier est un moyen de décomposer quelque chose en un groupe d’ondes sinusoïdales. Comme d'habitude, le nom vient d'une personne qui vivait il y a longtemps, appelée Fourier.</p>
+<p>Commençons par quelques exemples simples et on montera en puissance par la suite. Tout d'abord, nous allons examiner les ondes - des modèles qui se répètent dans le temps.</p>
+<p>Voici un exemple d'onde :</p>
+<canvas id="combo-sine-wave" class="sketch" width=500 height=300></canvas>
+<p>Ce motif d'onde peut être divisé en ondes sinusoïdales. En d’autres termes, lorsque nous additionnons les deux ondes sinusoïdales, nous récupérons l’onde initiale.</p>
+<canvas id="combo-sine-wave-split" class="sketch" width=500 height=500></canvas>
+<p>La transformation de Fourier est un moyen pour nous de trouver chacune des ondes sinusoïdales à partir de l'onde d'origine. Dans cet exemple, vous pouvez presque le faire dans votre tête, simplement en regardant l'onde d'origine.</p>
+<p>Pourquoi ? Il s'avère que beaucoup de choses dans le monde réel interagissent en fonction de ces ondes sinusoïdales. Nous les appelons généralement les fréquences de l'onde.</p>
+<p>L’exemple le plus évident est le son : lorsque nous entendons un son, nous n’entendons pas cette ligne cabossée, mais nous entendons les différentes fréquences des ondes sinusoïdales qui constituent le son.</p>
+<p><button id="together-button" class="button">Jouer l'onde globale</button></p>
+<p><button id="split-button-1" class="button">Joue la haute fréquence</button></p>
+<p><button id="split-button-2" class="button">Joue la basse fréquence</button></p>
+<p>Le fait de pouvoir les séparer sur un ordinateur peut nous permettre de comprendre ce qu'une personne entend réellement. Nous pouvons comprendre à quel point un son est aigu ou grave, ou déterminer de quelle note il s'agit.</p>
+<p>Nous pouvons également utiliser ce processus sur des ondes qui ne ressemblent pas à des ondes sinusoïdales.</p>
+<p>Jetons un coup d'œil à celle-là. C'est ce qu'on appelle une onde carrée.</p>
+<canvas id="square-wave" class="sketch" width=500 height=300></canvas>
+<p>On ne le dirait pas, mais elle peut aussi être divisée en ondes sinusoïdales.</p>
+<canvas id="square-wave-split" class="sketch" width=500 height=500></canvas>
+<p>Nous en avons besoin de beaucoup cette fois - techniquement, une infinité pour la représenter parfaitement. Au fur et à mesure que nous additionnons les ondes sinusoïdales, le motif se rapproche de plus en plus de l’onde carrée avec laquelle nous avons commencé.</p>
+<canvas id="square-wave-build-up" class="sketch" width=500 height=500></canvas>
+<p><input id="square-wave-build-up-slider" type="range" min="0" max="1" value="0" step="any" ></p>
+<p><button id="square-wave-button" class="button">Jouer l'onde</button></p>
+<p><em>Faites glisser le curseur ci-dessus pour jouer avec le nombre d'ondes sinusoïdales.</em></p>
+<p>Visuellement, vous remarquerez que ce sont les premières ondes sinusoïdales qui font la plus grande différence. Avec le curseur à mi-course, nous avons la forme générale de l'onde, mais elle est toute cabossée. Nous avons juste besoin du reste des plus petites ondes pour l'applatir.</p>
+<p>Lorsque vous écoutez l'onde, vous entendez le son devenir grave, car nous supprimons les fréquences les plus hautes.</p>
+<p>Ce processus fonctionne comme ça pour n'importe quelle ligne répétée. Essayez, dessinez la vôtre !</p>
+<div class="multi-container">
+<div class="sketch" >
+    <canvas id="wave-draw" class="sketch-child" width=500 height=300></canvas>
+    <p id="wave-draw-instruction" class="instruction wave-instruction">Dessinez ici !</p>
+</div>
+<canvas id="wave-draw-split" class="sketch" width=500 height=500></canvas>
+</div>
+<p><input id="wave-draw-slider" type="range" min="0" max="1" value="1" step="any">
+<button id="wave-draw-button" class="button">Jouer l'onde</button></p>
+<p><em>Déplacez le curseur pour voir comment, à mesure que nous ajoutons plus d'ondes sinusoïdales, on se rapproche de plus en plus de votre dessin.</em></p>
+<p>Encore une fois, mis à part pour les petites irrégularités, l'onde semble assez similaire avec seulement la moitié des ondes sinusoïdales.</p>
+<p>En fait, nous pouvons utiliser le fait que l'onde soit assez similaire à notre avantage. En utilisant une transformation de Fourier, nous pouvons obtenir les parties importantes d'un son et ne stocker que celles-ci pour retrouver quelque chose d'assez proche du son d'origine.</p>
+<p>Normalement sur un ordinateur, nous stockons une onde sous la forme de série de points.</p>
+<canvas id="wave-samples" class="sketch" width=500 height=500></canvas>
+<p>Ce que nous pouvons faire à la place, c’est la représenter par un groupe d’ondes sinusoïdales. Ensuite, nous pouvons compresser le son en ignorant les plus petites fréquences. Le résultat ne sera pas exactement le même, mais personne ne fera vraiment la différence.</p>
+<canvas id="wave-frequencies" class="sketch" width=500 height=500></canvas>
+<p>C’est essentiellement ce que fait le MP3, sauf qu’il est plus intelligent sur les fréquences qu’il conserve et sur celles qu’il jette.</p>
+<p>Ainsi, nous pouvons utiliser les transformations de Fourier pour comprendre les propriétés fondamentales d’une onde, puis l’utiliser pour des tâches telles que la compression.</p>
+<p>Ok, maintenant creusons plus loin le sujet. La partie suivante à l'air cool, mais vous donne également un peu plus de compréhension de ce que fait la transformation de Fourier. Mais surtout, c'est cool.</p>
+<h2 id="picycles">Épicycles</h2>
+<p>Au début, j’ai dit que la transformation de Fourier décomposait quelque chose en ondes sinusoïdales. Le problème, c’est que les ondes sinusoïdales qu’elle crée ne sont pas simplement des ondes sinusoïdales classiques, mais elles sont en 3D. Vous pouvez les appeler "sinusoïdes complexes". Ou simplement "spirales".</p>
+<canvas id="complex-sinusoid" class="sketch" width=500 height=500></canvas>
+<p>Si nous regardons de côté, elles ressemblent à des ondes sinusoïdales. De face, elles ressemblent à des cercles.</p>
+<canvas id="complex-sinusoid-turn" class="sketch" width=500 height=500></canvas>
+<p>Jusqu’à présent, on n’avait besoin que des ondes sinusoïdales 2D classiques. Lorsque nous réalisons une transformation de Fourier sur des ondes 2D, les parties complexes s’annulent, donnant des ondes sinusoïdales.</p>
+<p>Mais nous pouvons utiliser les ondes sinusoïdales 3D pour faire quelque chose d'amusant ressemblant à ceci :</p>
+<canvas id="peace-epicycles" class="sketch" width=500 height=500></canvas>
+<p>Qu'avons-nous ici ?</p>
+<p>En fait, nous pouvons considérer ce dessin comme une forme 3D dessinée dans le temps. Si vous imaginez que la main est dessinée par une personne, les trois dimensions indiquent où se trouve la pointe de son crayon à ce moment-là. Les dimensions x et y nous indiquent la position, puis la dimension temporelle est le moment présent.</p>
+<canvas id="peace-3d" class="sketch" width=500 height=500></canvas>
+<p>Maintenant que nous avons un motif 3D, nous ne pouvons plus utiliser les ondes sinusoïdales 2D classiques pour le représenter. Peu importe le nombre d'ondes sinusoïdales 2D que nous additionnons, nous n'obtiendrons jamais quelque chose en 3D. Nous avons donc besoin de quelque chose d'autre.</p>
+<p>Ce que nous pouvons utiliser, ce sont les ondes sinusoïdales 3D, en spirale. Si nous en additionnons beaucoup, nous pouvons obtenir quelque chose qui ressemble à notre motif 3D.</p>
+<p>Rappelez-vous que ces ondes ressemblent à des cercles quand on les regarde de face. Le nom du motif d'un cercle se déplaçant autour d'un autre cercle est un épicycle.</p>
+<canvas id="peace-build-up" class="sketch" width=500 height=500></canvas>
+<p><input id="peace-build-up-slider" type="range" min="0" max="1" value="1" step="any"></p>
+<p><em>Utilisez le curseur ci-dessus pour déterminer le nombre de cercles entrant en jeu.</em></p>
+<p>Comme auparavant, nous obtenons une assez bonne approximation de notre modèle avec seulement quelques cercles. Comme il s’agit d’une forme assez simple, la dernière chose à faire est de rendre les bords un peu plus nets.</p>
+<p>Ce principe s'applique à n'importe quel dessin ! Maintenant, c’est à votre tour de jouer avec.</p>
+<div class="multi-container">
+<div class="sketch" >
+    <canvas id="draw-zone" class="sketch-child" width=500 height=500></canvas>
+    <p id="draw-zone-instruction" class="instruction">Dessinez ici !</p>
+    <button id="draw-zone-undo-button" class="button embedded-button">Annuler</button>
+</div>
+<canvas id="circle-zone" class="sketch" width=500 height=500></canvas>
+</div>
+<p><input id="circle-zone-slider" type="range" min="0" max="1" value="1" step="any"></p>
+<p><em>Utilisez le curseur pour déterminer le nombre de cercles utilisés pour votre dessin.</em></p>
+<p>Encore une fois, vous verrez que pour la plupart des formes, nous pouvons les approcher assez bien avec un petit nombre de cercles seulement, au lieu de sauvegarder tous les points.</p>
+<p>Peut-on utiliser cela pour de vraies données ? Eh bien, nous pourrions ! En réalité, nous avons un autre format de données appelé SVG, qui fait probablement un meilleur travail pour les types de formes que nous avons tendance à créer. Donc pour le moment, c'est vraiment juste pour faire des petits gifs sympas.</p>
+<canvas id="fourier-title" class="sketch" width=500 height=300></canvas>
+<p>Il existe cependant un autre type de données visuelles qui utilise les transformations de Fourier.</p>
+<h2 id="lejpeg">Le JPEG</h2>
+<p>Saviez-vous que les transformations de Fourier peuvent également être utilisées sur des images ? En fait, nous l'utilisons tout le temps car c'est ainsi que fonctionnent les JPEG ! Nous appliquons les mêmes principes aux images : décomposer quelque chose en ondes sinusoïdales et ne stocker que les plus importantes.</p>
+<p>Maintenant que nous avons affaire à des images, nous avons besoin d’un type différent d’onde sinusoïdale. Nous avons besoin de pouvoir additionner plusieurs de ces ondes sinusoïdales pour revenir à notre image originale, quelle qu'elle soit.</p>
+<p>Pour ce faire, chacune de nos ondes sinusoïdales sera également une image. Au lieu d'une onde sous la forme d'une ligne, nous avons maintenant des images avec des sections en noir et blanc. Pour représenter la taille d'une onde, chaque image aura plus ou moins de contraste.</p>
+<p>Nous pouvons également les utiliser pour représenter la couleur de la même manière, mais commençons par les images en noir et blanc pour le moment. Pour représenter des images sans couleur, nous avons besoin d'images d'ondes horizontales,</p>
+<p><img id="img-y-component" src="img/components-4-0.png" class="sketch sketch-small"></p>
+<p>Avec des images d'ondes verticales.</p>
+<p><img id="img-x-component" src="img/components-0-4.png" class="sketch sketch-small"></p>
+<p>En soit, les images horizontales et verticales ne suffisent pas pour représenter les types d'images que nous obtenons. Nous avons également besoin de quelques-unes supplémentaires qu'on obtient en multipliant ces images entre elles.</p>
+<div class="multi-container">
+<img id="img-mult-x-component" src="img/components-0-4.png" class="sketch sketch-mult">
+<div class="maths">×</div>
+<img id="img-mult-y-component" src="img/components-4-0.png" class="sketch sketch-mult">
+<div class="maths">=</div>
+<img id="img-x-y-component" src="img/components-4-4.png" class="sketch sketch-mult">
+</div>
+<p>Pour une image 8x8, voici toutes les images dont nous avons besoin.</p>
+<div class="img-component-container">
+    <img src="img/components-0-0.png" class="img-component">
+    <img src="img/components-0-1.png" class="img-component">
+    <img src="img/components-0-2.png" class="img-component">
+    <img src="img/components-0-3.png" class="img-component">
+    <img src="img/components-0-4.png" class="img-component">
+    <img src="img/components-0-5.png" class="img-component">
+    <img src="img/components-0-6.png" class="img-component">
+    <img src="img/components-0-7.png" class="img-component">
+    <img src="img/components-1-0.png" class="img-component">
+    <img src="img/components-1-1.png" class="img-component">
+    <img src="img/components-1-2.png" class="img-component">
+    <img src="img/components-1-3.png" class="img-component">
+    <img src="img/components-1-4.png" class="img-component">
+    <img src="img/components-1-5.png" class="img-component">
+    <img src="img/components-1-6.png" class="img-component">
+    <img src="img/components-1-7.png" class="img-component">
+    <img src="img/components-2-0.png" class="img-component">
+    <img src="img/components-2-1.png" class="img-component">
+    <img src="img/components-2-2.png" class="img-component">
+    <img src="img/components-2-3.png" class="img-component">
+    <img src="img/components-2-4.png" class="img-component">
+    <img src="img/components-2-5.png" class="img-component">
+    <img src="img/components-2-6.png" class="img-component">
+    <img src="img/components-2-7.png" class="img-component">
+    <img src="img/components-3-0.png" class="img-component">
+    <img src="img/components-3-1.png" class="img-component">
+    <img src="img/components-3-2.png" class="img-component">
+    <img src="img/components-3-3.png" class="img-component">
+    <img src="img/components-3-4.png" class="img-component">
+    <img src="img/components-3-5.png" class="img-component">
+    <img src="img/components-3-6.png" class="img-component">
+    <img src="img/components-3-7.png" class="img-component">
+    <img src="img/components-4-0.png" class="img-component">
+    <img src="img/components-4-1.png" class="img-component">
+    <img src="img/components-4-2.png" class="img-component">
+    <img src="img/components-4-3.png" class="img-component">
+    <img src="img/components-4-4.png" class="img-component">
+    <img src="img/components-4-5.png" class="img-component">
+    <img src="img/components-4-6.png" class="img-component">
+    <img src="img/components-4-7.png" class="img-component">
+    <img src="img/components-5-0.png" class="img-component">
+    <img src="img/components-5-1.png" class="img-component">
+    <img src="img/components-5-2.png" class="img-component">
+    <img src="img/components-5-3.png" class="img-component">
+    <img src="img/components-5-4.png" class="img-component">
+    <img src="img/components-5-5.png" class="img-component">
+    <img src="img/components-5-6.png" class="img-component">
+    <img src="img/components-5-7.png" class="img-component">
+    <img src="img/components-6-0.png" class="img-component">
+    <img src="img/components-6-1.png" class="img-component">
+    <img src="img/components-6-2.png" class="img-component">
+    <img src="img/components-6-3.png" class="img-component">
+    <img src="img/components-6-4.png" class="img-component">
+    <img src="img/components-6-5.png" class="img-component">
+    <img src="img/components-6-6.png" class="img-component">
+    <img src="img/components-6-7.png" class="img-component">
+    <img src="img/components-7-0.png" class="img-component">
+    <img src="img/components-7-1.png" class="img-component">
+    <img src="img/components-7-2.png" class="img-component">
+    <img src="img/components-7-3.png" class="img-component">
+    <img src="img/components-7-4.png" class="img-component">
+    <img src="img/components-7-5.png" class="img-component">
+    <img src="img/components-7-6.png" class="img-component">
+    <img src="img/components-7-7.png" class="img-component">
+</div>
+<p>Si nous prenons ces images, ajustons leur contraste judicieusement, puis les additionnons, nous pouvons créer n’importe quelle image.</p>
+<p>Commençons par cette lettre 'A'. C'est assez petit, mais nous avons besoin que ce soit petit sinon nous allons nous retrouver avec trop d'images.</p>
+<p><img src="img/a.png" class="sketch sketch-letter"></p>
+<p>À mesure que nous ajoutons plus d'images, nous obtenons quelque chose qui se rapproche de plus en plus de l'image d'origine. Mais je pense que vous constaterez ici que nous obtenons une approximation raisonnable avec seulement quelques-unes d'entre elles.</p>
+<div class="hidden-preload">
+    <img src="img/img-buildup-0-0.png">
+    <img src="img/img-buildup-0-1.png">
+    <img src="img/img-buildup-0-2.png">
+    <img src="img/img-buildup-0-3.png">
+    <img src="img/img-buildup-0-4.png">
+    <img src="img/img-buildup-0-5.png">
+    <img src="img/img-buildup-0-6.png">
+    <img src="img/img-buildup-0-7.png">
+    <img src="img/img-buildup-1-0.png">
+    <img src="img/img-buildup-1-1.png">
+    <img src="img/img-buildup-1-2.png">
+    <img src="img/img-buildup-1-3.png">
+    <img src="img/img-buildup-1-4.png">
+    <img src="img/img-buildup-1-5.png">
+    <img src="img/img-buildup-1-6.png">
+    <img src="img/img-buildup-1-7.png">
+    <img src="img/img-buildup-2-0.png">
+    <img src="img/img-buildup-2-1.png">
+    <img src="img/img-buildup-2-2.png">
+    <img src="img/img-buildup-2-3.png">
+    <img src="img/img-buildup-2-4.png">
+    <img src="img/img-buildup-2-5.png">
+    <img src="img/img-buildup-2-6.png">
+    <img src="img/img-buildup-2-7.png">
+    <img src="img/img-buildup-3-0.png">
+    <img src="img/img-buildup-3-1.png">
+    <img src="img/img-buildup-3-2.png">
+    <img src="img/img-buildup-3-3.png">
+    <img src="img/img-buildup-3-4.png">
+    <img src="img/img-buildup-3-5.png">
+    <img src="img/img-buildup-3-6.png">
+    <img src="img/img-buildup-3-7.png">
+    <img src="img/img-buildup-4-0.png">
+    <img src="img/img-buildup-4-1.png">
+    <img src="img/img-buildup-4-2.png">
+    <img src="img/img-buildup-4-3.png">
+    <img src="img/img-buildup-4-4.png">
+    <img src="img/img-buildup-4-5.png">
+    <img src="img/img-buildup-4-6.png">
+    <img src="img/img-buildup-4-7.png">
+    <img src="img/img-buildup-5-0.png">
+    <img src="img/img-buildup-5-1.png">
+    <img src="img/img-buildup-5-2.png">
+    <img src="img/img-buildup-5-3.png">
+    <img src="img/img-buildup-5-4.png">
+    <img src="img/img-buildup-5-5.png">
+    <img src="img/img-buildup-5-6.png">
+    <img src="img/img-buildup-5-7.png">
+    <img src="img/img-buildup-6-0.png">
+    <img src="img/img-buildup-6-1.png">
+    <img src="img/img-buildup-6-2.png">
+    <img src="img/img-buildup-6-3.png">
+    <img src="img/img-buildup-6-4.png">
+    <img src="img/img-buildup-6-5.png">
+    <img src="img/img-buildup-6-6.png">
+    <img src="img/img-buildup-6-7.png">
+    <img src="img/img-buildup-7-0.png">
+    <img src="img/img-buildup-7-1.png">
+    <img src="img/img-buildup-7-2.png">
+    <img src="img/img-buildup-7-3.png">
+    <img src="img/img-buildup-7-4.png">
+    <img src="img/img-buildup-7-5.png">
+    <img src="img/img-buildup-7-6.png">
+    <img src="img/img-buildup-7-7.png">
+</div>
+<div id="letter-buildup" class="multi-container">
+<img id="letter-buildup-letter" src="img/img-buildup-0-0.png" class="sketch sketch-letter">
+<div id="letter-buildup-components" class="img-component-container">
+    <img src="img/img-components-0-0.png" class="img-component">
+    <img src="img/img-components-0-1.png" class="img-component">
+    <img src="img/img-components-0-2.png" class="img-component">
+    <img src="img/img-components-0-3.png" class="img-component">
+    <img src="img/img-components-0-4.png" class="img-component">
+    <img src="img/img-components-0-5.png" class="img-component">
+    <img src="img/img-components-0-6.png" class="img-component">
+    <img src="img/img-components-0-7.png" class="img-component">
+    <img src="img/img-components-1-0.png" class="img-component">
+    <img src="img/img-components-1-1.png" class="img-component">
+    <img src="img/img-components-1-2.png" class="img-component">
+    <img src="img/img-components-1-3.png" class="img-component">
+    <img src="img/img-components-1-4.png" class="img-component">
+    <img src="img/img-components-1-5.png" class="img-component">
+    <img src="img/img-components-1-6.png" class="img-component">
+    <img src="img/img-components-1-7.png" class="img-component">
+    <img src="img/img-components-2-0.png" class="img-component">
+    <img src="img/img-components-2-1.png" class="img-component">
+    <img src="img/img-components-2-2.png" class="img-component">
+    <img src="img/img-components-2-3.png" class="img-component">
+    <img src="img/img-components-2-4.png" class="img-component">
+    <img src="img/img-components-2-5.png" class="img-component">
+    <img src="img/img-components-2-6.png" class="img-component">
+    <img src="img/img-components-2-7.png" class="img-component">
+    <img src="img/img-components-3-0.png" class="img-component">
+    <img src="img/img-components-3-1.png" class="img-component">
+    <img src="img/img-components-3-2.png" class="img-component">
+    <img src="img/img-components-3-3.png" class="img-component">
+    <img src="img/img-components-3-4.png" class="img-component">
+    <img src="img/img-components-3-5.png" class="img-component">
+    <img src="img/img-components-3-6.png" class="img-component">
+    <img src="img/img-components-3-7.png" class="img-component">
+    <img src="img/img-components-4-0.png" class="img-component">
+    <img src="img/img-components-4-1.png" class="img-component">
+    <img src="img/img-components-4-2.png" class="img-component">
+    <img src="img/img-components-4-3.png" class="img-component">
+    <img src="img/img-components-4-4.png" class="img-component">
+    <img src="img/img-components-4-5.png" class="img-component">
+    <img src="img/img-components-4-6.png" class="img-component">
+    <img src="img/img-components-4-7.png" class="img-component">
+    <img src="img/img-components-5-0.png" class="img-component">
+    <img src="img/img-components-5-1.png" class="img-component">
+    <img src="img/img-components-5-2.png" class="img-component">
+    <img src="img/img-components-5-3.png" class="img-component">
+    <img src="img/img-components-5-4.png" class="img-component">
+    <img src="img/img-components-5-5.png" class="img-component">
+    <img src="img/img-components-5-6.png" class="img-component">
+    <img src="img/img-components-5-7.png" class="img-component">
+    <img src="img/img-components-6-0.png" class="img-component">
+    <img src="img/img-components-6-1.png" class="img-component">
+    <img src="img/img-components-6-2.png" class="img-component">
+    <img src="img/img-components-6-3.png" class="img-component">
+    <img src="img/img-components-6-4.png" class="img-component">
+    <img src="img/img-components-6-5.png" class="img-component">
+    <img src="img/img-components-6-6.png" class="img-component">
+    <img src="img/img-components-6-7.png" class="img-component">
+    <img src="img/img-components-7-0.png" class="img-component">
+    <img src="img/img-components-7-1.png" class="img-component">
+    <img src="img/img-components-7-2.png" class="img-component">
+    <img src="img/img-components-7-3.png" class="img-component">
+    <img src="img/img-components-7-4.png" class="img-component">
+    <img src="img/img-components-7-5.png" class="img-component">
+    <img src="img/img-components-7-6.png" class="img-component">
+    <img src="img/img-components-7-7.png" class="img-component">
+</div>
+</div>
+<p>Pour les vraies images JPEG, il y a juste quelques détails supplémentaires.</p>
+<p>L'image est divisée en morceaux 8x8, et chaque morceau est décomposé séparément. Nous utilisons un ensemble de fréquences pour déterminer la luminosité ou l’obscurité de chaque pixel, puis deux autres ensembles pour la couleur, un pour le rouge-vert et un autre pour le bleu-jaune. Le nombre de fréquences que nous utilisons pour chaque morceau détermine la qualité du JPEG.</p>
+<p>Voici une vraie image JPEG agrandie pour que nous puissions voir les détails. Lorsque nous jouons avec les niveaux de qualité, nous pouvons voir le processus en question en action.</p>
+<div id="jpeg-example" class="sketch">
+    <img src="img/cat.png" class="sketch-child clear-pixels">
+</div>
+<h2 id="conclusion">Conclusion</h2>
+<p>Alors récapitulons :</p>
+<ul>
+<li>les transformations de Fourier nous permettent de prendre quelque chose et de le décomposer en fréquences,</li>
+<li>les fréquences nous donnent certaines propriétés fondamentales des données dont nous disposons,</li>
+<li>et peuvent compresser les données en ne stockant que les fréquences importantes,</li>
+<li>et nous pouvons également les utiliser pour créer des animations sympas avec des cercles.</li>
+</ul>
+<p>Cela n'a fait qu'égratigner la surface avec quelques applications. La transformation de Fourier est un outil extrêmement puissant, car la décomposition de quelque chose en fréquences est fondamentale. Elle est utilisée dans de nombreux domaines, comme la conception de circuits, les signaux de téléphone mobile, l'imagerie par résonance magnétique (IRM) et la physique quantique !</p>
+<h2 id="questionspourlescurieux">Questions pour les curieux</h2>
+<p>J'ai omis la plupart des calculs mathématiques ici, mais si vous êtes intéressés par les principes sous-jacents du fonctionnement de la transformation de Fourier, voici quelques questions que vous pouvez utiliser pour guider votre recherche :</p>
+<ul>
+<li>Comment représentez-vous mathématiquement une transformation de Fourier ?</li>
+<li>Quelle est la différence entre une transformation de Fourier en temps continu et une transformation de Fourier en temps discret ?</li>
+<li>Comment calculez-vous une transformation de Fourier ?</li>
+<li>Comment faites-vous la transformation de Fourier d'une chanson entière (plutôt qu'une simple note) ?</li>
+</ul>
+<h2 id="lecturesupplmentaire">'Lecture' supplémentaire</h2>
+<p>Pour en savoir plus, voici de très bonnes ressources que vous pouvez consulter :</p>
+<p><a href="https://betterexplained.com/articles/an-interactive-guide-to-the-fourier-transform/">An Interactive Guide To The Fourier Transform</a>
+Un excellent article qui creuse de ce qui se passe mathématiquement.</p>
+<p><a href="https://www.youtube.com/watch?v=spUNpyF58BY">But what is the Fourier Transform? A visual introduction.</a>
+Une superbe vidéo Youtube de 3Blue1Brown, expliquant également le calcul de la transformation de Fourier d'un point de vue audio.</p>
+<p><a href="https://alex.miller.im/posts/fourier-series-spinning-circles-visualization/">A Tale of Math & Art: Creating the Fourier Series Harmonic Circles Visualization</a>
+Un autre article expliquant comment utiliser les épicycles pour dessiner un chemin, expliqué dans une perspective d'algèbre linéaire.</p>
+<p><a href="https://fr.wikipedia.org/wiki/Transformation_de_Fourier">Transformation de Fourier (Wikipedia)</a>
+Et bien sûr, l'article de Wikipedia est également très bon.</p>
+<h2 id="lauteur">L'auteur</h2>
+<canvas id="its-meee" class="sketch" width=500 height=500></canvas>
+<p>Je suis Jez ! Je travaille à plein temps dans une <a href="https://www.google.com/">société de recherche</a> dans la région de la baie de San Francisco, et pendant mon temps libre, j'aime créer des jeux et des codes interactifs comme celui-ci !</p>
+<p>Cette page web est open-source, vous pouvez aller regarder le code sur <a href="https://github.com/Jezzamonn/fourier">GitHub</a> ! Si vous avez des commentaires ou souhaitez poser des questions, n'hésitez pas à m'envoyer un mail à <span id="email-text">fourier [at] jezzamon [dot] com</span> ou à m'envoyer un tweet sur <a href="https://twitter.com/jezzamonn">Twitter</a>.</p>
+<p>Si vous voulez en voir plus sur mon travail, consultez ma <a href="/">page d'accueil</a>, et si vous voulez voir ce que je compte faire, vous pouvez suivre mon compte Twitter, <a href="https://twitter.com/jezzamonn">@jezzamonn</a> !</p>
+<h2 id="traductionfranaise">Traduction française</h2>
+<p>Proposée par <a href="http://www.richoux.fr">Florian Richoux</a> que vous pouvez suivre sur Twitter <a href="https://twitter.com/floricx">@FloRicx</a> et GitHub <a href="https://github.com/richoux">github.com/richoux</a>.</p>
+</main>
+<script src="main.bundle.js"></script>
+</body>
+</html>

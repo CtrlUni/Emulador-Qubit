@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html >
+<head>
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-105814606-2"></script>
+	<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+
+	gtag('config', 'UA-105814606-2');
+	</script>
+
+	<title>Interkatívny úvod do Fourierovej transformácie</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link href="css/styles.css" rel="stylesheet" type="text/css">
+	<link href="https://fonts.googleapis.com/css?family=Montserrat|Open+Sans" rel="stylesheet">
+	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+	<meta name="viewport" content="width=device-width" />
+
+	<!-- Favicon magic -->
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+	<link rel="manifest" href="/site.webmanifest">
+	<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+	<meta name="msapplication-TileColor" content="#ffc40d">
+	<meta name="theme-color" content="#ffffff">
+
+	<!-- Stuff for Facebook/Twitter -->
+	<meta property="og:url"                content="http://www.jezzamon.com/fourier&#x2F;sk.html" />
+	<meta property="og:type"               content="website" />
+	<meta property="og:title"              content="Interkatívny úvod do Fourierovej transformácie" />
+	<meta property="og:description"        content="Fourierova transofrmácia je náradie používané vo veľa rôznych odvetviach. Tu máme vysvetlené, čo Furierova transformácia robí a niekoľko rôznych spôsobov ako nám môže byť užitočná." />
+	<meta property="og:image"              content="http://www.jezzamon.com/fourier/preview.png" />
+	<meta property="og:image:type"         content="image/png" />
+	<meta property="og:image:width"        content="1200" />
+	<meta property="og:image:height"       content="630" />
+	<meta name="twitter:card"              content="summary_large_image" />
+	<meta name="twitter:site"              content="@jezzamonn" />
+	<meta property="fb:app_id"             content="264785490940720" />
+</head>
+<body>
+<header>
+	<canvas id="header-background" class="header-background"></canvas>
+	<h1>Interkatívny úvod do Fourierovej transformácie</h1>
+	<p>Jez Swanson</p>
+	<p>Preložil: <a href="https://github.com/Straaths">Jakub Mintal</a></p>
+</header>
+<nav id="languages">
+	<ul>
+		<li><a href="&#x2F;fourier">English</a></li>
+		<li><a href="&#x2F;fourier&#x2F;az.html">Azərbaycanca</a></li>
+		<li><a href="&#x2F;fourier&#x2F;de.html">Deutsch</a></li>
+		<li><a href="&#x2F;fourier&#x2F;es.html">Español</a></li>
+		<li><a href="&#x2F;fourier&#x2F;fr.html">Français</a></li>
+		<li><a href="&#x2F;fourier&#x2F;it.html">Italiano</a></li>
+		<li><a href="&#x2F;fourier&#x2F;pl.html">Polski</a></li>
+		<li><a href="&#x2F;fourier&#x2F;pt-br.html">Português</a></li>
+		<li><a href="&#x2F;fourier&#x2F;sk.html">Slovenčina</a></li>
+		<li><a href="&#x2F;fourier&#x2F;tr.html">Türkçe</a></li>
+		<li><a href="&#x2F;fourier&#x2F;ru.html">Русский</a></li>
+		<li><a href="&#x2F;fourier&#x2F;he.html">עברית</a></li>
+		<li><a href="&#x2F;fourier&#x2F;fa.html">فارسی</a></li>
+		<li><a href="&#x2F;fourier&#x2F;ko.html">한국어</a></li>
+		<li><a href="&#x2F;fourier&#x2F;zh-cn.html">简体中文</a></li>
+		<li><a href="&#x2F;fourier&#x2F;zh-tw.html">繁體中文</a></li>
+		<li><a href="https://github.com/Jezzamonn/fourier/tree/master/content">Add a translation</a></li>
+	</ul>
+</nav>
+<main id="content">
+	<p>Fourierova transformácia je náradie používané vo veľa rôznych odvetviach. Tu máme vysvetlené, čo Furierova transformácia robí a niekoľko rôznych spôsobov ako nám môže byť užitočná. A ako pomocou nej môžete urobiť pekné veci, ako napríklad táto:</p>
+<canvas id="self-draw" class="sketch" width=500 height=500></canvas>
+<p>Vysvetlím, ako táto animácia funguje, a popri tom vysvetlím Fourierovu transformáciu!</p>
+<p>Na konci by ste mali mať dobrý obraz o tom</p>
+<ul>
+<li>čo robí Fourierova transformácia</li>
+<li>niektoré praktické použitie Fourierovej transformácie</li>
+<li>niektoré zbytočné, ale zaujímavé použitia Fourierovej transformácie</li>
+</ul>
+<p>Matematiku a rovnice z toho zatiaľ vynecháme. Je za tým veľa zaujímavej matematiky ale je lepšie najskôr začať s tým, čo to v skutočnosti robí, a prečo by ste to chceli použiť. Ak sa chcete dozvedieť viac o tom "ako", nižšie nájdete niekoľko ďalších návrhov na čítanie!</p>
+<h2 id="takotovlastneje">Tak čo to vlastne je?</h2>
+<p>Zjednodušene povedané, Fourierova transformácia je spôsob rozdelenia čohokoľvek na niekoľko sínusových vĺn. Ako obvykle, meno pochádza od človeka, ktorý kedysi dávno žil a nazýval sa Fourier.</p>
+<p>Začnime s niekoľkými jednoduchými príkladmi a postupne budeme pokračovať našou cestou ďalej. Najskôr sa pozrieme na vlny - vzory, ktoré sa s tokom času opakujú.</p>
+<p>Tu je príklad takej vlny:</p>
+<canvas id="combo-sine-wave" class="sketch" width=500 height=300></canvas>
+<p>Tento zvlnený vzor sa dá rozdeliť na sínusové vlny. To znamená, že keď zložíme dve sínusové vlny, dostaneme pôvodný zvlnený vzor.</p>
+<canvas id="combo-sine-wave-split" class="sketch" width=500 height=500></canvas>
+<p>Fourierova transformácia je spôsob, ako zobrať túto kombinovanú vlnu a dostať z nej späť všetky pôvodné sínusové vlny. V tomto príklade to takmer môžete urobiť vo svojej hlave, len pri pohľade na pôvodnú vlnu.</p>
+<p>Prečo? Ukázalo sa, že veľa vecí v skutočnom svete interaguje na základe týchto sínusových vĺn. Väčšinou ich nazývame frekvenciami vlny.</p>
+<p>Najzreteľnejším príkladom je zvuk - keď počujeme zvuk, nepočujeme tú krivoľakú čiaru, ale počújeme rôzne frekvencie sínusových vĺn, ktoré spolu tvoria zvuk.</p>
+<p><button id="together-button" class="button">Zahraj celú vlnu</button></p>
+<p><button id="split-button-1" class="button">Zahraj vysokú frekvenciu</button></p>
+<p><button id="split-button-2" class="button">Zahraj nízku frekvenciu</button></p>
+<p>To, že ich dokážeme rozdeliť na počítači, nám môže pomôcť pochopiť, čo človek skutočne počuje. Dokážeme pochopiť, aký vysoký alebo nízky je zvuk, alebo zistiť, o akú notu ide.</p>
+<p>Tento proces môžeme použiť aj na vlnách, ktoré nevyzerajú, akoby boli vytvorené zo sínusových vĺn.</p>
+<p>Pozrime sa na toto. Hovorí sa tomu štvorcová vlna.</p>
+<canvas id="square-wave" class="sketch" width=500 height=300></canvas>
+<p>Možno to tak nevyzerá, ale aj tá sa dá rozdeliť na sínusové vlny.</p>
+<canvas id="square-wave-split" class="sketch" width=500 height=500></canvas>
+<p>Tentokrát ich technicky potrebujeme nekonečné množstvo, aby sme ju mohli dokonale reprezentovať. Keď pridávame čoraz viac sínusových vĺn, obrazec sa dostáva bližšie a bližšie k štvorcovej vlne, s ktorou sme začali.</p>
+<canvas id="square-wave-build-up" class="sketch" width=500 height=500></canvas>
+<p><input id="square-wave-build-up-slider" type="range" min="0" max="1" value="0" step="any" ></p>
+<p><button id="square-wave-button" class="button">Zahraj vlnu</button></p>
+<p><em>Posuňte vyžší posúvník pre zmenu počtu sínusových vĺn.</em></p>
+<p>Všimnete si, že v skutočnosti prvých pár sínusových vĺn robí najväčší rozdiel. S posúvníkom v polovici máme všeobecný tvar vlny, aj keď trochu pokrivený. Tie najmenšie potrebujeme len na to, aby sa zakrivenie vyrovnalo.</p>
+<p>Keď budete počúvať vlnu, budete počuť zvuk klesajúci, pretože odstraňujeme vyššie frekvencie.</p>
+<p>Tento proces funguje tak isto, pri každej opakujúcej sa krivke. Vyskúšajte si to!</p>
+<div class="multi-container">
+<div class="sketch" >
+    <canvas id="wave-draw" class="sketch-child" width=500 height=300></canvas>
+    <p id="wave-draw-instruction" class="instruction wave-instruction">Tu kreslite!</p>
+</div>
+<canvas id="wave-draw-split" class="sketch" width=500 height=500></canvas>
+</div>
+<p><input id="wave-draw-slider" type="range" min="0" max="1" value="1" step="any">
+<button id="wave-draw-button" class="button">Zahraj vlnu</button></p>
+<p><em>Pohybom posuvníka uvidíte, ako pribúdajú ďalšie sínusové vlny, takže sa bude viac a viac podobať na vašu kresbu.</em></p>
+<p>Znovu, vlna vyzerá, okrem mierneho pokrivenia, veľmi podobne už len s polovicou sinusových vĺn.</p>
+<p>V sutočnosti môžeme použiť fakt, že vlna je veľmi podobná, ako našu výhodu. Použitím Fourierovej transformácie, môžeme získať dôležité časti zvuku, uložiť len tie a nakoniec skončíme s niečím, čo je dosť blízko pôvodnému zvuku.</p>
+<p>Normálne na počítači ukladáme vlnu ako sériu hodnôt.</p>
+<canvas id="wave-samples" class="sketch" width=500 height=500></canvas>
+<p>Namiesto toho ju však môžeme reprezentovať, ako skupinu sínusových vĺn. Potom môžeme vykonať kompresiu zvuku ignorovaním vyžších frekvencií. Náš konečný výsledok nebude rovnaký ale pre človeka bude znieť dosť podobne.</p>
+<canvas id="wave-frequencies" class="sketch" width=500 height=500></canvas>
+<p>To je v podstate to, čo robia MP3ky, s výnimkou toho, že sú múdrejšie vo výberaní toho, ktoré frekvencie uchovávajú a ktoré vyhodia.</p>
+<p>Takže v tomto prípade môžeme použiť Fourierove transformácie na pochopenie základných vlastností vlny a potom ich môžeme použiť na užitočný proces, akým je kompresia.</p>
+<p>Dobre, pozrime sa bližšie na Fourierovú transformáciu. Táto nasledujúca časť nielenže vyzerá zaujímavo, ale tiež vám dáva trochu lepšie pochopenie toho, čo robí Fourierova transformácia. Ale hlavne vyzerá zaujímavo.</p>
+<h2 id="epicykly">Epicykly</h2>
+<p>Na začiatku sme povedali, že rozdeľuje veci na sínusové vlny. Ide o to, že sínusové vlny, ktoré vytvára, nie sú iba bežné sínusové vlny, ale sú 3D. Môžete ich nazvať „komplexnými sínusoidami“. Alebo jednoducho „špirály“.</p>
+<canvas id="complex-sinusoid" class="sketch" width=500 height=500></canvas>
+<p>Ak sa pozrieme z boku, vyzerajú ako sínusové vlny. Spredu však vyzerajú ako kruhy.</p>
+<canvas id="complex-sinusoid-turn" class="sketch" width=500 height=500></canvas>
+<p>Zatiaľ všetko, čo sme robili, vyžadovalo len normálne sínusové vlny 2D. Keď robíme Fourierovu transformáciu na 2D vlnách, komplexné časti sa vynulujú, takže nakoniec skončíme so sínusovými vlnami.</p>
+<p>Ale môžeme použiť 3D sínusové vlny, aby vytvoriť niečo zábavne vyzerajúce, takéto:</p>
+<canvas id="peace-epicycles" class="sketch" width=500 height=500></canvas>
+<p>Čo sa tu deje?</p>
+<p>No, kresbu môžeme považovať za 3D tvar kvôli spôsobu, akým sa vytvára v čase. Ak si viete predstaviť, že ruka bola nakreslená osobou, tri súradnice predstavujú polohu, kde sa v tomto okamihu nachádzala špička ceruzky. Súradnice x a y nám hovoria o polohe v priestore a tretia súradnica je čas v danom okamihu.</p>
+<canvas id="peace-3d" class="sketch" width=500 height=500></canvas>
+<p>Teraz, keď máme trojrozmerný vzor, nemôžeme na jeho reprezentáciu použiť normálne sínusové vlny 2D. Bez ohľadu na to, koľko 2D sínusových vĺn pridáme, nikdy nebudeme mať niečo 3D. Potrebujeme teda niečo iné.</p>
+<p>Môžeme použiť predchádzajúce 3D špirálové sínusové vlny. Ak zložíme veľa z nich, môžeme získať niečo, čo vyzerá ako náš trojrozmerný vzor.</p>
+<p>Pamätajte, že tieto vlny vyzerajú ako kruhy, keď sa na ne pozeráme spredu. Názov vzoru kruhu, ktorý sa pohybuje okolo iného kruhu, je epicyklus.</p>
+<canvas id="peace-build-up" class="sketch" width=500 height=500></canvas>
+<p><input id="peace-build-up-slider" type="range" min="0" max="1" value="1" step="any"></p>
+<p><em>Pomocou posúvníka vyššie môžete ovládať počet kruhov.</em></p>
+<p>Rovnako ako predtým, dosiahli sme celkom dobrú aproximáciu nášho modelu len s niekoľkými kruhmi. Pretože sa jedná o pomerne jednoduchý tvar, všetky posledné urobia hrany len o niečo ostrejšie.</p>
+<p>To všetko sa vzťahuje na akýkoľvek náčrtok, naozaj! Teraz máte šancu sa s tým pohrať.</p>
+<div class="multi-container">
+<div class="sketch" >
+    <canvas id="draw-zone" class="sketch-child" width=500 height=500></canvas>
+    <p id="draw-zone-instruction" class="instruction">Nakreslite tu!</p>
+    <button id="draw-zone-undo-button" class="button embedded-button">Krok späť</button>
+</div>
+<canvas id="circle-zone" class="sketch" width=500 height=500></canvas>
+</div>
+<p><input id="circle-zone-slider" type="range" min="0" max="1" value="1" step="any"></p>
+<p><em>Pomocou posúvníka určte, koľko kruhov sa použije na kreslenie</em></p>
+<p>Znova ste mohli vidieť, že väčšinu tvarov dokážeme pomerne dobre napodobniť pomocou malého počtu kruhov, namiesto uloženia súradníc všetkých bodov.</p>
+<p>Môžeme to použiť pre skutočné dáta? No, mohli by sme! V skutočnosti, tu máme ďalší dátový formát s názvom SVG, ktorý pravdepodobne vykonáva dobrú prácu pre typy tvarov, ktoré máme tendenciu vytvárať. Takže v tejto chvíli je to naozaj len pre tvorenie skvelých gifov.</p>
+<canvas id="fourier-title" class="sketch" width=500 height=300></canvas>
+<p>Existuje však aj iný typ vizuálnych údajov, ktoré využívajú Fourierovu transformáciu.</p>
+<h2 id="jpegs">JPEGs</h2>
+<p>Vedeli ste, že Fourierove transformácie sa dajú použiť aj na obrázky? V skutočnosti ich používame stále, pretože takto fungujú súbory JPEG! Na obrázky aplikujeme rovnaké princípy - niečo rozdelíme do zväzku sínusových vĺn a potom ukladáme iba tie dôležité.</p>
+<p>Teraz, keď sa zaoberáme obrázkami, potrebujeme iný typ sínusovej vlny. Potrebujeme niečo, čo bez ohľadu na to, aký obrázok máme, môžeme pridať, aby sme sa dostali späť k nášmu pôvodnému obrázku.</p>
+<p>Aby sme to mohli urobiť, každá z našich sínusových vĺn bude tiež obrázkom. Namiesto vlny, ktorá je čiarou, máme teraz obrázky s čiernymi a bielymi sekciami. Na vyjadrenie veľkosti vlny, bude mať každý obrázok viac alebo menej kontrastu.</p>
+<p>Môžeme ich tiež použiť na reprezentáciu farieb rovnakým spôsobom. Ale začnime s čiernobielym obrázkom. Na zobrazenie bezfarebných obrázkov potrebujeme niekoľko obrázkov horizontálnych vĺn,</p>
+<p><img id="img-y-component" src="img/components-4-0.png" class="sketch sketch-small"></p>
+<p>spolu s niekoľko obrázkami zvislých vĺn.</p>
+<p><img id="img-x-component" src="img/components-0-4.png" class="sketch sketch-small"></p>
+<p>Samotné iba vodorovné a zvislé obrázky nestačia na to, aby sme ich zložením dostali obrázky, ktoré chceme získať. Potrebujeme tiež nejaké ďalšie, ktoré získame vynásobením týchto dvoch jednotiek.</p>
+<div class="multi-container">
+<img id="img-mult-x-component" src="img/components-0-4.png" class="sketch sketch-mult">
+<div class="maths">×</div>
+<img id="img-mult-y-component" src="img/components-4-0.png" class="sketch sketch-mult">
+<div class="maths">=</div>
+<img id="img-x-y-component" src="img/components-4-4.png" class="sketch sketch-mult">
+</div>
+<p>Tu sú všetky obrázky, ktoré potrebujeme, pre získanie akéhokoľvek obrázka 8x8.</p>
+<div class="img-component-container">
+    <img src="img/components-0-0.png" class="img-component">
+    <img src="img/components-0-1.png" class="img-component">
+    <img src="img/components-0-2.png" class="img-component">
+    <img src="img/components-0-3.png" class="img-component">
+    <img src="img/components-0-4.png" class="img-component">
+    <img src="img/components-0-5.png" class="img-component">
+    <img src="img/components-0-6.png" class="img-component">
+    <img src="img/components-0-7.png" class="img-component">
+    <img src="img/components-1-0.png" class="img-component">
+    <img src="img/components-1-1.png" class="img-component">
+    <img src="img/components-1-2.png" class="img-component">
+    <img src="img/components-1-3.png" class="img-component">
+    <img src="img/components-1-4.png" class="img-component">
+    <img src="img/components-1-5.png" class="img-component">
+    <img src="img/components-1-6.png" class="img-component">
+    <img src="img/components-1-7.png" class="img-component">
+    <img src="img/components-2-0.png" class="img-component">
+    <img src="img/components-2-1.png" class="img-component">
+    <img src="img/components-2-2.png" class="img-component">
+    <img src="img/components-2-3.png" class="img-component">
+    <img src="img/components-2-4.png" class="img-component">
+    <img src="img/components-2-5.png" class="img-component">
+    <img src="img/components-2-6.png" class="img-component">
+    <img src="img/components-2-7.png" class="img-component">
+    <img src="img/components-3-0.png" class="img-component">
+    <img src="img/components-3-1.png" class="img-component">
+    <img src="img/components-3-2.png" class="img-component">
+    <img src="img/components-3-3.png" class="img-component">
+    <img src="img/components-3-4.png" class="img-component">
+    <img src="img/components-3-5.png" class="img-component">
+    <img src="img/components-3-6.png" class="img-component">
+    <img src="img/components-3-7.png" class="img-component">
+    <img src="img/components-4-0.png" class="img-component">
+    <img src="img/components-4-1.png" class="img-component">
+    <img src="img/components-4-2.png" class="img-component">
+    <img src="img/components-4-3.png" class="img-component">
+    <img src="img/components-4-4.png" class="img-component">
+    <img src="img/components-4-5.png" class="img-component">
+    <img src="img/components-4-6.png" class="img-component">
+    <img src="img/components-4-7.png" class="img-component">
+    <img src="img/components-5-0.png" class="img-component">
+    <img src="img/components-5-1.png" class="img-component">
+    <img src="img/components-5-2.png" class="img-component">
+    <img src="img/components-5-3.png" class="img-component">
+    <img src="img/components-5-4.png" class="img-component">
+    <img src="img/components-5-5.png" class="img-component">
+    <img src="img/components-5-6.png" class="img-component">
+    <img src="img/components-5-7.png" class="img-component">
+    <img src="img/components-6-0.png" class="img-component">
+    <img src="img/components-6-1.png" class="img-component">
+    <img src="img/components-6-2.png" class="img-component">
+    <img src="img/components-6-3.png" class="img-component">
+    <img src="img/components-6-4.png" class="img-component">
+    <img src="img/components-6-5.png" class="img-component">
+    <img src="img/components-6-6.png" class="img-component">
+    <img src="img/components-6-7.png" class="img-component">
+    <img src="img/components-7-0.png" class="img-component">
+    <img src="img/components-7-1.png" class="img-component">
+    <img src="img/components-7-2.png" class="img-component">
+    <img src="img/components-7-3.png" class="img-component">
+    <img src="img/components-7-4.png" class="img-component">
+    <img src="img/components-7-5.png" class="img-component">
+    <img src="img/components-7-6.png" class="img-component">
+    <img src="img/components-7-7.png" class="img-component">
+</div>
+<p>Ak vezmeme tieto obrázky, upravíme ich kontrast na správne hodnoty a potom ich zložíme, môžeme vytvoriť akýkoľvek obrázok.</p>
+<p>Začnime týmto písmenom „A“. Je dosť malé, ale musí byť malé, inak skončíme s príliš mnohými dodatkovými obrázkami.</p>
+<p><img src="img/a.png" class="sketch sketch-letter"></p>
+<p>Keď pridávame čoraz viac z týchto obrázkov, približujeme sa do niečoho, čo sa stáva viac a viac podobné originálnemu obrázku. Myslím si, že sami uvidíte postup, pretože už s niekoľkými z nich dostaneme dobrú aproximáciu.</p>
+<div class="hidden-preload">
+    <img src="img/img-buildup-0-0.png">
+    <img src="img/img-buildup-0-1.png">
+    <img src="img/img-buildup-0-2.png">
+    <img src="img/img-buildup-0-3.png">
+    <img src="img/img-buildup-0-4.png">
+    <img src="img/img-buildup-0-5.png">
+    <img src="img/img-buildup-0-6.png">
+    <img src="img/img-buildup-0-7.png">
+    <img src="img/img-buildup-1-0.png">
+    <img src="img/img-buildup-1-1.png">
+    <img src="img/img-buildup-1-2.png">
+    <img src="img/img-buildup-1-3.png">
+    <img src="img/img-buildup-1-4.png">
+    <img src="img/img-buildup-1-5.png">
+    <img src="img/img-buildup-1-6.png">
+    <img src="img/img-buildup-1-7.png">
+    <img src="img/img-buildup-2-0.png">
+    <img src="img/img-buildup-2-1.png">
+    <img src="img/img-buildup-2-2.png">
+    <img src="img/img-buildup-2-3.png">
+    <img src="img/img-buildup-2-4.png">
+    <img src="img/img-buildup-2-5.png">
+    <img src="img/img-buildup-2-6.png">
+    <img src="img/img-buildup-2-7.png">
+    <img src="img/img-buildup-3-0.png">
+    <img src="img/img-buildup-3-1.png">
+    <img src="img/img-buildup-3-2.png">
+    <img src="img/img-buildup-3-3.png">
+    <img src="img/img-buildup-3-4.png">
+    <img src="img/img-buildup-3-5.png">
+    <img src="img/img-buildup-3-6.png">
+    <img src="img/img-buildup-3-7.png">
+    <img src="img/img-buildup-4-0.png">
+    <img src="img/img-buildup-4-1.png">
+    <img src="img/img-buildup-4-2.png">
+    <img src="img/img-buildup-4-3.png">
+    <img src="img/img-buildup-4-4.png">
+    <img src="img/img-buildup-4-5.png">
+    <img src="img/img-buildup-4-6.png">
+    <img src="img/img-buildup-4-7.png">
+    <img src="img/img-buildup-5-0.png">
+    <img src="img/img-buildup-5-1.png">
+    <img src="img/img-buildup-5-2.png">
+    <img src="img/img-buildup-5-3.png">
+    <img src="img/img-buildup-5-4.png">
+    <img src="img/img-buildup-5-5.png">
+    <img src="img/img-buildup-5-6.png">
+    <img src="img/img-buildup-5-7.png">
+    <img src="img/img-buildup-6-0.png">
+    <img src="img/img-buildup-6-1.png">
+    <img src="img/img-buildup-6-2.png">
+    <img src="img/img-buildup-6-3.png">
+    <img src="img/img-buildup-6-4.png">
+    <img src="img/img-buildup-6-5.png">
+    <img src="img/img-buildup-6-6.png">
+    <img src="img/img-buildup-6-7.png">
+    <img src="img/img-buildup-7-0.png">
+    <img src="img/img-buildup-7-1.png">
+    <img src="img/img-buildup-7-2.png">
+    <img src="img/img-buildup-7-3.png">
+    <img src="img/img-buildup-7-4.png">
+    <img src="img/img-buildup-7-5.png">
+    <img src="img/img-buildup-7-6.png">
+    <img src="img/img-buildup-7-7.png">
+</div>
+<div id="letter-buildup" class="multi-container">
+<img id="letter-buildup-letter" src="img/img-buildup-0-0.png" class="sketch sketch-letter">
+<div id="letter-buildup-components" class="img-component-container">
+    <img src="img/img-components-0-0.png" class="img-component">
+    <img src="img/img-components-0-1.png" class="img-component">
+    <img src="img/img-components-0-2.png" class="img-component">
+    <img src="img/img-components-0-3.png" class="img-component">
+    <img src="img/img-components-0-4.png" class="img-component">
+    <img src="img/img-components-0-5.png" class="img-component">
+    <img src="img/img-components-0-6.png" class="img-component">
+    <img src="img/img-components-0-7.png" class="img-component">
+    <img src="img/img-components-1-0.png" class="img-component">
+    <img src="img/img-components-1-1.png" class="img-component">
+    <img src="img/img-components-1-2.png" class="img-component">
+    <img src="img/img-components-1-3.png" class="img-component">
+    <img src="img/img-components-1-4.png" class="img-component">
+    <img src="img/img-components-1-5.png" class="img-component">
+    <img src="img/img-components-1-6.png" class="img-component">
+    <img src="img/img-components-1-7.png" class="img-component">
+    <img src="img/img-components-2-0.png" class="img-component">
+    <img src="img/img-components-2-1.png" class="img-component">
+    <img src="img/img-components-2-2.png" class="img-component">
+    <img src="img/img-components-2-3.png" class="img-component">
+    <img src="img/img-components-2-4.png" class="img-component">
+    <img src="img/img-components-2-5.png" class="img-component">
+    <img src="img/img-components-2-6.png" class="img-component">
+    <img src="img/img-components-2-7.png" class="img-component">
+    <img src="img/img-components-3-0.png" class="img-component">
+    <img src="img/img-components-3-1.png" class="img-component">
+    <img src="img/img-components-3-2.png" class="img-component">
+    <img src="img/img-components-3-3.png" class="img-component">
+    <img src="img/img-components-3-4.png" class="img-component">
+    <img src="img/img-components-3-5.png" class="img-component">
+    <img src="img/img-components-3-6.png" class="img-component">
+    <img src="img/img-components-3-7.png" class="img-component">
+    <img src="img/img-components-4-0.png" class="img-component">
+    <img src="img/img-components-4-1.png" class="img-component">
+    <img src="img/img-components-4-2.png" class="img-component">
+    <img src="img/img-components-4-3.png" class="img-component">
+    <img src="img/img-components-4-4.png" class="img-component">
+    <img src="img/img-components-4-5.png" class="img-component">
+    <img src="img/img-components-4-6.png" class="img-component">
+    <img src="img/img-components-4-7.png" class="img-component">
+    <img src="img/img-components-5-0.png" class="img-component">
+    <img src="img/img-components-5-1.png" class="img-component">
+    <img src="img/img-components-5-2.png" class="img-component">
+    <img src="img/img-components-5-3.png" class="img-component">
+    <img src="img/img-components-5-4.png" class="img-component">
+    <img src="img/img-components-5-5.png" class="img-component">
+    <img src="img/img-components-5-6.png" class="img-component">
+    <img src="img/img-components-5-7.png" class="img-component">
+    <img src="img/img-components-6-0.png" class="img-component">
+    <img src="img/img-components-6-1.png" class="img-component">
+    <img src="img/img-components-6-2.png" class="img-component">
+    <img src="img/img-components-6-3.png" class="img-component">
+    <img src="img/img-components-6-4.png" class="img-component">
+    <img src="img/img-components-6-5.png" class="img-component">
+    <img src="img/img-components-6-6.png" class="img-component">
+    <img src="img/img-components-6-7.png" class="img-component">
+    <img src="img/img-components-7-0.png" class="img-component">
+    <img src="img/img-components-7-1.png" class="img-component">
+    <img src="img/img-components-7-2.png" class="img-component">
+    <img src="img/img-components-7-3.png" class="img-component">
+    <img src="img/img-components-7-4.png" class="img-component">
+    <img src="img/img-components-7-5.png" class="img-component">
+    <img src="img/img-components-7-6.png" class="img-component">
+    <img src="img/img-components-7-7.png" class="img-component">
+</div>
+</div>
+<p>Pre skutočné obrázky JPEG treba už len niekoľko ďalších detailov.</p>
+<p>Obrázok sa rozdelí na kúsky 8x8 a každý kúsok sa rozdelí osobitne. Na určenie toho, ako svetlý alebo tmavý je každý pixel, použijeme množinu frekvencií a potom ďalšie dve množiny pre definovanie farieb, jednu pre červeno-zelenú a druhú pre modro-žltú. Počet frekvencií, ktoré používame pre každý kúsok, určuje kvalitu JPEG.</p>
+<p>Toto je skutočný obrázok JPEG, priblížený, aby sme mohli vidieť podrobnosti. Keď sa hráme s úrovňou kvality, môžeme vidieť, ako tento proces prebieha.</p>
+<div id="jpeg-example" class="sketch">
+    <img src="img/cat.png" class="sketch-child clear-pixels">
+</div>
+<h2 id="zhrnutie">Zhrnutie</h2>
+<p>Zhrňme teda:</p>
+<ul>
+<li>Fourierova transformácia je proces, ktorý nám niečo vezme a rozdelí to na svoje frekvencie.</li>
+<li>Frekvencie nám hovoria o niektorých základných vlastnostiach údajov, ktoré máme.</li>
+<li>Dokáže komprimovať údaje iba ukladaním dôležitých frekvencií.</li>
+<li>A tiež ju môžeme použiť na vytváranie zaujímavo vyzerajúcich animácií s niekoľkými kruhmi.</li>
+</ul>
+<p>A to je len vrchol ľadovca. Fourierova transformácia je mimoriadne silný nástroj, pretože rozdelenie vecí na frekvencie je také zásadné. Používa sa v mnohých oblastiach vrátane návrhu integrovaných obvodov, pre signály mobilných telefónov, zobrazovanie magnetickou rezonanciou (MRI) a aj v kvantovej fyzike!</p>
+<h2 id="otzkyprezvedavch">Otázky pre zvedavých</h2>
+<p>Preskočil som tu väčšinu matematických vecí, ale ak vás zaujímajú základné princípy fungovania, tu sú niektoré otázky, ktoré môžete použiť na usmernenie svojho bádania:</p>
+<ul>
+<li>Ako matematicky reprezentuovať Fourierovu transformáciu?</li>
+<li>Aký je rozdiel medzi nepretržitou Fourierovou transformáciou a diskrétnou Fourierovou transformáciou?</li>
+<li>Ako vypočítate Fourierovu transformáciu?</li>
+<li>Ako urobiť Fourierovu transformáciu celej piesne? (Skôr než iba jednej noty.)</li>
+</ul>
+<h2 id="aietanie">Ďaľšie "čítanie"</h2>
+<p>Ak sa chcete dozvedieť viac, tu si môžete pozrieť niektoré naozaj dobré zdroje:</p>
+<p><a href="https://betterexplained.com/articles/an-interactive-guide-to-the-fourier-transform/">Interaktívny sprievodca po Fourierovej transformácii</a>
+Skvelý článok, ktorý sa viac venuje matematike toho, čo sa deje.</p>
+<p><a href="https://www.youtube.com/watch?v=spUNpyF58BY">Ale čo je Fourierova transformácia? Vizuálny úvod.</a>
+Skvelé YouTube video od 3Blue1Brown, ktoré tiež vysvetľuje matematiku Fourierových transformácií z audio perspektívy.</p>
+<p><a href="https://alex.miller.im/posts/fourier-series-spinning-circles-visualization/">Príbeh matematiky a umenia: Vytvorenie vizualizácie harmonických kruhov Fourierovej série</a>
+Ďalší článok, ktorý vysvetľuje, ako môžete pomocou epicyklov nakresliť cestu, je vysvetlený z pohľadu lineárnej algebry.</p>
+<p><a href="https://en.wikipedia.org/wiki/Fourier_transform">Fourierova transformácia (Wikipedia EN)</a> A samozrejme, článok Wikipedia je tiež celkom dobrý.</p>
+<p><a href="https://sk.wikipedia.org/wiki/Fourierova_transform%C3%A1cia">Fourierova transformácia (Wikipedia SK)</a>
+Po Slovensky už nie tak dobrý.</p>
+<h2 id="autor">Autor</h2>
+<canvas id="its-meee" class="sketch" width=500 height=500></canvas>
+<p>Som Jez! Na plný úväzok pracujem vo <a href="https://www.google.com/">vyhľadávacej spoločnosti</a> v oblasti Bay Area a vo svojom voľnom čase rád robím hry a interaktívne veci, ako je táto!</p>
+<p>Táto webová stránka je open-source, zdrojový kód si môžete pozrieť na <a href="https://github.com/Jezzamonn/fourier">GitHub</a>! Ak máte akúkoľvek spätnú väzbu alebo sa chcete niečo opýtať, neváhajte a pošlite mi e-mail na adresu <span id="email-text">fourier [at] jezzamon [dot] com</span>, alebo vystrelte tweeta na <a href="https://twitter.com/jezzamonn">Twitter</a>.</p>
+<p>Ak chcete vidieť viac mojej práce, pozrite sa na moju <a href="/">domovskú stránku</a> a ak chcete vidieť, čo budem robiť ďalej, môžete sledovať môj účet na Twitter, <a href="https://twitter.com/jezzamonn">@jezzamonn</a>!</p>
+</main>
+<script src="main.bundle.js"></script>
+</body>
+</html>

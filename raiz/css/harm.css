@@ -1,0 +1,78 @@
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+html {
+  font-size: 16px;
+  background-color: #000;
+  color: #fff; 
+  
+}
+html,
+body {
+  height: 100%;
+  margin: 0; 
+  background-color: #282828;
+ 
+}
+#branchs {
+  position: absolute;
+  margin: 0;
+  width: 100%;
+}
+#pre {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 1em;
+  margin: 0;
+  overflow: scroll;
+  cursor: default;
+}
+#pre span {
+  margin: 0 0.15em;
+  display: inline-block;
+  color: var(--color, #f00);
+  border: 2px solid var(--color, #f00);
+  min-width: 1.7em;
+  text-align: center;
+  border-radius: 100%;
+  padding: 0 0.25em 0.1em;
+}
+#pre span.coprime {
+  font-weight: bold;
+  background-color: var(--color, #f00);
+  color: #000;
+}
+#pre:has(span:hover) span {
+  opacity: 0.5;
+}
+#pre:has(span:hover) span:hover {
+  opacity: 1;
+}
+svg {
+  width: 100%;
+  height: 100%;
+  vertical-align: top;
+  fill: none;
+}
+#stars {
+  translate: 50% 50%;
+  stroke: #fff;
+  stroke-linecap: round;
+}
+#stars g {
+  mix-blend-mode: screen;
+}
+#stars:has(.hl) g {
+  opacity: 0.25;
+}
+#stars:has(.hl) g.hl {
+  opacity: 10;
+  stroke-width: 6;
+}
+#stars:has(.hl) g.hl line {
+  filter: saturate(4);
+}

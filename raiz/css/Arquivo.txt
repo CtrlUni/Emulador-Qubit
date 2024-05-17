@@ -1,0 +1,2 @@
+Por meio dessa página, quero apresentar um projeto de uma nova tecnologia, usando a computação Analógica pra desenvolver um sistema que pode ser aplicado tecnologias que estão em desenvolvimento, como : Inteligência Artificial, Machine Learning e Deep Learning.
+Os exemplos está no menu dessa página. 

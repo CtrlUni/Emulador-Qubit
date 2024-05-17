@@ -1,0 +1,2 @@
+https://www.googletagmanager.com/gtag/js?id=G-CER2FF84R4&l=dataLayer&cx=c
+https://www.google-analytics.com/analytics.js
