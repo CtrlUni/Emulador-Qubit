@@ -1,0 +1,163 @@
+body {
+  background-color: #282828;
+  height : 500px;
+  width : 500px;
+}
+
+.container {
+  background-color: #282828;
+  height : 500px;
+  width : 500px;
+}
+
+#chart {
+  background-color: #282828;
+}
+
+.circle {
+  stroke: #000;
+  stroke-width: 0px;
+}
+
+.line {
+  fill: none;
+  stroke: #AB1AB5;
+  stroke-width: 2px;
+}
+
+.figureLine {
+  fill: none;
+}
+
+.deltaline {
+}
+
+.domain {
+  stroke: #888;
+  stroke-width: 1px;
+}
+
+.yAxis > .domain {
+  stroke: #888;
+  stroke-width: 0px;
+}
+
+.tick {
+  stroke: #fff;
+  color: #fff;
+  fill: #fff;
+  stroke-width: 1px;
+}
+
+.indicator {
+  font-family: Verdana;
+  fill: #ddd;
+  font-size: 0.5em;
+}
+
+.now {
+  font-family: Verdana;
+  fill: #fa6900;
+  font-size: 0.8em;
+}
+
+.dataLabel {
+  font-family: 'Trebuchet MS', Trebuchet, Verdana, sans-serif;;
+  fill: #ddd;
+}
+
+.anomaly {
+  font-family: Verdana;
+  fill: #fa6900;
+}
+
+.circle-anomaly {
+  stroke: #000;
+  stroke-width: 0px;
+  fill: #fa6900;
+  fill-opacity: 1;
+}
+
+.data-time-indicator {
+  stroke: #000;
+  stroke-width: 0px;
+  fill: #AB1AB5;
+  fill-opacity: 0.5;
+}
+
+.current-time-indicator  {
+  stroke: #000;
+  stroke-width: 0px;
+  fill: #fa6900;
+  fill-opacity: 0.5;
+} 
+/**
+
+**/
+
+
+	
+.node {
+  cursor: pointer;
+}
+
+.node circle {
+  fill: #fff;
+  stroke: steelblue;
+  stroke-width: 15px;
+}
+
+.node text {
+  font: 10px sans-serif;
+}
+
+.link {
+  fill: none;
+  stroke: #fff;
+  stroke-width: 5px;
+}
+
+body-spin { 
+background-color: #fff;
+  height : 600px;
+  width : 600px;
+  margin: 0;
+  padding: 0;
+  font-family: "Lato", sans-serif;
+  font-size: 20pt;
+  font-weight: normal;
+  background: lightblue; /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(
+    -90deg,
+    lightblue,
+    blue
+  ); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(
+    -90deg,
+    lightblue,
+    red
+  ); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(
+    -90deg,
+    lightblue,
+    red
+  ); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(-90deg, lightblue, black); /* Standard syntax */
+}
+
+.main { 
+background-color: #282828;
+
+  margin: 0px auto;
+  text-align: center;
+}
+
+button {
+  padding: 8px;
+  background: transparent;
+  text-shadow: 1px 1px 1px #202020;
+  font-family: "Lato", sans-serif;
+  font-size: 25pt;
+  border: 1px solid lightblue;
+  color: lightblue;
+}

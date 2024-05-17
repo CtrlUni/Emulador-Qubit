@@ -1,0 +1,35 @@
+body,
+table {
+  font-family: Arial;
+  font-size: 14px;
+}
+
+h1 {
+  font-size: 120%;
+  font-weight: bold;
+}
+
+input[type="range"] {
+  width: 180px;
+  padding: 0;
+  margin: 0 0.2em 0 0.2em;
+}
+
+td {
+  padding: 0.2em;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+td.label {
+  text-align: right;
+}
+
+button.small {
+  width: 22px;
+  height: 22px;
+  padding: 0px;
+  margin: 0px;
+  font-size: 80%;
+  font-weight: bold;
+}
