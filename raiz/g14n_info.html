@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+
+
+
+
+
+
+
+
+<meta name="description" content="A random topic blog | My projects aggregator">
+<meta name="keywords" content="">
+<meta name="author" content="Gianluca Casati">
+
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<meta name="theme-color" content="#343434">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+<title>My Digital Copybook</title>
+
+  <link rel="icon" href="//g14n.info/favicon.ico" type="image/x-icon" />
+
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-Bx4pytHkyTDy3aJKjGkGoHPt3tvv6zlwwjc3iqN7ktaiEMLDPqLSZYts2OjKcBx1" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="/style.css">
+
+  <link rel="preload" as="font" href="/fonts/recursive.woff2" type="font/woff2" crossorigin="anonymous">
+
+
+  <meta name="google-site-verification" content="sL7WzWB8YUQPFoN0Rq_lGfM5JDdQ3r6PMj3_vhBHLwM" />
+
+
+
+
+
+
+</head>
+<body>
+  
+
+
+<nav>
+  <ul>
+    <li><a href="/" onclick="toggleNav()">My Digital Copybook</a></li>
+    
+      <li><a href="/about-me" onclick="toggleNav()">About me</a></li>
+    
+      <li><a href="/blog" onclick="toggleNav()">Blog</a></li>
+    
+  </ul>
+</nav>
+
+<div id="hamburgericon" onclick="toggleNav()">
+  <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
+</div>
+
+
+  <svg class=anathema>
+  <circle cx=0 cy=170 r=0>
+    <animate attributeType=XML attributeName=r fill=freeze dur=1s from=0 to=170 />
+  </circle>
+
+  <circle cx=0 cy=510 r=0>
+    <animate attributeType=XML attributeName=r fill=freeze dur=1s from=0 to=170 />
+  </circle>
+
+  <circle cx=170 cy=340 r=0>
+    <animate attributeType=XML attributeName=r fill=freeze dur=1s from=0 to=70 />
+  </circle>
+
+  <circle cx=82 cy=340 r=0>
+    <animate id=a0 attributeType=XML attributeName=r fill=freeze dur=1s begin=1s from=0 to=18 />
+  </circle>
+
+  <circle cx=55 cy=340 r=0>
+    <animate attributeType=XML attributeName=r fill=freeze dur=1s begin=a0.end from=0 to=8.5>
+  </circle>
+
+  <circle cx=95.8 cy=319 r=0>
+    <animate attributeType=XML attributeName=r fill=freeze dur=1s begin=a0.end from=0 to=6.3 />
+  </circle>
+
+  <circle cx=95.8 cy=361 r=0>
+    <animate id=a1 attributeType=XML attributeName=r fill=freeze dur=1s begin=a0.end from=0 to=6.3 />
+  </circle>
+
+  <circle cx=86.6 cy=360.3 r=0>
+    <animate id=a2 attributeType=XML attributeName=r fill=freeze dur=1s begin=a1.end from=0 to=2.3 />
+  </circle>
+
+  <circle cx=102.2 cy=369 r=0>
+    <animate id=a3 attributeType=XML attributeName=r fill=freeze dur=1s begin=a2.end from=0 to=3.6 />
+  </circle>
+
+  <circle cx=98.4 cy=352.4 r=0>
+    <animate attributeType=XML attributeName=r fill=freeze dur=1s begin=a3.end from=0 to=2.5 />
+  </circle>
+</svg>
+
+
+  <main><section>
+  <header class="paper">
+    <h1>My Digital Copybook</h1>
+  </header>
+</section>
+
+<section>
+  <p class="paper info">
+  <a href="./about-me">Gianluca Casati</a> writes here: this is a random topic <a href="./blog">blog</a> about things he wants to remember, most of all are technical information.<!-- It is also an aggregator of his <a href="./software">software</a> and projects. -->
+  </p>
+</section>
+
+<section>
+  <!-- _includes/posts_list.html start -->
+<div class="list-group">
+  
+    <section class="post_box">
+  <header class="paper">
+    <div>
+      <a href="/2024/04/bitcoin-aws/">
+        <h2>Run a Bitcoin node on AWS EC2</h2>
+
+        <p class="description">Is it worth to run a Bitcoin node? Is it better to use a local Raspberry Pi or a cloud EC2 instance?
+</p>
+      </a>
+    </div>
+
+    <time datetime="2024-04-29" class="badge">Apr 29 2024</time>
+
+
+    
+      
+  <div class="badge info">
+    <a href="/tag/aws">AWS</a>
+  </div>
+
+
+    
+  </header>
+</section>
+
+  
+    <section class="post_box">
+  <header class="paper">
+    <div>
+      <a href="/2024/02/js-error-handling/">
+        <h2>JS Error Handling</h2>
+
+        <p class="description">This is my vademecum on error handling in JavaScript
+</p>
+      </a>
+    </div>
+
+    <time datetime="2024-02-12" class="badge">Feb 12 2024</time>
+
+
+    
+      
+  <div class="badge info">
+    <a href="/tag/javascript">JavaScript</a>
+  </div>
+
+
+    
+  </header>
+</section>
+
+  
+    <section class="post_box">
+  <header class="paper">
+    <div>
+      <a href="/2024/01/math-use-cases/">
+        <h2>Math use cases</h2>
+
+        <p class="description">Is it worth to study Math? Of course, yes!
+</p>
+      </a>
+    </div>
+
+    <time datetime="2024-01-11" class="badge">Jan 11 2024</time>
+
+
+    
+      
+  <div class="badge">
+    Math
+  </div>
+
+
+    
+  </header>
+</section>
+
+  
+    <section class="post_box">
+  <header class="paper">
+    <div>
+      <a href="/2023/03/my-workflow/">
+        <h2>My workflow</h2>
+
+        <p class="description">Principles and policies I use to organize my tasks. It also includes my own way to handle a kanban board which uses an interesting approach, the metadata.
+</p>
+      </a>
+    </div>
+
+    <time datetime="2023-03-23" class="badge">Mar 23 2023</time>
+
+
+    
+      
+  <div class="badge">
+    Management
+  </div>
+
+
+    
+  </header>
+</section>
+
+  
+    <section class="post_box">
+  <header class="paper">
+    <div>
+      <a href="/2023/03/empty-html-page/">
+        <h2>Empty HTML page</h2>
+
+        <p class="description">How to create an empty HTML page, no title, no favicon
+</p>
+      </a>
+    </div>
+
+    <time datetime="2023-03-13" class="badge">Mar 13 2023</time>
+
+
+    
+      
+  <div class="badge info">
+    <a href="/tag/web">Web</a>
+  </div>
+
+
+    
+  </header>
+</section>
+
+  
+    <section class="post_box">
+  <header class="paper">
+    <div>
+      <a href="/2022/05/type-guard/">
+        <h2>How I implement a TypeScript type-guard on an object-like type.</h2>
+
+        <p class="description">It happens often I need to implement a TypeScript type-guard that consumes an object-like type, but did not found clear examples in official documentation or articles. This is the solution I found.
+</p>
+      </a>
+    </div>
+
+    <time datetime="2022-05-14" class="badge">May 14 2022</time>
+
+
+    
+      
+  <div class="badge info">
+    <a href="/tag/typescript">TypeScript</a>
+  </div>
+
+
+    
+  </header>
+</section>
+
+  
+    <section class="post_box">
+  <header class="paper">
+    <div>
+      <a href="/2022/02/my-bash-config/">
+        <h2>My Bash configuration</h2>
+
+        <p class="description">Few tips I want to remember about bash configuration
+</p>
+      </a>
+    </div>
+
+    <time datetime="2022-02-28" class="badge">Feb 28 2022</time>
+
+
+    
+      
+  <div class="badge info">
+    <a href="/tag/unix">Unix</a>
+  </div>
+
+
+    
+  </header>
+</section>
+
+  
+    <section class="post_box">
+  <header class="paper">
+    <div>
+      <a href="/2022/01/react-array-from/">
+        <h2>React list with Array.from()</h2>
+
+        <p class="description">How to use Array.from() to render a list of React components, makes me think about how good is React software design.
+</p>
+      </a>
+    </div>
+
+    <time datetime="2022-01-28" class="badge">Jan 28 2022</time>
+
+
+    
+      
+  <div class="badge info">
+    <a href="/tag/react">React</a>
+  </div>
+
+
+    
+  </header>
+</section>
+
+  
+</div>
+<!-- _includes/posts_list.html end -->
+
+</section>
+
+<a class="success" href="./blog" style="display: block; text-align: center; font-size: 2rem; padding: 1rem;">All articles</a>
+</main>
+
+  <load-html src="/common/footer.html"></load-html>
+  <script src="//g14n.info/js/bundle.js"></script>
+
+</body>
+</html>
