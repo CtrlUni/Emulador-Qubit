@@ -1,105 +1,228 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt" >
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simulção quântica</title>
-    <link rel="shortcut icon" href="../raiz/include/img/profile.png" type="image/x-icon">
-    <link rel="stylesheet" href="raiz/style_.css">
-    <link href="raiz/bootstrap.min.css" rel="stylesheet">
-    <script src="raiz/bootstrap.bundle.min.js"></script>
-    <script src="raiz/p5.min.js"></script>
-    <script src="raiz/sketch.js"></script>
+  <meta charset="UTF-8">
+  <title>Simulação quântica</title>
+  <link rel="stylesheet" href="./style.css">
+
 </head>
-<body data-bs-theme="light">
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg bg-dark py-3" data-bs-theme="dark">
-        <div class="container">
-		  <a class="navbar-brand" href="../raiz/home">Página inicial</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navContent">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-		  <div class="collapse navbar-collapse" id="navContent">
-			<ul class="navbar-nav ms-auto">
-			  <li class="nav-item">
-				
-			  <li class="nav-item">
-				<a class="nav-link" href="../raiz/journey">O que é ML?</a>
-			  </li>
-			  <li class="nav-item">
-				<a class="nav-link" href="raiz/index.html">O que é DL?</a>
-			  </li>
-
-			  <li class="nav-item">
-				<a class="nav-link" href="../raiz/journey">O que é IA?</a>
-			  </li>
-			  <li class="nav-item">
-				<a class="nav-link" href="raiz/qubit.html">O que é Qubit?</a>
-			  </li>
-			  <li class="nav-item">
-				<a class="nav-link" href="raiz/Wave-Velocity.html">Wavelets?</a>
-			  </li>
-				<a class="nav-link" href="../raiz/journey">O que é FT?</a>
-			  </li>
-			  <li class="nav-item">
-				<a class="nav-link" href="raiz/FFT/TransformFFT/index.html">O que é FFT?</a>
-			  </li>
-
-			  <li class="nav-item">
-				<a class="nav-link" href="../raiz/journey">O que é STFT?</a>
-			  </li>
-			  <li class="nav-item">
-				<a class="nav-link" href="raiz/index.html">O que é DCT?</a>
-			  </li>
-
-			  <li class="nav-item">
-				<a class="nav-link" href="../raiz/journey">O que é CWT?</a>
-			  </li>
-			  <li class="nav-item">
-				<a class="nav-link" href="raiz/index.html">O que é DWT?</a>
-			  </li>
-
-			  
-
+<body>
+<!-- partial:index.partial.html -->
+<figure>
+  <figcaption>Diagrama de estrutura<br></figcaption>
+  <ul class="tree">
+    <li><code>Sinal de entrada analógica ou digital</code>
+      <ul>
+        
+        <li><code>Define o tipo de processamento<br>e seleciona as interfaces matrizes em camadas</code>
+         
+		<ul>
+		  <li><code>Interface primaria</code>
+			<ul>
+			  <li><code>Reconhecimento de daods</code></li>
 			</ul>
-		  </div>
-        </div>
-    </nav>
-    <!-- What is DFT? -->
-    <section class="py-5 bg-info" id="what">
-        <div class="container-md">
-            <div class="row align-items-center">
-                <div class="col-12 col-md-6 mb-3">
-				  <p class="fs-1 text-center mb-3 fw-bold">Qual a finalidade dessa pagina?</p>
-				  <p class="fs-5">Por meio dessa página, quero apresentar um projeto de uma nova tecnologia, usando a computação Analógica pra desenvolver um sistema que pode ser aplicado nas tecnologias que estão em desenvolvimento, como : Inteligência Artificial, Machine Learning e Deep Learning, Pipeline, Blockchain; mas aqui, a estrutura é a simulação por meio de interface analógica.
-					Acesse o "Menu principal" dessa página. </p>
-                </div><!--
-                <div class="col-12 col-md-6 mb-3">
-                    <img class="img-fluid" src="dft_formula.png">
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- How DFT is used here? --
-    <section class="py-5" id="how">
-        <div class="container-md">
-            <div class="row align-items-center">
-                <div class="col-12 col-md-6 mb-3">
-                    <img class="img-fluid"src="dftc_algorithm.png">
-                </div>
-                <div class="col-12 col-md-6 mb-3">
-				  <p class="fs-1 text-center mb-3 fw-bold">Como o DFT é utilizado aqui?</p>
-				  <p class="fs-5">Existem duas maneiras pelas quais o DFT pode ser utilizado neste programa. <br> <br> O algoritmo ilustrado <span class="d-none d-md-inline">à esquerda</span><span class="d-md-none">acima</span> Esta é a principal função deste aplicativo. Ele recebe uma lista de coordenadas como entrada e a executa através do DFT algoritmo e gera informações para desenhar uma infinidade de ondas (como círculos). <br> <br> A segunda maneira (atualmente não implementada) é apenas passar uma série de coordenadas y, podendo recriar qualquer onda como uma infinidade de ondas com frequências diferentes (mais uma vez, representadas como círculos), assumindo que os pontos estão se movendo distância (como se o eixo x fosse o tempo).</p>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Image Input --
-    <section class="py-3 bg-primary text-light" id="project">
-        <div class="container-md mb-3" id="input">
-		  <p class="fs-4 text-center fw-bold">Carregue uma imagem ou desenhe um contorno</p>
-        </div>
-    </section>-->
-    <main></main>
+		  </li>
+            <li><code>Define o processo e distribui nas interface<br>Processamento analógico</code>
+              <ul>
+                <li><code>Matriz de processo<br>Binário 0</code>
+				  <ul>
+					  <li><code>X</code>
+						<ul>
+						  <li><code>Camada</code>
+							<ul>
+							  <li><code>X</code></li>
+							  <li><code>Y</code></li>
+							  <li><code>Z</code></li>
+							</ul>
+						  </li>
+						</ul>
+					  </li>
+					<li><code>Y</code>
+					  <ul>
+						<li><code>Camada</code>
+						  <ul>
+							<li><code>X</code></li>
+							<li><code>Y</code></li>
+							<li><code>Z</code></li>
+						  </ul>
+						</li>
+					  </ul>
+					</li>
+					<li><code>Z</code>
+					  <ul>
+						<li><code>Camada</code>
+						  <ul>
+							<li><code>X</code></li>
+							<li><code>Y</code></li>
+							<li><code>Z</code></li>
+						  </ul>
+						</li>
+					  </ul>
+					</li>
+				  </ul>
+				</li>
+                <li><code>Matriz de processo<br>Superposição<br>
+					<iframe class="background" src="raiz/spin.html" width="400" height="600"></iframe>
+				</code>
+				  <ul>
+					<li><code>X</code>
+					  <ul>
+						<li><code>Camada</code>
+						  <ul>
+							<li><code>X</code></li>
+							<li><code>Y</code></li>
+							<li><code>Z</code></li>
+						  </ul>
+						</li>
+					  </ul>
+					</li>
+					<li><code>Y</code>
+					  <ul>
+						<li><code>Camada</code>
+						  <ul>
+							<li><code>X</code></li>
+							<li><code>Y</code></li>
+							<li><code>Z</code></li>
+						  </ul>
+						</li>
+					  </ul>
+					</li>
+					<li><code>Z</code>
+					  <ul>
+						<li><code>Camada</code>
+						  <ul>
+							<li><code>X</code></li>
+							<li><code>Y</code></li>
+							<li><code>Z</code></li>
+						  </ul>
+						</li>
+					  </ul>
+					</li>
+				  </ul>
+				</li>
+				<li><code>Matriz de processo<br>Binário 1</code>
+				  <ul>
+					<li><code>X</code>
+					  <ul>
+						<li><code>Camada</code>
+						  <ul>
+							<li><code>X</code></li>
+							<li><code>Y</code></li>
+							<li><code>Z</code></li>
+						  </ul>
+						</li>
+					  </ul>
+					</li>
+					<li><code>Y</code>
+					  <ul>
+						<li><code>Camada</code>
+						  <ul>
+							<li><code>X</code></li>
+							<li><code>Y</code></li>
+							<li><code>Z</code></li>
+						  </ul>
+						</li>
+					  </ul>
+					</li>
+					<li><code>Z</code>
+					  <ul>
+						<li><code>Camada</code>
+						  <ul>
+							<li><code>X</code></li>
+							<li><code>Y</code></li>
+							<li><code>Z</code></li>
+						  </ul>
+						</li>
+					  </ul>
+					</li>
+				  </ul>
+				</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</figure>
+<figure> 
+  <figcaption>Método de processamento</figcaption>
+  <ul class="tree">
+    <li><span>Matriz de camada.
+	<br>Processo em camada.</span>
+      <ul>
+        <li><span>Seletor de sistema</span>
+          <ul>
+            <li><span>Dados analógico.</span>
+              <ul>
+                <li><span>Wavetes</span></li>
+				<li><span>Inteligência artificial</span>
+				  <ul>
+					<li><span>Aprendizado de máquina comum</span></li>
+					<li><span>Aprendizado aprofundado de máquina</span></li>
+				  </ul>
+				</li>
+              </ul>
+			  
+            </li>
+            
+          </ul>
+        </li>
+        <li><span>Roteador</span>
+          <ul>
+            <li><span>Grupo A</span>
+              <ul>
+                <li><span>Matriz 1</span></li>
+              </ul>
+			  <ul>
+                <li><span>Matriz 2</span></li>
+              </ul>
+			  <ul>
+                <li><span>Matriz 3</span></li>
+              </ul>
+			  <ul>
+                <li><span>...</span></li>
+              </ul>
+			  <ul>
+                <li><span>Matriz 128</span></li>
+              </ul>
+            </li>
+            <li><span>Grupo B</span>
+              <ul>
+                <li><span>Matriz 1</span></li>
+              </ul>
+			  <ul>
+                <li><span>Matriz 2</span></li>
+              </ul>
+			  <ul>
+                <li><span>Matriz 3</span></li>
+              </ul>
+			  <ul>
+                <li><span>...</span></li>
+              </ul>
+			  <ul>
+                <li><span>Matriz 128</span></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><span>Sistema de armazenamento</span>
+          <ul>
+            <li><span>Digital</span>
+              <ul>
+                <li><span>Analógico</span></li>
+              </ul>
+            </li>
+			
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</figure>
+<p><a href="https://medium.com/@ross.angus/sitemaps-and-dom-structure-from-nested-unordered-lists-eab2b02950cf" target="_blank">Full writeup</a></p>
+<!-- partial -->
+  <script  src="./script.js"></script>
+
 </body>
 </html>
