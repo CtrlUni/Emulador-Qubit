@@ -10006,14 +10006,14 @@ function init() {
   if (hasElement('email-text')) {
     var emailElement = document.getElementById('email-text');
     // Add my email using js so that non-js scrapers can't just get it
-    var email = 'fourier' + '@' + 'jezzamon.com';
+    var email = 'controleuniversal.br' + '@' + 'gmail.com';
     var emailText = "<a href=\"mailto:".concat(email, "\">").concat(email, "</a>");
     emailElement.innerHTML = emailText;
   }
   // Add the email address of the Traditional Chinese translator
   if (hasElement('email-k40005238-text')) {
     var _emailElement = document.getElementById('email-k40005238-text');
-    var _email = 'k40005238' + '@' + 'gcloud.csu.edu.tw';
+    var _email = 'sjmo1980' + '@' + 'gmail.com';
     var _emailText = "<a href=\"mailto:".concat(_email, "\">").concat(_email, "</a>");
     _emailElement.innerHTML = _emailText;
   }
