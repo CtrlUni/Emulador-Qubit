@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html >
+<head>
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-105814606-2"></script>
+	<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+
+	gtag('config', 'UA-105814606-2');
+	</script>
+
+	<title>Uma introdução interativa às transformadas de Fourier</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link href="css/styles.css" rel="stylesheet" type="text/css">
+	<link href="https://fonts.googleapis.com/css?family=Montserrat|Open+Sans" rel="stylesheet">
+	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+	<meta name="viewport" content="width=device-width" />
+
+	<!-- Favicon magic -->
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+	<link rel="manifest" href="/site.webmanifest">
+	<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+	<meta name="msapplication-TileColor" content="#ffc40d">
+	<meta name="theme-color" content="#ffffff">
+
+	<!-- Stuff for Facebook/Twitter -->
+	<meta property="og:url"                content="http://www.jezzamon.com/fourier&#x2F;pt-br.html" />
+	<meta property="og:type"               content="website" />
+	<meta property="og:title"              content="Uma introdução interativa às transformadas de Fourier" />
+	<meta property="og:description"        content="Transformadas de Fourier são ferramentas utilizadas em vários contextos. Essa é uma explicação do que uma transformada de Fourier faz, e algumas maneiras diferentes que elas podem ser úteis." />
+	<meta property="og:image"              content="http://www.jezzamon.com/fourier/preview.png" />
+	<meta property="og:image:type"         content="image/png" />
+	<meta property="og:image:width"        content="1200" />
+	<meta property="og:image:height"       content="630" />
+	<meta name="twitter:card"              content="summary_large_image" />
+	<meta name="twitter:site"              content="@jezzamonn" />
+	<meta property="fb:app_id"             content="264785490940720" />
+</head>
+<body>
+<header>
+	<canvas id="header-background" class="header-background"></canvas>
+	<h1>Uma introdução interativa às transformadas de Fourier</h1>
+	<p>Projeto</p>
+  <p>Github<a href="https://ctrluni.github.io/Emulador-Qubit/">Junior Mello</a></p>
+</header>
+<nav id="languages">
+  <!--
+	<ul>
+		<li><a href="&#x2F;fourier">English</a></li>
+		<li><a href="&#x2F;fourier&#x2F;az.html">Azərbaycanca</a></li>
+		<li><a href="&#x2F;fourier&#x2F;de.html">Deutsch</a></li>
+		<li><a href="&#x2F;fourier&#x2F;es.html">Español</a></li>
+		<li><a href="&#x2F;fourier&#x2F;fr.html">Français</a></li>
+		<li><a href="&#x2F;fourier&#x2F;it.html">Italiano</a></li>
+		<li><a href="&#x2F;fourier&#x2F;pl.html">Polski</a></li>
+		<li><a href="&#x2F;fourier&#x2F;pt-br.html">Português</a></li>
+		<li><a href="&#x2F;fourier&#x2F;sk.html">Slovenčina</a></li>
+		<li><a href="&#x2F;fourier&#x2F;tr.html">Türkçe</a></li>
+		<li><a href="&#x2F;fourier&#x2F;ru.html">Русский</a></li>
+		<li><a href="&#x2F;fourier&#x2F;he.html">עברית</a></li>
+		<li><a href="&#x2F;fourier&#x2F;fa.html">فارسی</a></li>
+		<li><a href="&#x2F;fourier&#x2F;ko.html">한국어</a></li>
+		<li><a href="&#x2F;fourier&#x2F;zh-cn.html">简体中文</a></li>
+		<li><a href="&#x2F;fourier&#x2F;zh-tw.html">繁體中文</a></li>
+		<li><a href="https://github.com/Jezzamonn/fourier/tree/master/content">Add a translation</a></li>
+	</ul>-->
+</nav>
+<main id="content">
+	<p>Entretanto, há outro tipo de dados visuais que utiliza transformadas de Fourier.</p>
+<h2 id="jpegs">JPEGs</h2>
+<p>Você sabia que as transformadas de Fourier também podem ser usadas em imagens? Na verdades, usamos o tempo todo, porque é assim que JPEGs funcionam! Nós aplicamos os mesmos princípios para imagens – dividimos algo em várias ondas senoidais, e então armazenamos apenas as importantes.</p>
+<p>Agora que estamos lidando com imagens, nós precisamos de outro tipo de ondas senoidais. Nós precisamos de algo que com qualquer imagem, podemos adicionar várias ondas senoidais para obter a imagem original de volta.</p>
+<p>Para isto, cada uma de nossas ondas senoidais serão imagens também. No lugar de uma onda, é uma linha, agora temos imagens com seções pretas e brancas. Para representar o tamanho de uma onda, cada imagem terá mais ou menos contraste.</p>
+<p>Também podemos utilizá-las para representar cores da mesma maneira, mas no começaremos com imagens em preto-e-branco. Para representar imagens sem cor, precisamos de algumas imagens de ondas horizontais,</p>
+<p><img id="img-y-component" src="img/components-4-0.png" class="sketch sketch-small"></p>
+<p>Junto de imagens de ondas verticais.</p>
+<p><img id="img-x-component" src="img/components-0-4.png" class="sketch sketch-small"></p>
+<p>Somente imagens horizontais e verticais não são suficiente parar representar os tipos de imagens que queremos obter. Também precisamos de algumas extras que você obtêm multiplicando as duas.</p>
+<div class="multi-container">
+<img id="img-mult-x-component" src="img/components-0-4.png" class="sketch sketch-mult">
+<div class="maths">×</div>
+<img id="img-mult-y-component" src="img/components-4-0.png" class="sketch sketch-mult">
+<div class="maths">=</div>
+<img id="img-x-y-component" src="img/components-4-4.png" class="sketch sketch-mult">
+</div>
+<p>Para uma imagem 8x8, aqui estão todas as imagens que precisamos.</p>
+<div class="img-component-container">
+    <img src="img/components-0-0.png" class="img-component">
+    <img src="img/components-0-1.png" class="img-component">
+    <img src="img/components-0-2.png" class="img-component">
+    <img src="img/components-0-3.png" class="img-component">
+    <img src="img/components-0-4.png" class="img-component">
+    <img src="img/components-0-5.png" class="img-component">
+    <img src="img/components-0-6.png" class="img-component">
+    <img src="img/components-0-7.png" class="img-component">
+    <img src="img/components-1-0.png" class="img-component">
+    <img src="img/components-1-1.png" class="img-component">
+    <img src="img/components-1-2.png" class="img-component">
+    <img src="img/components-1-3.png" class="img-component">
+    <img src="img/components-1-4.png" class="img-component">
+    <img src="img/components-1-5.png" class="img-component">
+    <img src="img/components-1-6.png" class="img-component">
+    <img src="img/components-1-7.png" class="img-component">
+    <img src="img/components-2-0.png" class="img-component">
+    <img src="img/components-2-1.png" class="img-component">
+    <img src="img/components-2-2.png" class="img-component">
+    <img src="img/components-2-3.png" class="img-component">
+    <img src="img/components-2-4.png" class="img-component">
+    <img src="img/components-2-5.png" class="img-component">
+    <img src="img/components-2-6.png" class="img-component">
+    <img src="img/components-2-7.png" class="img-component">
+    <img src="img/components-3-0.png" class="img-component">
+    <img src="img/components-3-1.png" class="img-component">
+    <img src="img/components-3-2.png" class="img-component">
+    <img src="img/components-3-3.png" class="img-component">
+    <img src="img/components-3-4.png" class="img-component">
+    <img src="img/components-3-5.png" class="img-component">
+    <img src="img/components-3-6.png" class="img-component">
+    <img src="img/components-3-7.png" class="img-component">
+    <img src="img/components-4-0.png" class="img-component">
+    <img src="img/components-4-1.png" class="img-component">
+    <img src="img/components-4-2.png" class="img-component">
+    <img src="img/components-4-3.png" class="img-component">
+    <img src="img/components-4-4.png" class="img-component">
+    <img src="img/components-4-5.png" class="img-component">
+    <img src="img/components-4-6.png" class="img-component">
+    <img src="img/components-4-7.png" class="img-component">
+    <img src="img/components-5-0.png" class="img-component">
+    <img src="img/components-5-1.png" class="img-component">
+    <img src="img/components-5-2.png" class="img-component">
+    <img src="img/components-5-3.png" class="img-component">
+    <img src="img/components-5-4.png" class="img-component">
+    <img src="img/components-5-5.png" class="img-component">
+    <img src="img/components-5-6.png" class="img-component">
+    <img src="img/components-5-7.png" class="img-component">
+    <img src="img/components-6-0.png" class="img-component">
+    <img src="img/components-6-1.png" class="img-component">
+    <img src="img/components-6-2.png" class="img-component">
+    <img src="img/components-6-3.png" class="img-component">
+    <img src="img/components-6-4.png" class="img-component">
+    <img src="img/components-6-5.png" class="img-component">
+    <img src="img/components-6-6.png" class="img-component">
+    <img src="img/components-6-7.png" class="img-component">
+    <img src="img/components-7-0.png" class="img-component">
+    <img src="img/components-7-1.png" class="img-component">
+    <img src="img/components-7-2.png" class="img-component">
+    <img src="img/components-7-3.png" class="img-component">
+    <img src="img/components-7-4.png" class="img-component">
+    <img src="img/components-7-5.png" class="img-component">
+    <img src="img/components-7-6.png" class="img-component">
+    <img src="img/components-7-7.png" class="img-component">
+</div>
+<p>Se pegarmos as imagens, ajustar seu contraste corretamente e então as adicionar, podemos criar qualquer imagem.</p>
+<p>Começaremos com esta letra 'A'. É bem pequena, mas precisamos que seja pequena, caso contrário, teremos muitas outras imagens.</p>
+<p><img src="img/a.png" class="sketch sketch-letter"></p>
+<p>Na medida em que adicionamos mais e mais dessas imagens, terminamos com algo que se parece cada vez mais com a verdadeira imagem. Mas imagino que você vê o padrão aqui, na medida em que obtemos uma aproximação razoável com apenas algumas delas.</p>
+<div class="hidden-preload">
+    <img src="img/img-buildup-0-0.png">
+    <img src="img/img-buildup-0-1.png">
+    <img src="img/img-buildup-0-2.png">
+    <img src="img/img-buildup-0-3.png">
+    <img src="img/img-buildup-0-4.png">
+    <img src="img/img-buildup-0-5.png">
+    <img src="img/img-buildup-0-6.png">
+    <img src="img/img-buildup-0-7.png">
+    <img src="img/img-buildup-1-0.png">
+    <img src="img/img-buildup-1-1.png">
+    <img src="img/img-buildup-1-2.png">
+    <img src="img/img-buildup-1-3.png">
+    <img src="img/img-buildup-1-4.png">
+    <img src="img/img-buildup-1-5.png">
+    <img src="img/img-buildup-1-6.png">
+    <img src="img/img-buildup-1-7.png">
+    <img src="img/img-buildup-2-0.png">
+    <img src="img/img-buildup-2-1.png">
+    <img src="img/img-buildup-2-2.png">
+    <img src="img/img-buildup-2-3.png">
+    <img src="img/img-buildup-2-4.png">
+    <img src="img/img-buildup-2-5.png">
+    <img src="img/img-buildup-2-6.png">
+    <img src="img/img-buildup-2-7.png">
+    <img src="img/img-buildup-3-0.png">
+    <img src="img/img-buildup-3-1.png">
+    <img src="img/img-buildup-3-2.png">
+    <img src="img/img-buildup-3-3.png">
+    <img src="img/img-buildup-3-4.png">
+    <img src="img/img-buildup-3-5.png">
+    <img src="img/img-buildup-3-6.png">
+    <img src="img/img-buildup-3-7.png">
+    <img src="img/img-buildup-4-0.png">
+    <img src="img/img-buildup-4-1.png">
+    <img src="img/img-buildup-4-2.png">
+    <img src="img/img-buildup-4-3.png">
+    <img src="img/img-buildup-4-4.png">
+    <img src="img/img-buildup-4-5.png">
+    <img src="img/img-buildup-4-6.png">
+    <img src="img/img-buildup-4-7.png">
+    <img src="img/img-buildup-5-0.png">
+    <img src="img/img-buildup-5-1.png">
+    <img src="img/img-buildup-5-2.png">
+    <img src="img/img-buildup-5-3.png">
+    <img src="img/img-buildup-5-4.png">
+    <img src="img/img-buildup-5-5.png">
+    <img src="img/img-buildup-5-6.png">
+    <img src="img/img-buildup-5-7.png">
+    <img src="img/img-buildup-6-0.png">
+    <img src="img/img-buildup-6-1.png">
+    <img src="img/img-buildup-6-2.png">
+    <img src="img/img-buildup-6-3.png">
+    <img src="img/img-buildup-6-4.png">
+    <img src="img/img-buildup-6-5.png">
+    <img src="img/img-buildup-6-6.png">
+    <img src="img/img-buildup-6-7.png">
+    <img src="img/img-buildup-7-0.png">
+    <img src="img/img-buildup-7-1.png">
+    <img src="img/img-buildup-7-2.png">
+    <img src="img/img-buildup-7-3.png">
+    <img src="img/img-buildup-7-4.png">
+    <img src="img/img-buildup-7-5.png">
+    <img src="img/img-buildup-7-6.png">
+    <img src="img/img-buildup-7-7.png">
+</div>
+<div id="letter-buildup" class="multi-container">
+<img id="letter-buildup-letter" src="img/img-buildup-0-0.png" class="sketch sketch-letter">
+<div id="letter-buildup-components" class="img-component-container">
+    <img src="img/img-components-0-0.png" class="img-component">
+    <img src="img/img-components-0-1.png" class="img-component">
+    <img src="img/img-components-0-2.png" class="img-component">
+    <img src="img/img-components-0-3.png" class="img-component">
+    <img src="img/img-components-0-4.png" class="img-component">
+    <img src="img/img-components-0-5.png" class="img-component">
+    <img src="img/img-components-0-6.png" class="img-component">
+    <img src="img/img-components-0-7.png" class="img-component">
+    <img src="img/img-components-1-0.png" class="img-component">
+    <img src="img/img-components-1-1.png" class="img-component">
+    <img src="img/img-components-1-2.png" class="img-component">
+    <img src="img/img-components-1-3.png" class="img-component">
+    <img src="img/img-components-1-4.png" class="img-component">
+    <img src="img/img-components-1-5.png" class="img-component">
+    <img src="img/img-components-1-6.png" class="img-component">
+    <img src="img/img-components-1-7.png" class="img-component">
+    <img src="img/img-components-2-0.png" class="img-component">
+    <img src="img/img-components-2-1.png" class="img-component">
+    <img src="img/img-components-2-2.png" class="img-component">
+    <img src="img/img-components-2-3.png" class="img-component">
+    <img src="img/img-components-2-4.png" class="img-component">
+    <img src="img/img-components-2-5.png" class="img-component">
+    <img src="img/img-components-2-6.png" class="img-component">
+    <img src="img/img-components-2-7.png" class="img-component">
+    <img src="img/img-components-3-0.png" class="img-component">
+    <img src="img/img-components-3-1.png" class="img-component">
+    <img src="img/img-components-3-2.png" class="img-component">
+    <img src="img/img-components-3-3.png" class="img-component">
+    <img src="img/img-components-3-4.png" class="img-component">
+    <img src="img/img-components-3-5.png" class="img-component">
+    <img src="img/img-components-3-6.png" class="img-component">
+    <img src="img/img-components-3-7.png" class="img-component">
+    <img src="img/img-components-4-0.png" class="img-component">
+    <img src="img/img-components-4-1.png" class="img-component">
+    <img src="img/img-components-4-2.png" class="img-component">
+    <img src="img/img-components-4-3.png" class="img-component">
+    <img src="img/img-components-4-4.png" class="img-component">
+    <img src="img/img-components-4-5.png" class="img-component">
+    <img src="img/img-components-4-6.png" class="img-component">
+    <img src="img/img-components-4-7.png" class="img-component">
+    <img src="img/img-components-5-0.png" class="img-component">
+    <img src="img/img-components-5-1.png" class="img-component">
+    <img src="img/img-components-5-2.png" class="img-component">
+    <img src="img/img-components-5-3.png" class="img-component">
+    <img src="img/img-components-5-4.png" class="img-component">
+    <img src="img/img-components-5-5.png" class="img-component">
+    <img src="img/img-components-5-6.png" class="img-component">
+    <img src="img/img-components-5-7.png" class="img-component">
+    <img src="img/img-components-6-0.png" class="img-component">
+    <img src="img/img-components-6-1.png" class="img-component">
+    <img src="img/img-components-6-2.png" class="img-component">
+    <img src="img/img-components-6-3.png" class="img-component">
+    <img src="img/img-components-6-4.png" class="img-component">
+    <img src="img/img-components-6-5.png" class="img-component">
+    <img src="img/img-components-6-6.png" class="img-component">
+    <img src="img/img-components-6-7.png" class="img-component">
+    <img src="img/img-components-7-0.png" class="img-component">
+    <img src="img/img-components-7-1.png" class="img-component">
+    <img src="img/img-components-7-2.png" class="img-component">
+    <img src="img/img-components-7-3.png" class="img-component">
+    <img src="img/img-components-7-4.png" class="img-component">
+    <img src="img/img-components-7-5.png" class="img-component">
+    <img src="img/img-components-7-6.png" class="img-component">
+    <img src="img/img-components-7-7.png" class="img-component">
+</div>
+</div>
+<p>Para imagens JPEG de verdade, há apenas alguns detalhes a mais.</p>
+<p>A imagem é separada em pedaços 8x8 e cada pedaço é dividido separadamente. Usamos um conjunto de frequências para determinar o quão claro ou escuro cada pixel é, e depois outros dois conjuntos para a cor, um para vermelho-verde, e outro para azul-amarelo. O número de frequência que utilizamos para cada pedaço determina a qualidade do JPEG.</p>
+<p>Aqui temos uma imagem JPEG de verdade, com zoom para vermos os detalhes. Quando nós alteramos os níveis de qualidade, podemos ver o processo acontecendo.</p>
+<div id="jpeg-example" class="sketch">
+    <img src="img/cat.png" class="sketch-child clear-pixels">
+</div>
+<h2 id="concluso">Conclusão</h2>
+<p>Então, recapitulando:</p>
+<ul>
+<li>Transformadas de Fourier são coisas que nos permite pegar algo e dividi-lo em suas frequências.</li>
+<li>As frequências nos dizem sobre as propriedades fundamentais dos dados que temos</li>
+<li>E também podemos comprimir dados ao armazenar somente as frequências importantes</li>
+<li>Também podemos utilizá-las para fazer animações legais com vários círculos</li>
+</ul>
+<p>Isto é só a ponta do iceberg das aplicações! A transformada de Fourier é uma ferramenta extremamente poderosa, porque dividir algo em frequências é bem fundamental. Elas são utilizadas em várias áreas, incluindo design de circuitos, sinais de aparelhos móveis, imagem por ressonância magnética e física quântica!</p>
+<h2 id="questesparaoscuriosos">Questões para os curiosos</h2>
+<p>Pulei a maior parte da matemática aqui, mas se você estiver interessado nos princípios por baixo das funcionalidades, algumas questões que você pode usar para se guiar em sua pesquisa:</p>
+<ul>
+<li>Como se representa uma transformada de Fourier matematicamente?</li>
+<li>Qual é a diferença entre uma transformada de Fourier de tempo contínuo e uma transformada de Fourier de tempo discreto?</li>
+<li>Como se faz uma transformada de Fourier computacionalmente?</li>
+<li>Como você aplica a transformada de Fourier em uma música inteira? (Em vez de uma só nota.)</li>
+</ul>
+<h2 id="leituraadicional">'Leitura' adicional</h2>
+<p>Para aprender mais, aqui estão alguns recursos que você pode checar:</p>
+<p><a href="https://betterexplained.com/articles/an-interactive-guide-to-the-fourier-transform/">An Interactive Guide To The Fourier Transform</a>
+Um ótimo artigo que explora mais a parte matemática do que acontece.</p>
+<p><a href="https://www.youtube.com/watch?v=spUNpyF58BY">But what is the Fourier Transform? A visual introduction.</a>
+Um ótimo vídeo de YouTube pelo 3Blue1Brown, também explicando a matemática das transformadas de Fourier numa perspectiva de áudio.</p>
+<p><a href="https://alex.miller.im/posts/fourier-series-spinning-circles-visualization/">A Tale of Math & Art: Creating the Fourier Series Harmonic Circles Visualization</a>
+Outro artigo explicando como você pode usar epiciclos para desenhar uma trajetória, explicado de uma perspectiva de álgebra linear.</p>
+<p><a href="https://en.wikipedia.org/wiki/Fourier_transform">Fourier transform (Wikipedia)</a>
+E claro, o artigo da Wikipédia é muito bom também.</p>
+<p></p>
+  <p>Esta página é open-source, você pode checar o código no <a href="https://github.com/CtrlUni/Emulador-Qubit">GitHub</a>! Se você tem algum feedback ou quer perguntar alguma coisa, sinta-se livre para me mandar um e-mail em <span id="email-text">controleuniversal.br@gmail.com</span><a href=""></a>.</p>
+<p><a href="/">homepage</a><a href=""></a>!</p>
+</main>
+<script src="main.bundle.js"></script>
+</body>
+</html>
