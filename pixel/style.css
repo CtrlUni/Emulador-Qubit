@@ -1,0 +1,23 @@
+body {
+  padding: 0;
+  margin: 0;
+  height: 100vh;
+  width: 100%;
+  background: #9E9E9E;
+  display: flex;
+}
+
+.pixel-wrapper {
+  width: 320px;
+  height: 320px;
+  margin: auto;
+}
+
+.pixel {
+  background-color: white;
+  width: 20px;
+  height: 20px;
+  display: block;
+  float: left;
+  transition: all 1000ms ease;
+}
