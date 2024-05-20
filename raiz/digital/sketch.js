@@ -1,6 +1,6 @@
 // Grid size
-var camadas=8;
-var bits=8;
+var camadas=32;
+var bits=32;
 var cols = bits;
 var rows = camadas;
 // 1024
