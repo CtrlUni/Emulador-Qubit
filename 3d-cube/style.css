@@ -6,16 +6,16 @@ body {
 #main {
     margin: 0;
     padding: 0;
-    border: 1px solid #ddd;
+    border: 0px solid #ddd;
     background-color: white;
-    width: 800px;
-    height: 500px;
-    margin: 10px auto;
+    width: 400px;
+    height: 400px;
+    margin: 0px auto;
 }
 .btn-group-wraper {
-    position: absolute;
-    top: 30px;
-    left: 65px;
+    position: center;
+    /*top: 0px;
+    left: 50px;*/
 }
 .shadow {
     position: absolute;
