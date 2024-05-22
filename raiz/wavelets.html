@@ -106,6 +106,8 @@
 <canvas id="square-wave-build-up" class="sketch" width=500 height=500></canvas>
 <p><input id="square-wave-build-up-slider" type="range" min="0" max="1" value="0" step="any" ></p>
 <p><button id="square-wave-button" class="button">Tocar onda</button></p>
+  <iframe class="background" src="../Harm/index.html" width=100% height=1024></iframe>
+
 <p><em>Arraste o slider acima para alterar a quantidade de ondas senoidais.</em></p>
 <p>Visualmente, você perceberá que as primeiras ondas senoidais são as que mais fazem diferença. Com o slider na metade, temos a forma geral da onda, mas está toda ondulada. Só precisamos das pequenas que restaram para aplanar as ondulações.</p>
 <p>Quando você ouvir a onda, você escutará o som ficando mais baixo porque estamos removendo as frequências mais altas.</p>
@@ -117,12 +119,18 @@
 </div>
 <canvas id="wave-draw-split" class="sketch" width=500 height=500></canvas>
 </div>
-<p><input id="wave-draw-slider" type="range" min="0" max="1" value="1" step="any">
+<p><input id="wave-draw-slider" type="range" min="0" max="1" value="1" step="any"> 
+
+  
+
 <button id="wave-draw-button" class="button">Tocar onda</button></p>
+
+
 <p><em>Mova o slider para ver como, na medida em que adicionamos mais ondas senoidais, fica cada vez mais parecido com seu desenho</em></p>
 <p>Novamente, apesar das ondulações extra, a onda é bastante parecida apenas com metade das ondas senoidais.</p>
 <p>Nós podemos aproveitar o fato de que a onda é bastante parecida, a nosso favor. Ao utilizar uma transformada de Fourier, podemos pegar as partes importantes de um som, armazenar somente essas partes e terminar com algo bem parecido com o som original.</p>
 <p>Normalmente, em um computador, armazenamos uma onda como uma série de pontos.</p>
+  
 <canvas id="wave-samples" class="sketch" width=500 height=500></canvas>
 <p>Em vez disso, podemos representá-la com várias ondas senoidais. Assim poderemos comprimir o som ao ignorar as frequências menores. Nosso resultado não será o mesmo, mas soará bem parecido com uma pessoa.</p>
 <canvas id="wave-frequencies" class="sketch" width=500 height=500></canvas>
