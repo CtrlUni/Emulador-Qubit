@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - show/hide multiple div&#39;s</title>
+  <link rel='stylesheet' href='css/font-awesome.min.css'>
+	<link rel="stylesheet" href="./css/div.css">
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<div class="menu">
+<a  id="showall">Mostrar todos</a>
+<a  class="showSingle" target="1">Base</a>
+  <a  class="showSingle" target="2">Matriz das camadas digitais</a>
+  <a  class="showSingle" target="3">Matriz das camadas analógica</a>
+  <a  class="showSingle" target="4">Linha de tempo</a>
+  
+</div>
+
+<section class="cnt">
+<div id="div1" class="targetDiv">Modelo 3D simples da matriz<br> 
+  <iframe class="background" src="cubo-3d/index.html" width=500 height=500></iframe>
+</div> 
+  
+  <div id="div2" class="targetDiv">Processamento digital<br>
+  <iframe class="background" src="cubo.html" width=800 height=800></iframe>
+</div>
+  
+<div id="div3" class="targetDiv">Processamento analógico<br>
+  <iframe class="background" src="round-circulo/index.html" width=600 height=600></iframe>
+</div>
+  
+<div id="div4" class="targetDiv">Linha de tempo<br>
+  <iframe class="background" src="Loop.html" width=600 height=700></iframe>
+</div>
+  
+</section>
+<!-- partial -->
+  <script src='js/jquery.min.js'></script>
+  <script  src="./js/div.js"></script>
+
+</body>
+</html>
+
