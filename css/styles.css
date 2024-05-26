@@ -2,7 +2,13 @@ body {
 	font-family: 'Open Sans', sans-serif;
 	margin: auto;
 	line-height: 1.6;
-	color: #141521;
+	color: #141521; 
+	padding: 10px;
+    background: #838997;
+    font: 1.0em sans-serif;
+    font-family: 'Source Sans Pro', 'Helvetica Neue', Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;  
 }
 
 h1, h2, h3 {
@@ -88,7 +94,42 @@ main {
 	margin-right: auto;
 	margin-top: 80px;
 	margin-bottom: 80px;
+} 
+/*
+main {
+    margin-left: 1em;
+    margin-right: 1em;
 }
+*/
+main > section { margin-bottom: 1em; }
+
+main > section div.framed > div {
+    border: 1px solid black;
+    margin-bottom: 1ex;
+    padding: 1ex;
+}
+
+main > section button { padding: 0.5ex 1em; }
+
+main > section input[type="range"] { width: 400px; }
+
+main > section label[for^="YouTube-player-"] { position: absolute; }
+
+main > section textarea {
+    height: 9ex;
+    margin: 0;
+    padding: 0;
+    vertical-align: top;
+    width: 99%;
+}
+
+
+
+
+
+
+
+
 
 .sketch {
 	display: block;
@@ -154,10 +195,28 @@ main {
 	font-size: 10vw;
 }
 
+
+button {
+    font: 1.0em sans-serif;
+    font-family: 'Source Sans Pro', 'Helvetica Neue', Arial, sans-serif;
+    background-color: #0F1110;
+    color: #fff;
+    letter-spacing: 0.1em;
+    border: 1px solid #fff;
+    display: inline-block;
+    padding: 5px 15px;
+    border-radius: 25px;
+    transition: all 0.15s ease;
+    margin-bottom: 0.5em;
+
+}
+
+
+
 .button {
 	display: block;
 	margin: auto;
-	background-color: #e91e63;
+	background-color: #0C2406;
 	color: white;
 	font-size: 20px;
 	padding: 0.5em 1em;
@@ -182,7 +241,7 @@ main {
 }
 .instruction {
 	font-size: 30px;
-	color: #3F51B5;
+	color: #050A24;
 	margin: auto;
 	position: absolute;
 	text-align: center;
@@ -242,26 +301,13 @@ input[type=range] {
 } 
 
 
-
-
-
-
-
-
 * {
   margin: 0;
   padding: 0;
   border: 0;
 }
 
-body {
-  padding: 10px;
-  background: #838997;
-  font: 1.0em sans-serif;
-  font-family: 'Source Sans Pro', 'Helvetica Neue', Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;  
-}
+
 
 select {
     font: 1.0em sans-serif;
@@ -301,20 +347,7 @@ a:hover {
   transform: scale(1.05);
 }
 
-button {
-    font: 1.0em sans-serif;
-    font-family: 'Source Sans Pro', 'Helvetica Neue', Arial, sans-serif;
-    background-color: #3B5998;
-    color: #fff;
-    letter-spacing: 0.1em;
-    border: 1px solid #fff;
-    display: inline-block;
-    padding: 5px 15px;
-    border-radius: 25px;
-    transition: all 0.15s ease;
-    margin-bottom: 0.5em;
 
-}
 
 
 button:hover {
@@ -344,32 +377,6 @@ input[type="text"] {
 
 
 
-main {
-    margin-left: 1em;
-    margin-right: 1em;
-}
-
-main > section { margin-bottom: 1em; }
-
-main > section div.framed > div {
-    border: 1px solid black;
-    margin-bottom: 1ex;
-    padding: 1ex;
-}
-
-main > section button { padding: 0.5ex 1em; }
-
-main > section input[type="range"] { width: 400px; }
-
-main > section label[for^="YouTube-player-"] { position: absolute; }
-
-main > section textarea {
-    height: 9ex;
-    margin: 0;
-    padding: 0;
-    vertical-align: top;
-    width: 99%;
-}
 
 
 .center { text-align: center; }
@@ -414,4 +421,138 @@ main > section textarea {
     }
 
     main > section input[type="range"] { width: 200px; }
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html {
+  font-size: 14pt;
+  font-family: "Myriad Web Pro" sans-serif;
+  font-color: #111;
+}
+p {
+  margin-top: 1.5rem;
+}
+.container {
+  margin: 0 auto;
+}
+.btn {
+  padding: 0 0.5rem;
+  background-color: #AAA;
+  cursor: pointer;
+}
+.sidebar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 99;
+  width: 100%;
+  height: 230px;
+  overflow: hidden;
+  background-color: #444;
+  -webkit-transition: height ease-in 100ms;
+}
+.sidebar ul {
+  color: #ddd;
+  margin-left: 400px;
+}
+.sidebar .close {
+  float: right;
+}
+.sidebar .description {
+  font-style: italic;
+  font-size: 24pt;
+  margin-right: 400px;
+  color: #bbb;
+  padding: 0.5rem;
+}
+.sidebar .player {
+  width: 345px;
+  background-color: #444;
+  z-index: 999;
+  float: left;
+}
+.sidebar .player.scrolled {
+  position: fixed;
+  right: 0px;
+  -webkit-box-shadow: 0px 0px 7px 3px #333;
+}
+.sidebar.closed {
+  height: 0px;
+  -webkit-transition: height ease-in 100ms;
+}
+.carousel {
+  width: 100%;
+  height: 35vw;
+  background-color: #AAA;
+  display: table;
+}
+.carousel p {
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+}
+nav {
+  width: 100%;
+  margin-right: 0;
+  top: 0px;
+  background-color: #888;
+  min-height: 50px;
+  z-index: 998;
+  clear: both;
+}
+nav .logo {
+  width: 128px;
+  background-color: #bbb;
+  padding: 1rem;
+  text-align: center;
+}
+nav.scrolled {
+  position: fixed;
+  -webkit-box-shadow: 0px 0px 7px 3px #333;
+}
+.tabs {
+  min-height: 59px;
+}
+.tab {
+  color: #fff;
+  display: inline-block;
+  padding: 1rem;
+  cursor: pointer;
+}
+.tab.active {
+  text-decoration: underline;
+}
+.tab-pane {
+  padding: 2rem 0px;
+  position: absolute;
+  top: -9999px;
+  left: -9999px;
+  text-align: left;
+}
+.tab-pane.active {
+  position: relative;
+  top: 0;
+  left: 0;
+}
+.module {
+  max-height: 254px;
+  min-height: 240px;
+  margin-top: 1rem;
+  padding: 4px;
+  background-color: #ddd;
+  overflow: auto;
+  white-space: nowrap;
+}
+.thumb {
+  display: inline-block;
+  color: #ddd;
+  background-color: #888;
+  width: 333px;
+  height: 221px;
+  margin: 5px;
+  padding: 0.5rem;
 }
