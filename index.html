@@ -1,248 +1,391 @@
 <!DOCTYPE html>
-<html lang="pt" >
-  <head>
-	<meta charset="UTF-8">
-	<title>Simulação quântica</title>
-	<link rel="stylesheet" href="./style.css">
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Emulador-Qubit</title>
+  <link rel="stylesheet" href="./style.css">
 
-  </head>
-  <body>
-	<!-- partial:index.partial.html -->
-	<figure>
-	  <figcaption>Diagrama de estrutura<br>Todo sistema nesse projeto funciona por meio de uma unica interface ou dividir o processamento em série.</figcaption>
-	  <ul class="tree">
-		<li><code>Sinal de entrada analógica ou digital</code>
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<head>
+	<link rel="stylesheet" href="/ipad-footer/css/ipad.css">
+	<script src="jquery.min.js"></script>
+	<script type="text/javascript" src="/ipad-footer/js/ipad.js"></script>
+</head>
+<head>
+  <!-- Global site tag (gtag.js) - Google Analytics --
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-105814606-2"></script>
+	<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+
+	gtag('config', 'UA-105814606-2');
+	</script>-->
+
+  <title>Uma introdução interativa às transformadas de Fourier</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <link href="css/styles.css" rel="stylesheet" type="text/css">
+  <link href="css/wavelets.css?family=Montserrat|Open+Sans" rel="stylesheet">
+  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+  <meta name="viewport" content="width=device-width" />
+
+  <!-- Favicon magic -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#ffc40d">
+  <meta name="theme-color" content="#ffffff">
+
+  <!-- Stuff for Facebook/Twitter -->
+  <meta property="og:url"                content="http://www.jezzamon.com/fourier&#x2F;pt-br.html" />
+  <meta property="og:type"               content="website" />
+  <meta property="og:title"              content="Uma introdução interativa às transformadas de Fourier" />
+  <meta property="og:description"        content="Transformadas de Fourier são ferramentas utilizadas em vários contextos. Essa é uma explicação do que uma transformada de Fourier faz, e algumas maneiras diferentes que elas podem ser úteis." />
+  <meta property="og:image"              content="http://www.jezzamon.com/fourier/preview.png" />
+  <meta property="og:image:type"         content="image/png" />
+  <meta property="og:image:width"        content="1200" />
+  <meta property="og:image:height"       content="630" />
+  <meta name="twitter:card"              content="summary_large_image" />
+  <meta name="twitter:site"              content="@jezzamonn" />
+  <meta property="fb:app_id"             content="264785490940720" />
+</head>
+<body>
+  
+  
+<div class="sidebar closed">
+	<span class="close btn"></span>
+	<div class="player">
+		<div class="thumb hero">
+		</div>
+	</div>
+	<p class="description">
+	  Aqui você vê:
+	</p>
+	<ul>
+	  <li>Descrição do Jogando Agora</li>
+	  <li>Link para a página do episódio/clip/lista de reprodução</li>
+	  <li>Link para a página Wiki</li>
+	  <li>A seguir</li>
+	</ul>
+</div>
+
+<div class="container">
+<div class="tab-container">
+<nav class="tabs">
+	<span class="logo">Emulador Qubit</span>
+	<div class="tab active">Estudo geral</div>
+  <div class="tab">Apresentação</div>
+	<div class="tab">Compução digital</div>
+	<div class="tab">Computação analógica</div>
+  <div class="tab">Transformada Fourier</div>
+  
+</nav>
+
+
+ 
+<div class="tab-panes">
+<div class="tab-pane active">
+  <main id="content">
+  
+	<link rel="stylesheet" href="./css/estudo.css">
+	<main>
+	  <section>
+		<div class="center">
+		  <!--
+		  <h2>Fontes do <code>estudo</code> do projeto</h2>
+          -->
+		  <div id="YouTube-player"></div>
+
+		  <div> 
+			<span class="nowrap">
+			  <button onclick="youTubePlayerPlay();">Reproduzir</button>
+			  <button onclick="youTubePlayerPause();">Pausar</button>
+			  <button onclick="youTubePlayerStop();">Parar</button>
+			</span><br>
+			
+			<span class="nowrap"> 
+			  <!--
+			  <h2>Estudo sobre computação a computação quântica.<code></code></h2>
+			  -->
+			  <button onclick="document.getElementById('YouTube-video-id').value='RmnPPXKDTL4'; youTubePlayerChangeVideoId();" title="O que é a superposição quântica?">Processo quântica</button>
+			  <button onclick="document.getElementById('YouTube-video-id').value='p7bzE1E5PMY'; youTubePlayerChangeVideoId();" title="Ilutração Quântica">Vizualização</button><br>
+			  <button onclick="document.getElementById('YouTube-video-id').value='Nc-xoGjkqPw'; youTubePlayerChangeVideoId();" title="Qubit">Bit quântico</button>
+			  <button onclick="document.getElementById('YouTube-video-id').value='zNzzGgr2mhk'; youTubePlayerChangeVideoId();" title="Superposição">Superposição quântica</button><br>
+			  <button onclick="document.getElementById('YouTube-video-id').value='SD6TH7GZ1rM'; youTubePlayerChangeVideoId();" title="Computação quântica">Computação Q</button> 
+			  <!--
+			  <h2>Aplicação da Transformada de Fourier para o processamento quântico<code></code></h2>
+			  -->
+			  <button onclick="document.getElementById('YouTube-video-id').value='r18Gi8lSkfM'; youTubePlayerChangeVideoId();" title="FFT">Aplicação do FFT</button>
+			  <button onclick="document.getElementById('YouTube-video-id').value='OUuCsbumRpo'; youTubePlayerChangeVideoId();" title="Reconhecimento de voz">Processo de reconhecimento</button>
+			  <!--<h2><code></code></h2>-->
+			  </span>
+			
+
+			<span class="nowrap margin-left-m margin-right-m">
+			  <label for="YouTube-video-id">videoId</label>:
+			  <input id="YouTube-video-id" type="text" value="RmnPPXKDTL4" size="12" pattern="[_\-0-9A-Za-z]{11}" onchange="youTubePlayerChangeVideoId();">
+			</span>
+
+			
+		  </div>
+
+		  <div>
+			<input id="YouTube-player-progress" type="range" value="0" min="0" max="100" onchange="youTubePlayerCurrentTimeChange(this.value);" oninput="youTubePlayerCurrentTimeSlide();">
+			<label for="YouTube-player-progress">duração</label>
+		  </div>
+
+		  <div>
+			<input id="YouTube-player-volume" type="range" value="50" min="0" max="100" onchange="youTubePlayerVolumeChange(this.value);">
+			<label for="YouTube-player-volume">volume</label>
+		  </div>
+		</div>
+
+		<div class="framed">
+		  <div id="YouTube-player-infos"></div>
+		  <div id="YouTube-player-errors"></div>
+		  <a id="YouTube-player-fixed-infos"></a>
+		  <!--</div>
+		  </section>
+		  <!--
+		  <section>
+		  <h2>References</h2>
 		  <ul>
-
-			<li><code>Define o tipo de processamento<br>e seleciona as interfaces matrizes em camadas<br>
-				<iframe class="background" src="cubo-Q/index.html" width="300" height="300"></iframe>
-			</code>
-
-			  <ul>
-				<li><code>
-					<a class="nav-link" href="distribui.html">Interface primaria</a>
-				  </code>
-				  <ul>
-					<li><code><a class="nav-link" href="reconhecimento.html">Reconhecimento de daods analógico</a></code></li>
-				  </ul>
-				</li>
-				<li><code>Define o processo e distribui nas interface<br>Processamento analógico</code>
-				  <ul>
-					<li><code><a class="nav-link" href="Processamento.html">Matriz de processo digital<br>Binário 0</a></code>
-					  <ul>
-						<li><code>X</code>
-						  <ul>
-							<li><code><a class="nav-link" href="">Camada</a></code>
-							  <ul>
-								<li><code>X</code></li>
-								<li><code>Y</code></li>
-								<li><code>Z</code></li>
-							  </ul>
-							</li>
-						  </ul>
-						</li>
-						<li><code>Y</code>
-						  <ul>
-							<li><code><a class="nav-link" href="">Camada</a></code>
-							  <ul>
-								<li><code>X</code></li>
-								<li><code>Y</code></li>
-								<li><code>Z</code></li>
-							  </ul>
-							</li>
-						  </ul>
-						</li>
-						<li><code>Z</code>
-						  <ul>
-							<li><code><a class="nav-link" href="">Camada</a></code>
-							  <ul>
-								<li><code>X</code></li>
-								<li><code>Y</code></li>
-								<li><code>Z</code></li>
-							  </ul>
-							</li>
-						  </ul>
-						</li>
-					  </ul>
-					</li>
-					<li><code><a class="nav-link" href="superP.html">Matriz de processo Analógico<br>Superposição</a></code>
-					  <ul>
-						<li><code>X</code>
-						  <ul>
-							<li><code><a class="nav-link" href="">Camada</a></code>
-							  <ul>
-								<li><code>X</code></li>
-								<li><code>Y</code></li>
-								<li><code>Z</code></li>
-							  </ul>
-							</li>
-						  </ul>
-						</li>
-						<li><code>Y</code>
-						  <ul>
-							<li><code><a class="nav-link" href="">Camada</a></code>
-							  <ul>
-								<li><code>X</code></li>
-								<li><code>Y</code></li>
-								<li><code>Z</code></li>
-							  </ul>
-							</li>
-						  </ul>
-						</li>
-						<li><code>Z</code>
-						  <ul>
-							<li><code><a class="nav-link" href="">Camada</a></code>
-							  <ul>
-								<li><code>X</code></li>
-								<li><code>Y</code></li>
-								<li><code>Z</code></li>
-							  </ul>
-							</li>
-						  </ul>
-						</li>
-					  </ul>
-					</li>
-					<li><code><a class="nav-link" href="">Matriz de processo<br>Binário 1</a></code>
-					  <ul>
-						<li><code>X</code>
-						  <ul>
-							<li><code><a class="nav-link" href="">Camada</a></code>
-							  <ul>
-								<li><code>X</code></li>
-								<li><code>Y</code></li>
-								<li><code>Z</code></li>
-							  </ul>
-							</li>
-						  </ul>
-						</li>
-						<li><code>Y</code>
-						  <ul>
-							<li><code><a class="nav-link" href="">Camada</a></code>
-							  <ul>
-								<li><code>X</code></li>
-								<li><code>Y</code></li>
-								<li><code>Z</code></li>
-							  </ul>
-							</li>
-						  </ul>
-						</li>
-						<li><code>Z</code>
-						  <ul>
-							<li><code><a class="nav-link" href="">Camada</a></code>
-							  <ul>
-								<li><code>X</code></li>
-								<li><code>Y</code></li>
-								<li><code>Z</code></li>
-							  </ul>
-							</li>
-						  </ul>
-						</li>
-					  </ul>
-					</li>
-				  </ul>
-				</li>
-			  </ul>
-			</li>
-		  </ul>
-		</li>
-	  </ul>
-	</figure>
-	<figure> 
-	  <figcaption>Método de processamento</figcaption>
-	  <ul class="tree">
-		<li><span>Matriz de camada.
-			<br>Processo em camada.</span>
+		  <li>
+		  This example on my website:
+		  <strong><a href="http://www.opimedia.be/DS/webdev/YouTube/">YouTube <abbr>API</abbr> example</a></strong>
+		  </li>
+		  <li>
+		  YouTube:
 		  <ul>
-			<li><span>Seletor de sistema</span>
-			  <ul>
-				<li><span>Dados analógico.</span>
-				  <ul>
-					<li><span><a class="nav-link" href="raiz/ML.html">ML</a></span></li>
-					<li><span><a class="nav-link" href="raiz/wavelets.html">O que é a transformada de Fourier?<br>Wavelets<br> é a aplicação do FFT para criar regras analócas.</a></span></li>
-					<li><span>Inteligência artificial</span>
-					  <ul>
-						<li><span>Aprendizado de máquina comum</span></li>
-						<li><span>Aprendizado aprofundado de máquina</span></li>
-					  </ul>
-					</li>
-				  </ul>
-
-				</li>
-
-			  </ul>
-			</li>
-			<li><span><a class="nav-link" href="ML-3D/index.html"><br>Modelo</a></span>
-			  <ul>
-				<li><span>Grupo X</span>
-				  <ul>
-					<li><span>Matriz 1</span></li>
-				  </ul>
-				  <ul>
-					<li><span>Matriz 2</span></li>
-				  </ul>
-				  <ul>
-					<li><span>Matriz 3</span></li>
-				  </ul>
-				  <ul>
-					<li><span>...</span></li>
-				  </ul>
-				  <ul>
-					<li><span>Matriz 128</span></li>
-				  </ul>
-				</li>
-				<li><span>Grupo Y</span>
-				  <ul>
-					<li><span>Matriz 1</span></li>
-				  </ul>
-				  <ul>
-					<li><span>Matriz 2</span></li>
-				  </ul>
-				  <ul>
-					<li><span>Matriz 3</span></li>
-				  </ul>
-				  <ul>
-					<li><span>...</span></li>
-				  </ul>
-				  <ul>
-					<li><span>Matriz 128</span></li>
-				  </ul>
-				</li>
-				<li><span>Grupo Z</span>
-				  <ul>
-					<li><span>Matriz 1</span></li>
-				  </ul>
-				  <ul>
-					<li><span>Matriz 2</span></li>
-				  </ul>
-				  <ul>
-					<li><span>Matriz 3</span></li>
-				  </ul>
-				  <ul>
-					<li><span>...</span></li>
-				  </ul>
-				  <ul>
-					<li><span>Matriz 128</span></li>
-				  </ul>
-				</li>
-			  </ul>
-			</li>
-			<li><span>Sistema de armazenamento</span>
-			  <ul>
-				<li><span>Digital</span>
-				  <ul>
-					<li><span>Analógico</span></li>
-				  </ul>
-				</li>
-
-			  </ul>
-			</li>
+          <li><a href="https://developers.google.com/youtube/iframe_api_reference"><em>YouTube Player <abbr>API</abbr> Reference for <code>iframe</code> Embeds</em></a></li>
+          <li><a href="https://developers.google.com/youtube/player_parameters"><em>YouTube Embedded Players and Player Parameters</em></a></li>
 		  </ul>
-		</li>
-	  </ul>
-	</figure>
-	<p><a href="" target="_blank"></a></p>
-	<!-- partial -->
-	<script  src="./script.js"></script>
+		  </li>
+		  </ul>
+		  </section>-->
+		</div></section></main>
+  <!--<div class="module">
+	
+	  <div class="thumb hero">
+	
+		<iframe class="background" src="https://youtu.be/r8KWciNmEGw?si=jJvz2yCynk5jGMSP" width=100% height=1024></iframe>
+		</div>
+	
+	<div class="thumb">
+	  2
+	</div>
+	<div class="thumb">
+	  3
+	</div>
+	<div class="thumb">
+	  4
+	</div>
+	<div class="thumb">
+	  5
+	</div>
+	<div class="thumb">
+	  6
+	</div>
+	<div class="thumb">
+	  7
+	</div>
+	<div class="thumb">
+	  8
+	</div>
+	<div class="thumb">
+	  9
+	</div>
+	<div class="thumb">
+	  10
+	</div>
+	<div class="thumb">
+	  11
+	</div>
+  </div>-->
+  
+  </main>
+</div> 
 
-  </body>
+
+
+<div class="tab-pane">
+	<h2>Esquema</h2>
+  
+  <div class="tab-paine">
+
+  </div>
+	
+  <iframe class="background" src="mapa.html" width=1024 height=1024></iframe>
+</div>
+  
+  
+<div class="tab-pane">
+  <h2>Computação digital</h2>
+  <p>Info 2</p><p>Info 2</p><p>Info 2</p><p>Info 2</p><p>Info 2</p><p>Info 2</p><p>Info 2</p><p>Info 2</p><p>Info 2</p>
+</div>
+<div class="tab-pane">
+  <h2>Computação analógica</h2>
+  <p>Info 3</p><p>Info 3</p><p>Info 3</p><p>Info 3</p><p>Info 3</p><p>Info 3</p><p>Info 3</p><p>Info 3</p><p>Info 3</p><p>Info 3</p><p>Info 3</p>
+</div>
+  <div class="tab-pane">
+	<h2>Trasformada de Fourier</h2> 
+	
+	<div class="carousel">
+	<header>
+	  <canvas id="header-background" class="header-background"></canvas>
+	  <h1>Uma introdução interativa às transformadas de Fourier</h1>
+	  <p>Projeto</p>
+	  <p>Github : <a href="https://ctrluni.github.io/Emulador-Qubit/">Junior Mello</a></p>
+	</header>
+  </div>
+	<main id="content">
+	  <p>Transformadas de Fourier são ferramentas utilizadas em vários contextos. Essa é uma explicação do que uma transformada de Fourier faz, e algumas maneiras diferentes que elas podem ser úteis. E como você pode fazer coisas bonitas com elas, como isto:</p>
+	  <canvas id="self-draw" class="sketch" width=500 height=500></canvas>
+	  <p>Irei explicar como essa animação funciona, e no caminho explicar as transformadas de Fourier!</p>
+	  <p>No final, você deve ter uma boa noção sobre</p>
+	  <ul>
+		<li>O que uma transformada de Fourier faz</li>
+
+		<li>Animação da série Fourier usando círculos</li>
+
+		<li>Alguns usos práticos das transformadas de Fourier</li>
+		<li>Usos inúteis, mas legais das transformadas de Fourier</li>
+	  </ul>
+	  <p>Iremos deixar a matemática e as equações de lado por enquanto. Tem bastante matemática interessante por trás delas, mas é melhor começar com o que elas fazem e motivos para você utilizá-las. Se você quiser saber mais sobre a teoria, há algumas sugestões de leitura abaixo!</p>
+	  <h2 id="entooque">Então, o que é?</h2>
+	  <p>De maneira simples, a transformada de Fourier é uma maneira de dividir algo em várias ondas senoidais. Como de costume, o nome vem de uma pessoa, que viveu a bastante tempo atrás, chamada de Fourier.</p>
+	  <p>Começaremos com alguns exemplos simples e depois faremos outros exemplos mais completos. Primeiro olharemos para ondas - padrões que se repetem com o tempo.</p>
+	  <p>Um exemplo de onda:</p>
+	  <canvas id="combo-sine-wave" class="sketch" width=500 height=300></canvas>
+	  <p>Este padrão ondulado pode ser dividido em ondas senoidais. Isto é, quando nós adicionamos as duas ondas senoidais, obteremos a onda original novamente.</p>
+	  <canvas id="combo-sine-wave-split" class="sketch" width=500 height=500></canvas>
+	  <p>A transformada de Fourier é uma maneira de nós, a partir de uma onda combinada, obter cada uma das ondas senoidais de volta. Neste exemplo, você quase consegue fazer isso na sua cabeça, só de olhar para a onda original.</p>
+	  <p>Por quê? Diversas coisas na vida real interagem com base nessas ondas senoidais. Nós geralmente as chamamos de frequência da onda.</p>
+	  <p>O exemplo mais óbvio é o som – quando ouvimos um som, só não ouvimos essa linha sinuosa, mas sim as diferentes frequências que compõem o som.</p>
+	  <p><button id="together-button" class="button">Tocar a onda completa</button></p>
+	  <p><button id="split-button-1" class="button">Tocar a alta frequência</button></p>
+	  <p><button id="split-button-2" class="button">Tocar a baixa frequência</button></p>
+	  <p>Ser capaz de dividi-las em um computador nos dá entendimento do que uma pessoa realmente ouve. Nós podemos entender o quão alto ou baixo um som é, ou descobrir qual nota que o som está.</p>
+	  <p>Também podemos usar este processo em ondas que não parecem que são feitas de ondas senoidais.</p>
+	  <p>Vamos dar uma olhada nesta. É chamada de onda quadrada.</p>
+	  <canvas id="square-wave" class="sketch" width=500 height=300></canvas>
+	  <p>Pode não parecer, mas também podemos dividi-la em ondas senoidais.</p>
+	  <canvas id="square-wave-split" class="sketch" width=500 height=500></canvas>
+	  <p>Nós precisamos de muitas desta vez – tecnicamente, uma quantidade infinita delas para representar. Na medida em que adicionamos mais e mais ondas senoidais, o padrão se aproxima cada vez mais da onda quadrada que começamos.</p>
+	  <canvas id="square-wave-build-up" class="sketch" width=500 height=500></canvas>
+	  <p><input id="square-wave-build-up-slider" type="range" min="0" max="1" value="0" step="any" ></p>
+	  <p><button id="square-wave-button" class="button">Tocar onda</button></p>
+	  <iframe class="background" src="../Harm/index.html" width=100% height=1024></iframe>
+
+	  <p><em>Arraste o slider acima para alterar a quantidade de ondas senoidais.</em></p>
+	  <p>Visualmente, você perceberá que as primeiras ondas senoidais são as que mais fazem diferença. Com o slider na metade, temos a forma geral da onda, mas está toda ondulada. Só precisamos das pequenas que restaram para aplanar as ondulações.</p>
+	  <p>Quando você ouvir a onda, você escutará o som ficando mais baixo porque estamos removendo as frequências mais altas.</p>
+	  <p>Este processo funciona com qualquer linha que se repete. Tente desenhar uma!</p>
+	  <div class="multi-container">
+		<div class="sketch" >
+		  <canvas id="wave-draw" class="sketch-child" width=500 height=300></canvas>
+		  <p id="wave-draw-instruction" class="instruction wave-instruction">Desenhe aqui!</p>
+		</div>
+		<canvas id="wave-draw-split" class="sketch" width=500 height=500></canvas>
+	  </div>
+	  <p><input id="wave-draw-slider" type="range" min="0" max="1" value="1" step="any"> 
+
+
+
+		<button id="wave-draw-button" class="button">Tocar onda</button></p>
+
+
+	  <p><em>Mova o slider para ver como, na medida em que adicionamos mais ondas senoidais, fica cada vez mais parecido com seu desenho</em></p>
+	  <p>Novamente, apesar das ondulações extra, a onda é bastante parecida apenas com metade das ondas senoidais.</p>
+	  <p>Nós podemos aproveitar o fato de que a onda é bastante parecida, a nosso favor. Ao utilizar uma transformada de Fourier, podemos pegar as partes importantes de um som, armazenar somente essas partes e terminar com algo bem parecido com o som original.</p>
+	  <p>Normalmente, em um computador, armazenamos uma onda como uma série de pontos.</p>
+
+	  <canvas id="wave-samples" class="sketch" width=500 height=500></canvas>
+	  <p>Em vez disso, podemos representá-la com várias ondas senoidais. Assim poderemos comprimir o som ao ignorar as frequências menores. Nosso resultado não será o mesmo, mas soará bem parecido com uma pessoa.</p>
+	  <canvas id="wave-frequencies" class="sketch" width=500 height=500></canvas>
+	  <p>Isto é essencialmente o que MP3s fazem, só que eles são mais espertos sobre quais frequências manter e quais jogar fora.</p>
+	  <p>Então, neste caso, podemos utilizar transformadas de Fourier para entender as propriedades fundamentais de uma onda, e usar este conhecimento para outras coisas, como compressão.</p>
+	  <p>Ok, nos aprofundaremos mais na transformada de Fourier. Esta próxima parte parece bem legal, mas também lhe dá maior entendimento sobre o que a transformada de Fourier faz. Mas principalmente parece legal.</p>
+	  <h2 id="epiciclos">Epiciclos</h2>
+	  <p>No começo, eu disse que dividia coisas em ondas senoidais. A questão é, as ondas senoidais que são criadas não são ondas senoidais comuns, mas sim ondas 3D. Você pode simplesmente chamá-las de "espirais".</p>
+	  <canvas id="complex-sinusoid" class="sketch" width=500 height=500></canvas>
+	  <p>Se você as olhar de lado, elas parecem como ondas senoidais. Já olhando de frente, parecem com círculos.</p>
+	  <canvas id="complex-sinusoid-turn" class="sketch" width=500 height=500></canvas>
+	  <p>Até então, tudo que temos feito só precisou de ondas senoidais 2D. Quando aplicamos a transformada de Fourier em ondas 2D, as partes complexas se anulam e simplesmente terminamos com ondas senoidais.</p>
+	  <p>Mas podemos usar as ondas 3D para fazer coisas legais, que nem isto:</p>
+	  <canvas id="peace-epicycles" class="sketch" width=500 height=500></canvas>
+	  <p>O que está acontecendo aqui?</p>
+	  <p>Bem, podemos pensar no desenho como uma forma 3D pelo jeito que ele se move com o tempo. Se você imaginar a mão sendo desenhada por uma pessoa, as três dimensões representam onde a ponta do lápis dela está naquele momento. As dimensões x e y nos dizem a posição, e a dimensão tempo é o tempo naquele momento.</p>
+	  <canvas id="peace-3d" class="sketch" width=500 height=500></canvas>
+	  <p>Agora que temos um padrão 3D, não podemos usar as ondas senoidais 2D para representá-lo. Não importa quantas ondas senoidais 2D adicionarmos, nós nunca obteremos algo 3D. Então precisamos de outra coisa.</p>
+	  <p>O que podemos usar são as ondas senoidais em espirais 3D de antes. Se adicionarmos várias dessas, podemos obter algo parecido com o nosso padrão 3D.</p>
+	  <p>Lembre-se, essas ondas se parecem com círculos quando as olhamos de frente. O nome para o padrão de um círculo se movendo ao redor de outro círculo é epiciclo.</p>
+	  <canvas id="peace-build-up" class="sketch" width=500 height=500></canvas>
+	  <p><input id="peace-build-up-slider" type="range" min="0" max="1" value="1" step="any"></p>
+	  <p><em>Use o slider acima para controlar a quantidade de círculos.</em></p>
+	  <p>Como antes, obtemos uma boa aproximação de nosso padrão apenas com alguns círculos. Considerando que esta é uma forma razoavelmente simples, tudo o que os últimos fazem, é deixar as pontas um pouco mais afiadas.</p>
+	  <p>Tudo isto se aplica a qualquer desenho! Agora é sua vez de brincar.</p>
+	  <div class="multi-container">
+		<div class="sketch" >
+		  <canvas id="draw-zone" class="sketch-child" width=500 height=500></canvas>
+		  <p id="draw-zone-instruction" class="instruction">Desenhe aqui!</p>
+		  <button id="draw-zone-undo-button" class="button embedded-button">Desfazer</button>
+		</div>
+		<canvas id="circle-zone" class="sketch" width=500 height=500></canvas>
+	  </div>
+	  <p><input id="circle-zone-slider" type="range" min="0" max="1" value="1" step="any"></p>
+	  <p><em>Use o slider para controlar a quantidade de círculos utilizados em seu desenho</em></p>
+	  <p>Novamente, você verá que para a maioria das formas, podemos aproximá-las razoavelmente bem com poucos círculos, em vez de salvar todos os pontos.</p>
+	  <p>Podemos usar isso para dados reais? Bem, podemos! Na verdade, temos outro formato de dados chamado SVG, que provavelmente faz um trabalho melhor para as formas que queremos criar. Então, no momento, isto serve só para fazer pequenas gifs legais.</p>
+	  <canvas id="fourier-title" class="sketch" width=500 height=300></canvas>
+
+	  <h2 id="concluso">Conclusão</h2>
+	  <p>Então, recapitulando:</p>
+	  <ul>
+		<li>Transformadas de Fourier são coisas que nos permite pegar algo e dividi-lo em suas frequências.</li>
+		<li>As frequências nos dizem sobre as propriedades fundamentais dos dados que temos</li>
+		<li>E também podemos comprimir dados ao armazenar somente as frequências importantes</li>
+		<li>Também podemos utilizá-las para fazer animações legais com vários círculos</li>
+	  </ul>
+	  <p>Isto é só a ponta do iceberg das aplicações! A transformada de Fourier é uma ferramenta extremamente poderosa, porque dividir algo em frequências é bem fundamental. Elas são utilizadas em várias áreas, incluindo design de circuitos, sinais de aparelhos móveis, imagem por ressonância magnética e física quântica!</p>
+	  <h2 id="questesparaoscuriosos">Questões para os curiosos</h2>
+	  <p>Pulei a maior parte da matemática aqui, mas se você estiver interessado nos princípios por baixo das funcionalidades, algumas questões que você pode usar para se guiar em sua pesquisa:</p>
+	  <ul>
+		<li>Como se representa uma transformada de Fourier matematicamente?</li>
+		<li>Qual é a diferença entre uma transformada de Fourier de tempo contínuo e uma transformada de Fourier de tempo discreto?</li>
+		<li>Como se faz uma transformada de Fourier computacionalmente?</li>
+		<li>Como você aplica a transformada de Fourier em uma música inteira? (Em vez de uma só nota.)</li>
+	  </ul>
+	  <h2 id="leituraadicional">'Leitura' adicional</h2>
+	  <p>Para aprender mais, aqui estão alguns recursos que você pode checar:</p>
+	  <p><a href="https://betterexplained.com/articles/an-interactive-guide-to-the-fourier-transform/">An Interactive Guide To The Fourier Transform</a>
+		Um ótimo artigo que explora mais a parte matemática do que acontece.</p>
+	  <p><a href="https://www.youtube.com/watch?v=spUNpyF58BY">But what is the Fourier Transform? A visual introduction.</a>
+		Um ótimo vídeo de YouTube pelo 3Blue1Brown, também explicando a matemática das transformadas de Fourier numa perspectiva de áudio.</p>
+	  <p><a href="https://alex.miller.im/posts/fourier-series-spinning-circles-visualization/">A Tale of Math & Art: Creating the Fourier Series Harmonic Circles Visualization</a>
+		Outro artigo explicando como você pode usar epiciclos para desenhar uma trajetória, explicado de uma perspectiva de álgebra linear.</p>
+	  <p><a href="https://en.wikipedia.org/wiki/Fourier_transform">Fourier transform (Wikipedia)</a>
+		E claro, o artigo da Wikipédia é muito bom também.</p>
+	  <p></p>
+	  <p>Esta página é open-source, você pode checar o código no <a href="https://github.com/CtrlUni/Emulador-Qubit">GitHub</a>! Se você tem algum feedback ou quer perguntar alguma coisa, sinta-se livre para me mandar um e-mail em <span id="email-text">controleuniversal.br@gmail.com</span><a href=""></a>.</p>
+	  <p><a href="">homepage</a><a href=""></a>!</p>
+	</main>
+	<a class="nav-link" href="Processamento.html">Matriz de processo digital<br>Binário 0</a>
+	<p>Info 1</p><p>Info 1</p><p>Info 1</p><p>Info 1</p><p>Info 1</p><p>Info 1</p><p>Info 1</p><p>Info 1</p>
+  </div>
+
+</div>
+</div>
+</div>
+<!-- partial -->
+  <script src='jquery.mi.js'></script>
+  <script  src="./script.js"></script>
+  <script src="main.bundle.js"></script>
+  <script  src="./js/estudo.js"></script>
+  <script  src="./js/vatYoutube.js"></script>
+</body>
 </html>

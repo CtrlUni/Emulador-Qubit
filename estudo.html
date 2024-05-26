@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt" >
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <link rel="stylesheet" href="./css/estudo.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<main>
+  <section>
+    <div class="center">
+      <h2>Fontes do <code>estudo</code> do projeto</h2>
+	  
+      <div id="YouTube-player"></div>
+
+      <div>
+        <span class="nowrap">
+          <button onclick="document.getElementById('YouTube-video-id').value='RmnPPXKDTL4'; youTubePlayerChangeVideoId();" title="O que é a superposição quântica?">Processo quântica</button>
+          <button onclick="document.getElementById('YouTube-video-id').value='Nc-xoGjkqPw'; youTubePlayerChangeVideoId();" title="Qubit">Bit quântico</button>
+          <button onclick="document.getElementById('YouTube-video-id').value=''; youTubePlayerChangeVideoId();" title="">3</button>
+          <button onclick="document.getElementById('YouTube-video-id').value=''; youTubePlayerChangeVideoId();" title="">4</button>
+        </span>
+
+        <span class="nowrap margin-left-m margin-right-m">
+          <label for="YouTube-video-id">videoId</label>:
+          <input id="YouTube-video-id" type="text" value="RmnPPXKDTL4" size="12" pattern="[_\-0-9A-Za-z]{11}" onchange="youTubePlayerChangeVideoId();">
+        </span>
+
+        <span class="nowrap">
+          <button onclick="youTubePlayerPlay();">Reproduzir</button>
+          <button onclick="youTubePlayerPause();">Pausar</button>
+          <button onclick="youTubePlayerStop();">Parar</button>
+        </span>
+      </div>
+
+      <div>
+        <input id="YouTube-player-progress" type="range" value="0" min="0" max="100" onchange="youTubePlayerCurrentTimeChange(this.value);" oninput="youTubePlayerCurrentTimeSlide();">
+        <label for="YouTube-player-progress">duração</label>
+      </div>
+
+      <div>
+        <input id="YouTube-player-volume" type="range" value="50" min="0" max="100" onchange="youTubePlayerVolumeChange(this.value);">
+        <label for="YouTube-player-volume">volume</label>
+      </div>
+    </div>
+
+    <div class="framed">
+      <div id="YouTube-player-infos"></div>
+      <div id="YouTube-player-errors"></div>
+     <!-- <div id="YouTube-player-fixed-infos"></div>
+    </div>
+  </section>
+<!--
+  <section>
+    <h2>References</h2>
+    <ul>
+      <li>
+        This example on my website:
+        <strong><a href="http://www.opimedia.be/DS/webdev/YouTube/">YouTube <abbr>API</abbr> example</a></strong>
+      </li>
+      <li>
+        YouTube:
+        <ul>
+          <li><a href="https://developers.google.com/youtube/iframe_api_reference"><em>YouTube Player <abbr>API</abbr> Reference for <code>iframe</code> Embeds</em></a></li>
+          <li><a href="https://developers.google.com/youtube/player_parameters"><em>YouTube Embedded Players and Player Parameters</em></a></li>
+        </ul>
+      </li>
+    </ul>
+  </section>-->
+    </div></section></main>
+<!-- partial -->
+  <script  src="./js/estudo.js"></script>
+
+</body>
+</html>
